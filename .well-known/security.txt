@@ -1,0 +1,11 @@
+# Security Contact Information
+
+Contact: mail@naruaika.me
+
+# Security Policies
+
+We appreciate responsible disclosure of security vulnerabilities. Please report any vulnerabilities to mail@naruaika.me.
+
+# Acknowledgments
+
+Acknowledgments will be sent for all responsible disclosures.
