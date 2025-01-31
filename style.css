@@ -10,6 +10,7 @@ body {
     background-color: #FFF;
 }
 main {
+    flex: 1;
     padding: 0 10vw;
     max-width: 900px;
     color: #111;
