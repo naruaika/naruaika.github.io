@@ -1,5 +1,2 @@
 User-agent: *
-Disallow: /private/
-Allow: /
-
-Sitemap: https://naruaika.me/sitemap.xml
+Disallow:

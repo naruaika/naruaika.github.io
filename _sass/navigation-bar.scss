@@ -1,0 +1,46 @@
+#navigation-bar {
+    box-sizing: border-box;
+    container-type: inline-size;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: inherit;
+    z-index: 9999;
+
+    .icon {
+        height: 50px;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        font-size: 1.4rem;
+
+        a {
+            color: #AAA;
+            text-decoration: none;
+
+            &:hover {
+                color: #FFF;
+            }
+
+            &.selected {
+                position: relative;
+                color: #FFF;
+
+                &::after {
+                    content: '^';
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 1.25rem;
+                    text-align: center;
+                    transform: scaleY(0.5);
+                }
+            }
+        }
+    }
+}

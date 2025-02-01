@@ -1,1 +1,6 @@
-TODO
+_site
+.backup
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor

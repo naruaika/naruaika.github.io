@@ -1,1 +1,46 @@
-include: [".well-known"]
+title: Naufan Rusyda Faikar
+email: mail@naruaika.me
+phone: +62 821-3000-3006
+description: >-
+  Offering expert solutions and consultations for your business growth
+  using technology.
+baseurl: ""
+url: "https://naruaika.me"
+
+instagram: naruaika
+telegram: naruaika
+threads: naruaika
+discord: naruaika
+github: naruaika
+devto: naruaika
+medium: naruaika
+unsplash: naruaika
+linkedin: naruaika
+
+# Build settings
+plugins:
+  # - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+# exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
+
+include:
+  - .well-known/
