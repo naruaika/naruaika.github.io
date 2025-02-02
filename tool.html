@@ -41,10 +41,13 @@ permalink: /tool
             > .container  {
                 grid-template-columns: 1fr;
                 grid-template-rows: auto;
+                border-left: none;
+                border-right: none;
+                gap: 2rem;
 
                 #previewer {
                     grid-column: 1;
-                    grid-row: 3;
+                    grid-row: 1;
                 }
             }
         }
@@ -78,6 +81,7 @@ permalink: /tool
             language: "html",
             theme: "vs-dark",
             minimap: { enabled: false },
+            automaticLayout: true,
         });
         const cssEditor = monaco.editor.create(document.getElementById("css-editor"), {
             value:
@@ -92,6 +96,7 @@ p {
             language: "css",
             theme: "vs-dark",
             minimap: { enabled: false },
+            automaticLayout: true,
         });
         let reloadTimeout = null;
         const reloadPreview = () => {

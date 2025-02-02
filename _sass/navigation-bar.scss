@@ -43,3 +43,10 @@
         }
     }
 }
+
+@media (width < 700px) {
+    #navigation-bar .menu {
+        gap: 1rem;
+        font-size: 1.2rem;
+    }
+}
