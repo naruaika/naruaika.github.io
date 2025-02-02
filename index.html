@@ -6,7 +6,7 @@ title: Naufan Rusyda Faikar - Software Engineer
     main {
         container-type: inline-size;
         box-sizing: border-box;
-        padding: 3.5rem 2rem;
+        padding: 3.5rem 2rem 0;
     }
 
     #my-hello {
@@ -115,12 +115,13 @@ title: Naufan Rusyda Faikar - Software Engineer
     #steve-quote,
     #alice-quote,
     #jobs-quote {
+        box-sizing: border-box;
         position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: max(50vh, 50vw);
+        height: 100vh;
         max-width: 75%;
         margin: 3.5rem auto 0;
         font-family: "DM Serif Display", serif;
@@ -227,7 +228,13 @@ title: Naufan Rusyda Faikar - Software Engineer
         }
     }
 
-    @container (width < 1500px) {
+    @container (width < 1600px) {
+        #my-hello {
+            font-size: 3rem;
+        }
+    }
+
+    @container (width < 1280px) {
         #my-hello {
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: auto;
@@ -261,7 +268,7 @@ title: Naufan Rusyda Faikar - Software Engineer
         #alice-quote,
         #jobs-quote {
             max-width: unset;
-            font-size: min(10vh, 10vw);
+            font-size: 10vmin;
         }
 
         #my-values {
@@ -278,7 +285,7 @@ title: Naufan Rusyda Faikar - Software Engineer
         }
     }
 
-    @container (width < 700px) {
+    @container (width < 720px) {
         #my-hello {
             grid-template-columns: 1fr;
             grid-template-rows: auto;
@@ -309,7 +316,7 @@ title: Naufan Rusyda Faikar - Software Engineer
         }
     }
 
-    @media (width < 700px) {
+    @media (width < 720px) {
         main {
             padding: 0;
         }
