@@ -1,26 +1,26 @@
 ---
-layout: default
-title: Tool | Naufan Rusyda Faikar
-permalink: /tool
+layout: tool
+title: Editor
+permalink: /tool/editor
 ---
 <style>
     main {
         box-sizing: border-box;
         display: flex;
-        padding: 3.5rem 2rem 0;
 
         > .container {
             box-sizing: border-box;
+            padding: 1rem;
+            min-height: calc(100vh - 40px - 33px);
             flex: 1;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-template-rows: repeat(2, 1fr);
             gap: 1rem;
-            min-height: calc(100vh - 2rem * 2);
 
             > * {
                 min-height: 200px;
-                border: 1px solid #FFF;
+                outline: 1px solid #FFF;
             }
 
             #previewer {
@@ -41,11 +41,6 @@ permalink: /tool
                 grid-template-columns: 1fr;
                 grid-template-rows: auto;
                 gap: 2rem;
-
-                > * {
-                    border-left: none;
-                    border-right: none;
-                }
 
                 #previewer {
                     grid-column: 1;
@@ -84,6 +79,7 @@ permalink: /tool
             theme: "vs-dark",
             minimap: { enabled: false },
             automaticLayout: true,
+            scrollBeyondLastLine: false,
         });
         const cssEditor = monaco.editor.create(document.getElementById("css-editor"), {
             value:
@@ -101,6 +97,7 @@ p {
             theme: "vs-dark",
             minimap: { enabled: false },
             automaticLayout: true,
+            scrollBeyondLastLine: false,
         });
         let reloadTimeout = null;
         const reloadPreview = () => {

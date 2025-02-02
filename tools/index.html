@@ -1,0 +1,72 @@
+---
+layout: default
+title: Tool
+permalink: /tool/
+---
+<style>
+    main {
+        container-type: inline-size;
+        box-sizing: border-box;
+        padding: 3.5rem 2rem;
+
+        h1 {
+            box-sizing: border-box;
+            margin: 0;
+            margin-bottom: 3.5rem;
+            display: inline-block;
+            font-family: "DM Serif Display", serif;
+            font-size: 2.5rem;
+            line-height: 1.25;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+        }
+
+        li {
+            display: flex;
+            list-style: none;
+        }
+
+        a {
+            box-sizing: border-box;
+            padding: .75rem 1rem;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: inherit;
+            text-decoration: none;
+            font-family: "Fira Sans", sans-serif;
+            border: 3px solid #FFF;
+            background-color: transparent;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #FFF;
+                color: #000;
+            }
+        }
+    }
+
+    @media (width < 720px) {
+        main {
+            padding-top: 0;
+
+            a {
+                font-size: 1.2rem;
+            }
+        }
+    }
+</style>
+
+<main>
+    <h1>#my-tools</h1>
+    <ul>
+        <!-- TODO: use for loop instead -->
+        <li><a href="/tool/editor">Editor</a></li>
+        <li><a href="/tool/inspector">Inspector</a></li>
+    </ul>
+</main>

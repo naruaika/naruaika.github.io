@@ -1,8 +1,8 @@
 - name: Home
   link: /
 - name: Work
-  link: /work
+  link: /work/
 - name: Blog
-  link: /blog
+  link: /blog/
 - name: Tool
-  link: /tool
+  link: /tool/
