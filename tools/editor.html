@@ -1,34 +1,142 @@
 ---
 layout: tool
-title: Editor
+title: HTML Editor
 permalink: /tool/editor
 ---
 <style>
     main {
-        box-sizing: border-box;
         display: flex;
+        min-height: calc(100vh - 33px);
 
-        > .container {
-            box-sizing: border-box;
+        > .row {
+            flex: 1;
             padding: 1rem;
-            min-height: calc(100vh - 40px - 33px);
+            display: grid;
+            grid-template-columns: minmax(200px, 1fr) repeat(11, 1fr);
+            gap: 4px;
+
+            > .column {
+                grid-column: 2 / span 11;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+        }
+
+        .title {
+            box-sizing: border-box;
+            height: 30px;
+            padding: 0.4rem 0.6rem;
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background-color: #111;
+            text-transform: uppercase;
+        }
+
+        #templates {
+            position: absolute;
+            inset: 0;
+            top: calc(0px + 30px + 4px);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            background-color: #000;
+            font-size: 0.8rem;
+            overflow-y: auto;
+
+            .category {
+                box-sizing: border-box;
+                position: sticky;
+                top: 0;
+                padding: 0.4rem 0.6rem;
+                display: flex;
+                align-items: center;
+                background-color: #1A1A1A;
+                z-index: 1;
+            }
+
+            .component {
+                position: relative;
+                box-sizing: border-box;
+                padding: 0.4rem 0.6rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #1A1A1A;
+                aspect-ratio: 2 / 1;
+                z-index: 0;
+            }
+        }
+
+        #tabs {
+            height: 30px;
+            display: flex;
+            gap: 4px;
+            font-size: 0.8rem;
+            background-color: #111;
+            overflow-x: auto;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab {
+                box-sizing: border-box;
+                padding: 0.4rem 0.6rem;
+                padding-right: 0.4rem;
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+                color: #AAA;
+                white-space: nowrap;
+                user-select: none;
+                cursor: pointer;
+
+                &.active {
+                    background-color: #1E1E1E;
+                    color: #FFF;
+                }
+
+                .close {
+                    box-sizing: border-box;
+                    font-size: 0.6rem;
+                    font-weight: 600;
+                    padding: 1px;
+                    width: 16px;
+                    height: 16px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    &:hover {
+                        background-color: #444;
+                    }
+                }
+            }
+        }
+
+        #workspace {
+            box-sizing: border-box;
             flex: 1;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-template-rows: repeat(2, 1fr);
-            gap: 1rem;
+            gap: 4px;
 
             > * {
                 min-height: 200px;
-                outline: 1px solid #FFF;
             }
 
-            #previewer {
+            #viewer {
                 grid-column: 2;
                 grid-row: 1 / span 2;
-                background-color: #FFF;
+                background-color: #1A1A1A;
                 width: 100%;
                 height: 100%;
+                border: 0;
             }
         }
     }
@@ -37,12 +145,12 @@ permalink: /tool/editor
         main {
             padding: 0;
 
-            > .container  {
+            #workspace  {
                 grid-template-columns: 1fr;
                 grid-template-rows: auto;
                 gap: 2rem;
 
-                #previewer {
+                #viewer {
                     grid-column: 1;
                     grid-row: 1;
                 }
@@ -52,10 +160,34 @@ permalink: /tool/editor
 </style>
 
 <main>
-    <div class="container">
-        <div id="html-editor" class="editor"></div>
-        <div id="css-editor" class="editor"></div>
-        <iframe id="previewer" frameborder="0"></iframe>
+    <div class="row">
+        <div style="position:relative">
+            <div class="title">Explore</div>
+            <div id="templates" class="scrollable">
+                {% for item in site.data.web-templates %}
+                    {%- if item.type == "category" -%}
+                        <div class="category">
+                            {{ item.content }}
+                        </div>
+                    {%- else -%}
+                        <div class="component">
+                            {{ item.content }}
+                        </div>
+                    {%- endif -%}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="column">
+            <div id="tabs">
+                <div id="tab-1" class="tab active">Untitled-1<span class="close">&#x2715;</span></div>
+                <div id="tab-2" class="tab">Untitled-2<span class="close">&#x2715;</span></div>
+            </div>
+            <div id="workspace">
+                <div id="html-editor" class="editor"></div>
+                <div id="css-editor" class="editor"></div>
+                <iframe id="viewer" frameborder="0"></iframe>
+            </div>
+        </div>
     </div>
 </main>
 
@@ -69,12 +201,13 @@ permalink: /tool/editor
     require.config({ paths: { vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs" } });
     require(["vs/editor/editor.main"], function () {
         const runner = document.getElementById("runner");
-        const previewer = document.getElementById("previewer");
+        const viewer = document.getElementById("viewer");
         const htmlEditor = monaco.editor.create(document.getElementById("html-editor"), {
             value:
 `<p>
     The brown fox jumps over the lazy dog.
-</p>`,
+</p>
+`,
             language: "html",
             theme: "vs-dark",
             minimap: { enabled: false },
@@ -86,13 +219,17 @@ permalink: /tool/editor
 `body {
     margin: 0;
     padding: 20px;
+    background-color: #FFF;
 }
+
 p {
     margin: 0;
     font-size: 2rem;
-    line-height: 1.25;
     font-weight: 800;
-}`,
+    line-height: 1.25;
+}
+
+`,
             language: "css",
             theme: "vs-dark",
             minimap: { enabled: false },
@@ -103,9 +240,9 @@ p {
         const reloadPreview = () => {
             const htmlContent = htmlEditor.getValue();
             const cssContent = cssEditor.getValue();
-            previewer.src = "about:blank";
-            previewer.contentWindow.document.open();
-            previewer.contentWindow.document.write(`
+            viewer.src = "about:blank";
+            viewer.contentWindow.document.open();
+            viewer.contentWindow.document.write(`
                 <!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -119,17 +256,20 @@ p {
                 </body>
                 </html>
             `);
-            previewer.contentWindow.document.close();
+            viewer.contentWindow.document.close();
             reloadTimeout = null;
         }
-        const requestToReloadPreview = () => {
+        const requestToReloadViewer = () => {
             if (reloadTimeout !== null) {
                 clearTimeout(reloadTimeout);
             }
-            reloadTimeout = setTimeout(reloadPreview, 1000);
+            reloadTimeout = setTimeout(reloadPreview, 1000 / 60);
         }
-        htmlEditor.onDidChangeModelContent(() => requestToReloadPreview());
-        cssEditor.onDidChangeModelContent(() => requestToReloadPreview());
+        htmlEditor.onDidChangeModelContent(() => requestToReloadViewer());
+        cssEditor.onDidChangeModelContent(() => requestToReloadViewer());
+        htmlEditor.setPosition({ lineNumber: 4, column: 1, });
+        cssEditor.setPosition({ lineNumber: 14, column: 1, });
+        htmlEditor.focus();
         reloadPreview();
     });
 </script>
