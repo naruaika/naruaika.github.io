@@ -6,7 +6,7 @@
   credit: https://codepen.io/Danil89/pen/MzrEdX
   content: >-
     <style>
-      .button-1 {
+      .tb1 {
         position: relative;
         height: 45px;
         width: 130px;
@@ -23,16 +23,16 @@
         cursor: pointer;
       }
 
-      .button-1:hover {
-        animation: rotate-button-1 0.7s ease-in-out both;
+      .tb1:hover {
+        animation: rotate-tb1 0.7s ease-in-out both;
       }
 
-      .button-1:hover span {
-        animation: storm-button-1 0.7s ease-in-out both;
+      .tb1:hover span {
+        animation: storm-tb1 0.7s ease-in-out both;
         animation-delay: 0.06s;
       }
 
-      @keyframes rotate-button-1 {
+      @keyframes rotate-tb1 {
         0% { transform: rotate(0deg) translate3d(0, 0, 0); }
         25% { transform: rotate(3deg) translate3d(0, 0, 0); }
         50% { transform: rotate(-3deg) translate3d(0, 0, 0); }
@@ -40,7 +40,7 @@
         100% { transform: rotate(0deg) translate3d(0, 0, 0); }
       }
 
-      @keyframes storm-button-1 {
+      @keyframes storm-tb1 {
         0% { transform: translate3d(0, 0, 0) translateZ(0); }
         25% { transform: translate3d(4px, 0, 0) translateZ(0); }
         50% { transform: translate3d(-3px, 0, 0) translateZ(0); }
@@ -49,7 +49,7 @@
       }
     </style>
 
-    <button class="button-1">
+    <button class="tb1">
       <span>Hover Me</span>
     </button>
 
@@ -58,7 +58,7 @@
   credit: CSS Scan
   content: >-
     <style>
-      .button-2 {
+      .tb2 {
         height: 45px;
         width: 130px;
         display: flex;
@@ -76,7 +76,7 @@
         cursor: pointer;
       }
 
-      .button-2:hover {
+      .tb2:hover {
         background-image: linear-gradient(
           55deg,
           transparent 10%,
@@ -99,7 +99,7 @@
       }
     </style>
 
-    <button class="button-2">
+    <button class="tb2">
       Hover Me
     </button>
 
@@ -108,7 +108,7 @@
   credit: https://codepen.io/JavaScriptJunkie/pen/pPRooV
   content: >-
     <style>
-      .button-3 {
+      .tb3 {
         height: 45px;
         width: 130px;
         display: flex;
@@ -133,17 +133,17 @@
         cursor: pointer;
       }
 
-      .button-3:hover {
+      .tb3:hover {
         background-position: 100% 0;
         transition: all .4s ease-in-out;
       }
 
-      .button-3:focus {
+      .tb3:focus {
         outline: none;
       }
     </style>
 
-    <button class="button-3">
+    <button class="tb3">
       Hover Me
     </button>
 
@@ -152,7 +152,7 @@
   credit: https://codepen.io/JavaScriptJunkie/pen/pPRooV
   content: >-
     <style>
-      .button-4 {
+      .tb4 {
         position: relative;
         height: 45px;
         width: 130px;
@@ -171,7 +171,7 @@
         z-index: 1;
       }
 
-      .button-4:after {
+      .tb4:after {
         content: "";
         position: absolute;
         width: 0;
@@ -184,22 +184,22 @@
         z-index: -1;
       }
 
-      .button-4:hover {
+      .tb4:hover {
         color: #000;
       }
 
-      .button-4:hover:after {
+      .tb4:hover:after {
         left: auto;
         right: 0;
         width: 100%;
       }
 
-      .button-4:active {
+      .tb4:active {
         top: 2px;
       }
     </style>
 
-    <button class="button-4">
+    <button class="tb4">
       Hover Me
     </button>
 
@@ -208,7 +208,7 @@
   credit: Joe Bocock
   content: >-
     <style>
-      .button-5 {
+      .tb5 {
         position: relative;
         height: 45px;
         width: 130px;
@@ -228,7 +228,7 @@
         touch-action: manipulation;
       }
 
-      .button-5:after {
+      .tb5:after {
         content: "";
         position: absolute;
         width: 100%;
@@ -240,13 +240,13 @@
         transition: 0.2s;
       }
 
-      .button-5:hover:after {
+      .tb5:hover:after {
         top: 0px;
         left: 0px;
       }
     </style>
 
-    <button class="button-5">
+    <button class="tb5">
       Hover Me
     </button>
 
@@ -255,7 +255,7 @@
   credit: Scott Branch
   content: >-
     <style>
-      .button-6 {
+      .tb6 {
         position: relative;
         height: 45px;
         width: 130px;
@@ -275,13 +275,13 @@
         touch-action: manipulation;
       }
 
-      .button-6 span:first-child {
+      .tb6 span:first-child {
         position: relative;
         z-index: 10;
         transition: color 400ms cubic-bezier(0.48, 0, 0.12, 1);
       }
 
-      .button-6 span:last-child {
+      .tb6 span:last-child {
         position: absolute;
         height: 45px;
         width: 130px;
@@ -298,7 +298,7 @@
         transition: all 350ms cubic-bezier(0.48, 0, 0.12, 1);
       }
 
-      .button-6:after {
+      .tb6:after {
         position: absolute;
         content: "";
         width: 100%;
@@ -312,19 +312,19 @@
         transition: transform 400ms cubic-bezier(0.48, 0, 0.12, 1);
       }
 
-      .button-6:hover:after {
+      .tb6:hover:after {
         transform-origin: bottom center;
         transform: skewY(9.3deg) scaleY(2);
       }
 
-      .button-6:hover span:last-child {
+      .tb6:hover span:last-child {
         transform: translateX(-50%) translateY(-50%);
         opacity: 1;
         transition: all 500ms cubic-bezier(0.48, 0, 0.12, 1);
       }
     </style>
 
-    <button class="button-6">
+    <button class="tb6">
       <span class="text">Hover Me</span>
       <span>Hovered</span>
     </button>
@@ -334,7 +334,7 @@
   credit: gagan-gv
   content: >-
     <style>
-      .button-11 {
+      .tb7 {
         position: relative;
         height: 45px;
         width: 130px;
@@ -355,8 +355,8 @@
         touch-action: manipulation;
       }
 
-      .button-11::after,
-      .button-11::before {
+      .tb7::after,
+      .tb7::before {
         content: '';
         position: absolute;
         bottom: 0;
@@ -365,7 +365,7 @@
         transition: all .4s;
       }
 
-      .button-11::before {
+      .tb7::before {
         transform: translate(0%, 0%);
         width: 100%;
         height: 100%;
@@ -373,7 +373,7 @@
         border-radius: 10px;
       }
 
-      .button-11::after {
+      .tb7::after {
         transform: translate(10px, 10px);
         width: 35px;
         height: 35px;
@@ -383,26 +383,26 @@
         border-radius: 50px;
       }
 
-      .button-11:hover::before {
+      .tb7:hover::before {
         transform: translate(5%, 20%);
         width: 110%;
         height: 110%;
       }
 
-      .button-11:hover::after {
+      .tb7:hover::after {
         border-radius: 10px;
         transform: translate(0, 0);
         width: 100%;
         height: 100%;
       }
 
-      .button-11:active::after {
+      .tb7:active::after {
         transition: 0s;
         transform: translate(0, 5%);
       }
     </style>
 
-    <button class="button-11">
+    <button class="tb7">
       Hover Me
     </button>
 
@@ -411,11 +411,11 @@
   credit: Temani Afif
   content: >-
     <style>
-      .button-12 {
-        --b: 3px; /* border thickness */
-        --s: .45em; /* size of the corner */
-        --color: #fff;
-        --p: var(--s);
+      .tb8 {
+        --tb8-b: 3px;
+        --tb8-s: .45em;
+        --tb8-c: #fff;
+        --tb8-p: var(--tb8-s);
         position: relative;
         height: 45px;
         width: 130px;
@@ -425,12 +425,12 @@
         font-size: 14px;
         font-weight: 800;
         text-transform: uppercase;
-        color: var(--color);
+        color: var(--tb8-c);
         background:
-          conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
-          var(--p) var(--p) / calc(100% - var(--b) - 2 * var(--p)) calc(100% - var(--b) - 2 * var(--p));
+          conic-gradient(from 90deg at var(--tb8-b) var(--tb8-b), #0000 90deg, var(--tb8-c) 0)
+          var(--tb8-p) var(--tb8-p) / calc(100% - var(--tb8-b) - 2 * var(--tb8-p)) calc(100% - var(--tb8-b) - 2 * var(--tb8-p));
         border: none;
-        outline: var(--b) solid #0000;
+        outline: var(--tb8-b) solid #0000;
         outline-offset: .6em;
         cursor: pointer;
         user-select: none;
@@ -439,20 +439,20 @@
         transition: .15s linear, color 0s, background-color 0s;
       }
 
-      .button-12:hover,
-      .button-12:focus-visible{
-        --p: 0px;
-        outline-color: var(--color);
+      .tb8:hover,
+      .tb8:focus-visible{
+        --tb8-p: 0px;
+        outline-color: var(--tb8-c);
         outline-offset: 0;
       }
 
-      .button-12:active {
+      .tb8:active {
         color: #373B44;
-        background: var(--color);
+        background: var(--tb8-c);
       }
     </style>
 
-    <button class="button-12">
+    <button class="tb8">
       Hover Me
     </button>
 
@@ -461,7 +461,7 @@
   credit: UIForms
   content: >-
     <style>
-      .button-9 {
+      .tb9 {
         height: 45px;
         width: 130px;
         display: flex;
@@ -481,17 +481,17 @@
         cursor: pointer;
       }
 
-      .button-9:hover {
+      .tb9:hover {
           background-color: #fff;
         }
 
-      .button-9:active {
+      .tb9:active {
         box-shadow: #422800 2px 2px 0 0;
         transform: translate(2px, 2px);
       }
     </style>
 
-    <button class="button-9">
+    <button class="tb9">
       Click Me
     </button>
 
@@ -500,7 +500,7 @@
   credit: Duolingo
   content: >-
     <style>
-      .button-8 {
+      .tb10 {
         height: 45px;
         width: 130px;
         display: flex;
@@ -526,7 +526,7 @@
         white-space: nowrap;
       }
 
-      .button-8:after {
+      .tb10:after {
         content: "";
         position: absolute;
         bottom: -4px;
@@ -541,27 +541,27 @@
         z-index: -1;
       }
 
-      .button-8,
-      .button-8:focus {
+      .tb10,
+      .tb10:focus {
         user-select: auto;
         -webkit-user-select: auto;
       }
 
-      .button-8:hover:not(:disabled) {
+      .tb10:hover:not(:disabled) {
         filter: brightness(1.1);
       }
 
-      .button-8:disabled {
+      .tb10:disabled {
         cursor: auto;
       }
 
-      .button-8:active {
+      .tb10:active {
         border-width: 4px 0 0;
         background: none;
       }
     </style>
 
-    <button class="button-8">
+    <button class="tb10">
       Click Me
     </button>
 
@@ -570,7 +570,7 @@
   credit: Michael McMillan
   content: >-
     <style>
-      .button-13 {
+      .tb11 {
         position: relative;
         height: 45px;
         width: 130px;
@@ -590,92 +590,15 @@
         touch-action: manipulation;
       }
 
-      .button-13:active {
+      .tb11:active {
         box-shadow: 0px 0px 0px 0px;
         top: 5px;
         left: 5px;
       }
     </style>
 
-    <button class="button-13">
+    <button class="tb11">
       Click Me
-    </button>
-
-- type: component
-  access: 2025-02-04
-  credit: CSS Scan
-  content: >-
-    <style>
-      .button-10 {
-        position: relative;
-        height: 45px;
-        width: 130px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        font-size: 14px;
-        font-weight: 800;
-        text-transform: uppercase;
-        background: #111;
-        border: none;
-        border-radius: 50px;
-        outline: none;
-        z-index: 0;
-        cursor: pointer;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-      }
-
-      .button-10:before {
-        position: absolute;
-        content: "";
-        top: -2px;
-        left: -2px;
-        width: calc(100% + 4px);
-        height: calc(100% + 4px);
-        background: linear-gradient(
-          45deg,
-          #ff0000,
-          #ff7300,
-          #fffb00,
-          #48ff00,
-          #00ffd5,
-          #002bff,
-          #7a00ff,
-          #ff00c8,
-          #ff0000
-        );
-        background-size: 400%;
-        border-radius: 50px;
-        filter: blur(5px);
-        z-index: -1;
-        animation: glowing-button-10 20s linear infinite;
-        transition: opacity 0.3s ease-in-out;
-      }
-
-      @keyframes glowing-button-10 {
-        0% { background-position: 0 0; }
-        50% { background-position: 400% 0; }
-        100% { background-position: 0 0; }
-      }
-
-      .button-10:after {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        background: #232323;
-        border-radius: 50px;
-        z-index: -1;
-      }
-    </style>
-
-    <button class="button-10">
-      Spot Me
     </button>
 
 - type: component
@@ -683,7 +606,7 @@
   credit: Paper CSS
   content: >-
     <style>
-      .button-14 {
+      .tb12 {
         position: relative;
         height: 45px;
         width: 130px;
@@ -713,16 +636,206 @@
         transition: all 235ms ease-in-out;
       }
 
-      .button-14:hover {
+      .tb12:hover {
         box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
         transform: translate3d(0, 2px, 0);
       }
 
-      .button-14:focus {
+      .tb12:focus {
         box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
       }
     </style>
 
-    <button class="button-14">
+    <button class="tb12">
+      Spot Me
+    </button>
+
+- type: component
+  access: 2025-02-05
+  credit: https://panda.metroui.org.ua/ui/buttons
+  content: >-
+    <style>
+      @property --tb13-a {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: true;
+      }
+
+      .tb13 {
+        position: relative;
+        height: 45px;
+        width: 130px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 800;
+        text-transform: uppercase;
+        background: #232323;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        transition: all .15s ease-in-out;
+      }
+
+      .tb13:before,
+      .tb13:after {
+        position: absolute;
+        content: "";
+        top: calc(2px * -1);
+        left: calc(2px * -1);
+        width: calc(100% + 2px * 2);
+        height: calc(100% + 2px * 2);
+        background-image: conic-gradient(
+          from var(--tb13-a),
+          #ff4545,
+          #00ff99,
+          #006aff,
+          #ff0095,
+          #ff4545
+        );
+        border-radius: inherit;
+        z-index: -1;
+        animation: 3s spin-tb13 linear infinite;
+      }
+
+      .tb13:before {
+        filter: blur(.5rem);
+        opacity: .5;
+        padding: 4px;
+        top: calc(6px * -1);
+        left: calc(6px * -1);
+      }
+
+      @keyframes spin-tb13 {
+        100% {
+          --tb13-a: 360deg;
+        }
+      }
+    </style>
+
+    <button class="tb13">
+      Spot Me
+    </button>
+
+- type: component
+  access: 2025-02-05
+  credit: https://panda.metroui.org.ua/ui/buttons
+  content: >-
+    <style>
+      @property --tb14-a {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: true;
+      }
+
+      .tb14 {
+        position: relative;
+        height: 45px;
+        width: 130px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 800;
+        text-transform: uppercase;
+        background: #232323;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        transition: all .15s ease-in-out;
+      }
+
+      .tb14:before {
+        position: absolute;
+        content: "";
+        top: calc(2px * -1);
+        left: calc(2px * -1);
+        width: calc(100% + 2px * 2);
+        height: calc(100% + 2px * 2);
+        background-image: repeating-conic-gradient(
+          from var(--tb14-a),
+          #50a8ff 0%,
+          #50a8ff 5%,
+          transparent 5%,
+          transparent 40%,
+          #50a8ff 50%
+        );
+        border-radius: inherit;
+        z-index: -1;
+        animation: 3s spin-tb14 linear infinite;
+      }
+
+      @keyframes spin-tb14 {
+        to { --tb14-a: 360deg; }
+      }
+    </style>
+
+    <button class="tb14">
+      Spot Me
+    </button>
+
+- type: component
+  access: 2025-02-05
+  credit: https://panda.metroui.org.ua/ui/buttons
+  content: >-
+    <style>
+      .tb15 {
+        position: relative;
+        height: 45px;
+        width: 130px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        color: #232323;
+        font-size: 14px;
+        font-weight: 800;
+        text-transform: uppercase;
+        background: #fff;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      .tb15 svg {
+        width: 16px;
+        height: 16px;
+        fill: #232323;
+        transform-origin: 50% 0;
+        animation: tb15-ring 2s ease infinite;
+      }
+
+      @keyframes tb15-ring {
+        0% { transform: rotate(-15deg); }
+        2% { transform: rotate(15deg); }
+        4% { transform: rotate(-18deg); }
+        6% { transform: rotate(18deg); }
+        8% { transform: rotate(-22deg); }
+        10% { transform: rotate(22deg); }
+        12% { transform: rotate(-18deg); }
+        14% { transform: rotate(18deg); }
+        16% { transform: rotate(-12deg); }
+        18% { transform: rotate(12deg); }
+        20% { transform: rotate(0); }
+      }
+    </style>
+
+    <button class="tb15">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416l384 0c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8l0-18.8c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg>
       Spot Me
     </button>

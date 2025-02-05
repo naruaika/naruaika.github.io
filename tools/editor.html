@@ -1,6 +1,6 @@
 ---
 layout: tool
-title: HTML Editor
+title: CSS Editor
 permalink: /tool/editor
 ---
 <style>
@@ -50,6 +50,7 @@ permalink: /tool/editor
                 box-sizing: border-box;
                 position: sticky;
                 top: 0;
+                left: 0;
                 padding: 0.4rem 0.6rem;
                 display: flex;
                 align-items: center;
@@ -144,6 +145,29 @@ permalink: /tool/editor
     @media (width < 720px) {
         main {
             padding: 0;
+
+            > .row {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 2rem;
+
+                > * {
+                    min-height: 200px;
+                }
+
+                > .column {
+                    grid-column: 1;
+                    grid-row: 2;
+                }
+            }
+
+            #templates {
+                flex-direction: row;
+
+                .category {
+                    writing-mode: vertical-lr;
+                }
+            }
 
             #workspace  {
                 grid-template-columns: 1fr;
