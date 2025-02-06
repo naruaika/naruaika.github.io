@@ -44,6 +44,7 @@ permalink: /tool/editor
             gap: 2px;
             background-color: #000;
             font-size: 0.8rem;
+            overflow-x: hidden;
             overflow-y: auto;
 
             .category {
@@ -68,6 +69,11 @@ permalink: /tool/editor
                 background-color: #1A1A1A;
                 aspect-ratio: 2 / 1;
                 z-index: 0;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #111;
+                }
             }
         }
 
@@ -189,15 +195,9 @@ permalink: /tool/editor
             <div class="title">Explorer</div>
             <div id="templates" class="scrollable">
                 {% for item in site.data.web-templates %}
-                    {%- if item.type == "category" -%}
-                        <div class="category">
-                            {{ item.content }}
-                        </div>
-                    {%- else -%}
-                        <div class="component">
-                            {{ item.content }}
-                        </div>
-                    {%- endif -%}
+                    <div class="{{ item.type }}" onclick="loadTemplate(event)">
+                        {{ item.content }}
+                    </div>
                 {% endfor %}
             </div>
         </div>
@@ -222,11 +222,50 @@ permalink: /tool/editor
     referrerpolicy="no-referrer"
 ></script>
 <script>
+    const viewer = document.getElementById("viewer");
+    let htmlEditor;
+    let cssEditor;
+    let reloadTimeout = null;
+
+    const reloadPreview = () => {
+        viewer.src = "about:blank";
+        viewer.contentWindow.document.open();
+        viewer.contentWindow.document.write(`
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Preview</title>
+            </head>
+            <body>
+                <style>${cssEditor.getValue()}</style>
+                ${htmlEditor.getValue()}
+            </body>
+            </html>
+        `);
+        viewer.contentWindow.document.close();
+        reloadTimeout = null;
+    }
+
+    const requestToReloadViewer = () => {
+        if (reloadTimeout !== null) {
+            clearTimeout(reloadTimeout);
+        }
+        reloadTimeout = setTimeout(reloadPreview, 1000 / 60);
+    }
+
+    const loadTemplate = (event) => {
+        const target = event.currentTarget;
+        const css = target.children[0].textContent;
+        const html = target.children[1].outerHTML;
+        cssEditor.setValue(cssEditor.getValue() + css + "\n");
+        htmlEditor.setValue(htmlEditor.getValue() + html + "\n");
+    }
+
     require.config({ paths: { vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs" } });
-    require(["vs/editor/editor.main"], function () {
-        const runner = document.getElementById("runner");
-        const viewer = document.getElementById("viewer");
-        const htmlEditor = monaco.editor.create(document.getElementById("html-editor"), {
+    require(["vs/editor/editor.main"], () => {
+        htmlEditor = monaco.editor.create(document.getElementById("html-editor"), {
             value:
 `<p>
     The brown fox jumps over the lazy dog.
@@ -238,12 +277,11 @@ permalink: /tool/editor
             automaticLayout: true,
             scrollBeyondLastLine: false,
         });
-        const cssEditor = monaco.editor.create(document.getElementById("css-editor"), {
+        cssEditor = monaco.editor.create(document.getElementById("css-editor"), {
             value:
 `body {
     margin: 0;
     padding: 20px;
-    background-color: #FFF;
 }
 
 p {
@@ -251,6 +289,11 @@ p {
     font-size: 2rem;
     font-weight: 800;
     line-height: 1.25;
+    color: #FFF;
+}
+
+button {
+    margin: 2rem 0;
 }
 
 `,
@@ -260,35 +303,6 @@ p {
             automaticLayout: true,
             scrollBeyondLastLine: false,
         });
-        let reloadTimeout = null;
-        const reloadPreview = () => {
-            const htmlContent = htmlEditor.getValue();
-            const cssContent = cssEditor.getValue();
-            viewer.src = "about:blank";
-            viewer.contentWindow.document.open();
-            viewer.contentWindow.document.write(`
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Preview</title>
-                </head>
-                <body>
-                    <style>${cssContent}</style>
-                    ${htmlContent}
-                </body>
-                </html>
-            `);
-            viewer.contentWindow.document.close();
-            reloadTimeout = null;
-        }
-        const requestToReloadViewer = () => {
-            if (reloadTimeout !== null) {
-                clearTimeout(reloadTimeout);
-            }
-            reloadTimeout = setTimeout(reloadPreview, 1000 / 60);
-        }
         htmlEditor.onDidChangeModelContent(() => requestToReloadViewer());
         cssEditor.onDidChangeModelContent(() => requestToReloadViewer());
         htmlEditor.setPosition({ lineNumber: 4, column: 1, });
