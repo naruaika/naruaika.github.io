@@ -1,0 +1,216 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/chatting-with-a-discord-bot-4pc4
+title: Chatting With a Self-Deployed Discord Bot
+description: Among friends from the gaming community, I have been known as a NPC lover. Do not get me wrong; I do not like certain NPCs, but rather all NPCs.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    <i>This is such an old project, but I had no chance until today to make a quick publish!</i>
+</p>
+
+<p>
+    Among friends from the gaming community, I have been known as a NPC lover. Do not get me wrong; I do not like certain NPCs, but rather all NPCs. Why not just hang out with other players instead? I am living in real world, so I am not willing if someone&mdash;let us say a toxic player&mdash;from virtual world could mess up with my life. The excitement of chatting with real humans is priceless indeed. But at some point in time, we only want to have a friend to chat without knowing who we really are. If only the in-game player-to-player chat was truly a sandbox, but that is okay.
+</p>
+
+<p>
+    Name a role-playing game that has real dialogue with NPCs. To date, I have not found one. There have been offering to the answer choices or none at all. Moreover, some only provides futile answer choices, not at all changing the story regardless of the choice.
+</p>
+
+<p>
+    I have been introduced to BlenderBot, an open source chatbot developed by Facebook AI Research, by a post from <a href="https://dev.to/edemgold" rel="nofollow">@edemgold</a>. But instead, I am eager to turn it into a Discord bot.
+</p>
+
+<p>
+    File <code>.env</code>:
+</p>
+
+{% raw %}
+<pre>
+TOKEN={{my_discord_bot_token}}
+</pre>
+{% endraw %}
+
+<p>
+    File <code>words.json</code>:
+</p>
+
+<pre>
+{
+    "greeting": [
+        "Hi", "Hai", "Yo", "Hey", "Heyyy", "Hello", "Hullo",
+        "Halo", "Hola", "Howdy", "Hiya", "Ahoy", "Good to see ya",
+        "Great to see you", "Nice to see you", "Hey, boo"
+    ],
+    "encouraging": [
+        "Hang in there, {user}.",
+        "Don't give up, {user}.",
+        "Keep pushing, {user}.",
+        "Keep fighting, {user}!",
+        "Stay strong, {user}.",
+        "Never give up, {user}.",
+        "Come on, {user}! You can do it!",
+        "Follow your dreams, {user}.",
+        "Reach for the stars, {user}.",
+        "Do the impossible, {user}.",
+        "Believe in yourself, {user}.",
+        "The sky is the limit, {user}.",
+        "I'll support you either way, {user}.",
+        "I'm behind you 100%, {user}."
+    ],
+    "naugthy": [
+        "shit"
+    ]
+}
+</pre>
+
+<p>
+    File <code>main.py</code>:
+</p>
+
+<pre>
+import asyncio
+import discord
+import json
+import os
+import random
+import re
+from dotenv import load_dotenv
+from discord.ext import commands
+from discord_slash import SlashContext
+from discord_slash import SlashCommand
+from transformers import BlenderbotTokenizer
+from transformers import BlenderbotForConditionalGeneration
+
+load_dotenv()
+
+client = commands.Bot(command_prefix='/')
+slash = SlashCommand(client, sync_commands=True)  # TODO: migrate to newly discord built-in
+
+tokenizer = BlenderbotTokenizer.from_pretrained('facebook/blenderbot-400M-distill')
+converse_model = BlenderbotForConditionalGeneration.from_pretrained('facebook/blenderbot-400M-distill')
+
+tag_finder = re.compile('\s*<.*?>\s*')
+word_finder = re.compile('[^a-zA-Z\s]*')
+duplicate_finder = re.compile(r"(.)\1{2,}", re.DOTALL)
+
+with open('words.json', 'r') as f:
+    words = json.loads(f.read())
+
+
+@client.event
+async def on_ready():
+    print(f'{client.user} has connected to Discord!')
+
+
+@slash.slash(name='ping', description='PING!')
+async def ping(context):
+    await context.send('pong')
+
+
+@slash.slash(name='me', description='Send a message to Naru.')
+async def naru(context: SlashContext, message='Hello, Naru!'):
+    print(f'{context.author} says {message} to Naru')
+
+    if message == 'Hello, Naru!':
+        await context.send('You just say hello to Naru!')
+    else:
+        await context.send(f'Your message has been sent to Naru.')
+
+    # TODO: send the message to me in DM
+
+
+@client.event
+async def on_message(message):
+    # Execute slash commands
+    if message.content.startswith('/'):
+        return await client.process_commands(message)
+
+    # Do nothing if the message is from the bot itself
+    if message.author == client.user:
+        return
+
+    # Do nothing if the message is from a bot
+    if message.author.bot:
+        return
+
+    # Simulate thinking delay
+    await asyncio.sleep(30)
+
+    response = []
+
+    # Pre-process the message
+    msg = message.content.lower()  # lowercase
+    msg = re.sub(word_finder, '', msg)  # remove non-alphanumeric characters
+    msg = duplicate_finder.sub(r"\1\1", msg)  # remove more than 2 duplicate letters
+
+    # Ask the user to speak up
+    if (msg.isspace() or msg == ''):
+        response.append(f"{message.author.mention}, what weighs on your mind?")
+        response.append(f"We can talk in DM if you want.")
+        return await message.channel.send(' '.join(response))
+
+    # Log the user message
+    if message.channel.type is not discord.ChannelType.private:
+        print(f'{message.author} says {msg}')
+
+    # Warn the user if the message contains naughty words
+    msg_words = msg.split()
+    for naughty_word in words['naugthy']:
+        if any(naughty_word == word for word in msg_words):
+            response.append(f"Hey {message.author.mention}, don't talk badly!")
+            response.append(f"Naru taught me to say nice things only.")
+            return await message.channel.send(' '.join(response))
+
+    # Indicate the bot is typing
+    async with message.channel.typing():
+
+        # Respond to the greeting message
+        if msg in [word.lower() for word in words['greeting']]:
+            greeting_word = random.choice(words['greeting'])
+            greeting_sentence = f'{greeting_word}, {message.author.mention}!'
+            response.append(greeting_sentence)
+
+        # Respond to the message
+        msg_token = tokenizer(msg, return_tensors='pt')
+        msg_reply = converse_model.generate(**msg_token)
+        msg_reply = tokenizer.decode(msg_reply[0])
+        msg_reply = re.sub(tag_finder, '', msg_reply)
+        response.append(msg_reply)
+
+        if response:
+            # Send the response
+            await message.channel.send(' '.join(response))
+
+            # Log the bot response
+            if message.channel.type is not discord.ChannelType.private:
+                print(f"Bot replies {' '.join(response)}")
+
+
+# Run the bot
+client.run(os.getenv('TOKEN'))
+</pre>
+
+<p>
+    Once the application is run by simply executing <code>python main.py</code>, we can basically say anything to the bot. But the best part of it is bringing my own Discord server to life with discussions between bots while I work in the office!
+</p>
+
+<figure>
+    <div class="container" style="background-color:#36393f;">
+        <img src="/assets/posts/af7f68fnkcta1ar8p43e.png" alt="">
+    </div>
+</figure>
+
+<p>
+    What a time to be alive!
+</p>

@@ -1,0 +1,238 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/some-strategies-for-studying-new-technologies-pygtk-28ee
+title: "Some Strategies for Studying New Technologies: PyGTK"
+description: What I meant by "new technology" in here is something really meant for beginners as they have absolutely no experience in writing such application.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    I have been studying a new technology, <i>exempli gratia</i> PyGObject, especially PyGTK, for around 1.5 months. As we know already, GObject was originally develop in C. So, anything else than that must be wrappers only. But do not even worry, since there is not any different on what *GObject is capable of. If anything, it could be just performance, for Python is relatively run slower compare to C in general. I would think if your application does not require graphic intensive processing, you can safely prefer Python to C.
+</p>
+
+<p>
+    GTK or even PyGTK is not a new technology at all, it has been there for a decade or two. What I meant by "new technology" in here is something really meant for beginners as they have absolutely no experience in writing such application. In spite of having no coach or partner, I want to share how I self-taught to get my first steps by relying solely on the internet.
+</p>
+
+<h2>
+    1. Googling All the Time
+</h2>
+
+<p>
+    Sure, it could be any web search engine that exists today, e.g. DuckDuckGo. You know, sometimes it becomes controversial when I am as a GNU/Linux user get caught not using open source technologies and even not aware of my privacy. I personally do not take too much time of listening to other people judging me when I am very well to know what I am doing. <i>We are the writer of our own life story.</i> I prefer Google to others just because it fits my personal needs.
+</p>
+
+<p>
+    But really, the essential part is not what search engine we shall use, but it is merely about <i>try searching it first whenever we have questions.</i> For the most part, this is how I managed to get answers to almost every problems of mine when it comes to programming.
+</p>
+
+<p>
+    Let us say that we want to write our very first GTK application. So, we would come up with, at least, a very commonly used keyword: <i>PyGTK tutorial</i> which we may just wrote in the Google search box. This is what I got at the first try:
+</p>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <img src="/assets/posts/q6z29s0gohptzb7ulfhd.png" alt="">
+    </div>
+</figure>
+
+<p>
+    And then <a href="https://developer.gnome.org/gnome-devel-demos/stable/tutorial.py.html.en" rel="nofollow">the tutorial</a> from the official GNOME website which is still on the first search page. they are all there to give us a complete guide to getting started.
+</p>
+
+<p>
+    Some people will end up on YouTube, because it is more interesting to see people trying to "teach us" how to get things done. I do not have any complaints, since often that is my personal way of getting excited about learning something.
+</p>
+
+<p>
+    After all, it is really easy to write our first PyGTK application, from installing all required dependencies to distributing worldwide. Let me take a more special case, let us say that I am interested in developing a Flatpak application. Again, the first thing to do is <i>googling</i>.
+</p>
+
+<p>
+    The first entry that appears most likely always be the <a href="https://docs.flatpak.org/en/latest/getting-started.html" rel="nofollow">official documentation Flatpak</a>, at least as of the time I am writing this article. Sadly, it seems to provide only a simple script as our hello-world application. Whereas developing a GUI application could be more complex than it actually is.
+</p>
+
+<p>
+    Even Google was not quite sure when I looked for a more specific keyword: <i>pygtk flatpak tutorial</i>;
+</p>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <img src="/assets/posts/0ugsc3kv0l0qgazgpjlk.png" alt="">
+    </div>
+</figure>
+
+<p>
+    The first result was a Reddit thread from someone asking for tutorials, not of much use. Luckly, <a href="https://belmoussaoui.com/article/5-how-to-create-a-gtk-application-using-python-part-1" rel="nofollow">the second one</a> was from Bilal Elmoussaoui. It is actually what I was looking for! Although, it seems to be his first and last article talking about PyGTK and Flatpak. Sigh. But at least, I came to know what to do next;
+</p>
+
+<ol>
+    <li>Installing GNOME Builder; and</li>
+    <li>Adding Meson in the list to learn in addition to PyGTK and Flatpak!</li>
+</ol>
+
+<p>
+    Well, yes, it was too much for me as a newbie. In any case, at least, I can still keep my premise: <i>googling</i> is a way to do for any developer.
+</p>
+
+<p>
+    Click ... click ... tap ... tap ... Awesome! Now, we have our own hello-world by just a few clicks and taps. It is, indeed, a simple thing, but we will disagree if we have no idea where we shall go.
+</p>
+
+<h2>
+    2. Reading Someone Else's Code
+</h2>
+
+<p>
+    As long as we still remember that PyGTK is an open source technology, we will find almost anywhere people write and share their source code for a spectacular set of GTK applications. For sometimes, we will have a hard time implementing what any of the documentation tells and suggests. By no mean they did a bad job writing documentation. Although, sometimes it is. But it is more likely we need an example or two, how a real-world application had implemented it. In a simpler way, what is the best practice of using this class and all their respective functions to do this and that.
+</p>
+
+<p>
+    People often advised that it will not ever be possible to lift a big stones by only one person. We grow, develop and learn from each other, until then we can build even a skyscraper. By learning with others does not always mean meeting and having a chat with them. Sometimes, it could merely be reading someone's else code. As reading is of use to come up with an approach that we may not have thought of in our entire life.
+</p>
+
+<p>
+    Do not think of reading as a separate thing, because it is always done after looking for things. Both of them are couples all the time.
+</p>
+
+<p>
+    Let us take a look at a different story of mine. I do know that <code>urllib</code> there and already built-ins in Python distribution. But somehow, I had struggled in finding any good articles tutoring how to do certain things using <code>urllib</code>. I ask to myself, why on earth would people prefer other packages when there is a built-in one.
+</p>
+
+<p>
+    Trying to do <code>import requests</code> did not seem successful, because I had to install it manually beforehand, by using PIP to be precise, I thought. Well, I cannot do so. As Meson has its own procedure for installing packages. So, I turned my steering for a moment to read Meson's documentation. Womp, womp ... said the sad trombone. Err, why was I thinking of Meson, when it might actually have something to do with Flatpak. Since for me, it is a lot easier to read a JSON for Flatpak than a build script for Meson. I have learned from it that we should consider taking the most simple thing we could imagine in solving any case, for the first attempt.
+</p>
+
+<p>
+    After gooling for minutes, I found a way of doing so. There is a script called <a href="https://github.com/flatpak/flatpak-builder-tools/tree/master/pip" rel="nofollow"><i>Flatpak PIP Generator</i></a> on the official Flatpak repository.
+</p>
+
+<p>
+    At another time, I wanted to have a scroll animation for my <code>Gtk.ScrolledWindow</code>. I have read <a href="https://developer.gnome.org/gtk4/4.0/concepts.html" rel="nofollow">the GTK concept</a> about drawing stuff. In the end, I only knew about classes and functions to use, but still did not get the how-to.
+</p>
+
+<p>
+    While it might be a lot of work, we probably do not want to skip a code written in other than Python or whatsoever language we used to. Writing "gtk scroll animation" in the search led me to <a href="https://blogs.gnome.org/jsparber/2018/04/29/animate-a-scrolledwindow/" rel="nofollow">an article</a> by Julian, whereas using the keyword "pygtk" did not help. So, I have forced myself to read Julian's code in Rust. Meanwhile it is a language I just heard of not too long ago and never had a chance to try it. After struggling a little, pouring out sweat that never dripped, I managed to rewrite it in Python. It turns out to be a nice language, actually.
+</p>
+
+<p>
+    Speaking of exploring and reading belongs to someone else, I have a random small tip. Some nosy programmers sometimes create their own filename extensions, so people browsing the source code are confused about how to open them. For example, Some of them can be recognized by the operating system, while others are not.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/g0zsigj7uanidzvzrugj.png" alt="">
+    </div>
+</figure>
+
+<p>
+    As we can see from the selected file icon, the file with the <code>ayt</code> extension must be an archive which will be opened by simply double clicking it. But guess what the following?
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/ri1akcovk78p60yskn6r.png" alt="">
+    </div>
+</figure>
+
+<p>
+    Even though they have the same extension, they are not the same file type. Or even this? What could it be?
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/tuuqfi33qx2tvnylpeid.png" alt="">
+    </div>
+</figure>
+
+<p>
+    If we are lucky, we could figure it out by trying to open them using our beloved text editor.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/5gbo4ztggj4hl4fr5uud.png" alt="">
+    </div>
+</figure>
+
+<p>
+    No matter if they are binary files, just open them anyway.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/v48giy053evrjxs1saea.png" alt="">
+    </div>
+</figure>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/t14p9ey54omb3d2ckd5g.png" alt="">
+    </div>
+</figure>
+
+<p>
+    Bang!
+</p>
+
+<h2>
+    3. Inspecting Existing Applications
+</h2>
+
+<p>
+    It is always a best practice to research some of the similar applications we are going to develop or some of which use the same toolkit. If it is a GTK application, fortunately, we have another great tool to be considered, it is GtkInspector.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/uray1kjrtuma6o6nppy0.png" alt="">
+    </div>
+</figure>
+
+<p>
+    So, we are able to get some insights and even reproduce some good user interface implementations of existing applications that are known to be beautiful and user-friendly.
+</p>
+
+<h2>
+    4. Hanging Out with Others
+</h2>
+
+<p>
+    As weak creatures, we always need guidance in doing something. Luckily, we find various discussion rooms on the internet, such as GitHub Discussions and internet relay chat (IRC), easily. I remember that someone once gave us advice that <i>ideas and creativity come through interacting with other people</i>, or something similar. And I have proved it myself by taking many benefits of doing so.
+</p>
+
+<p>
+    However, there are a number of points that need to be considered when starting to enter a question-answer community. Some of them have general guidelines that are very worthy of following:
+</p>
+
+<ul>
+    <li>Do not ask to ask, uh, come on, just ask your question right away (<a href="https://dontasktoask.com/" rel="nofollow">https://dontasktoask.com/</a>);</li>
+    <li>Please ask your actual question and not the solution you have tried (<a href="https://xyproblem.info/" rel="nofollow">https://xyproblem.info/</a>);</li>
+    <li>Please at least try to read it yourself before asking (<a href="https://just-read.it/" rel="nofollow">https://just-read.it/</a>);</li>
+    <li>Et cetera.</li>
+</ul>
+
+<p>
+    If you do not aware of their rules, I am afraid that you will end up with someone giving a sarcastic reply like this: <a href="https://letmegooglethat.com/?q=for+loop+python" rel="nofollow">https://letmegooglethat.com/?q=for+loop+python</a>.
+</p>
+
+<h2>
+    5. Sharing Helps
+</h2>
+
+<p>
+    It is very not fair to me talking about anything that is just about taking benefits from others, but I have to be bold in speaking of making benefits to others. As besides <a href="https://en.wikipedia.org/wiki/Learning-by-doing" rel="nofollow">learning by doing</a>, there is also <a href="https://en.wikipedia.org/wiki/Learning_by_teaching" rel="nofollow">learning by teaching</a>. Let us say that we are sharing a public gist, what we are all hoping for? It is obvious, a discussion of other approaches. Since to impart our knowledge means to be open receiving others.
+</p>
+
+<p>
+    Good luck!
+</p>

@@ -1,0 +1,175 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/how-i-managed-to-run-blenderbot-20-1jac
+title: How I Managed to Run BlenderBot 2.0
+description: The title became a matter when it comes to limited machines. I managed to run it on my own machine with 16GB RAM on the CPU.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    The title became a matter when it comes to limited machines. I managed to run it on my own machine with 16GB RAM on the CPU, but not on the GPU as it has only 4GB VRAM. But for those who have a smaller RAM capacity, they can run it on Google Colab with a GPU.
+</p>
+
+<p>
+    Unfortunately, it is still not enough to run it without a subscription.
+</p>
+
+<pre>
+> # Run on Google Colab with the free plan
+
+> !nvidia-smi
+Tue Mar  8 03:08:28 2022
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 460.32.03    Driver Version: 460.32.03    CUDA Version: 11.2     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Tesla T4            Off  | 00000000:00:04.0 Off |                    0 |
+| N/A   55C    P8    10W /  70W |      0MiB / 15109MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+
+> !free
+              total        used        free      shared  buff/cache   available
+Mem:       13302920      631188    10510972        1192     2160760    12420412
+Swap:             0           0           0
+</pre>
+
+<p>
+    But need not to worry, we have the hackaround in here.
+</p>
+
+<p>
+    Please note that I do not take any credit for the code. I just copied from <a href="https://github.com/JulesGM/ParlAI_SearchEngine/blob/master/README.md" rel="nofollow">https://github.com/<wbr>JulesGM/<wbr>ParlAI_SearchEngine/<wbr>blob/<wbr>master/<wbr>README.md</a>.
+</p>
+
+<p>
+    <b>First,</b> let us install all the required dependencies in a new cell:
+</p>
+
+<pre>
+%%capture
+
+# Install the latest version of ParlAI from source.
+# This is important, otherwise using Blenderbot 2.0 will not work.
+!pip install -q git+https://github.com/facebookresearch/ParlAI.git
+
+# Clone the server and install its requirements
+!git clone https://github.com/JulesGM/ParlAI_SearchEngine.git
+!pip install -q  -r ParlAI_SearchEngine/requirements.txt
+</pre>
+
+<p>
+    <b>Second,</b> run the web search server in a new cell:
+</p>
+
+<pre>
+import os
+import shlex
+import subprocess
+import time
+
+# Using port 8080 doesn't work on Colab
+HOST = "0.0.0.0:1111"
+PATH_TO_SEARCH_SERVER = "./ParlAI_SearchEngine/search_server.py"
+
+assert os.path.exists(PATH_TO_SEARCH_SERVER), (f"Incorrect path {PATH_TO_SEARCH_SERVER}")
+
+command = ["python", "-u", shlex.quote(PATH_TO_SEARCH_SERVER), "serve", "--host", HOST]
+command_str = " ".join(command)
+p = subprocess.Popen(command, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+
+# Wait a bit before the next cell to let a lot of the potential errors happen.
+time.sleep(3)
+</pre>
+
+<p>
+    <b>Third,</b> in here where the hack is applied:
+</p>
+
+<pre>
+%%capture
+
+%mkdir /usr/local/lib/python3.7/dist-packages/data
+%cd /usr/local/lib/python3.7/dist-packages/data
+
+# To prevent the 3.7GB BERT model build process taking too much RAM in the model runtime,
+# we need to build it separately before running the interactive parlai command
+from parlai.zoo.bart.build import download as download_bart_model
+download_bart_model('.')
+</pre>
+
+<p>
+    <b>Last,</b> run the BlenderBot 2.0's interactive shell in a new cell:
+</p>
+
+<pre class="wrapped">
+!python -m parlai interactive --model-file zoo:blenderbot2/blenderbot2_400M/model --search_server $HOST
+</pre>
+
+<p>
+    Congrats! Now, let us look at this sample conversation:
+</p>
+
+<pre>
+...
+Enter [DONE] if you want to end the episode, [EXIT] to quit.
+03:26:48 | creating task(s): interactive
+Enter Your Message: Who is Kamisato Ayaka?
+/usr/local/lib/python3.7/dist-packages/parlai/core/torch_generator_agent.py:1749: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  hyp_ids = best_idxs // voc_size
+[BlenderBot2Fid]: Kamisato ayaka is one of my favorite anime characters. _POTENTIALLY_UNSAFE__
+Enter Your Message: From which anime or game she is?
+[BlenderBot2Fid]: She is from Genshin Impact. She is a character in the anime series. Do you like anime?
+Enter Your Message: Yes, I do. What's her role in Genshin Impact?
+[BlenderBot2Fid]: She is the main character of the anime. She plays a role in the story of the series.
+Enter Your Message: Really? The main character? How does she look like?
+[BlenderBot2Fid]: She does not look like the anime character. She looks more like a character from a video game.
+Enter Your Message: What's her favorite food?
+[BlenderBot2Fid]: I am not sure, but I do know that she is a big fan of pizza. Have you ever had pizza?
+Enter Your Message: Yeah, actually, my family run a home bakery years ago. Anyway, where she lives?
+[BlenderBot2Fid]: She lives in Tokyo, Japan. I do not know where she is from. I have never been to Japan.
+Enter Your Message: Me too. By the way, does she have a brother?
+[BlenderBot2Fid]: I do not think she has a brother. She does not live with her family. She lives with her parents.
+Enter Your Message: Oh, is it true? But I have heard someone named Kamisato Ayato.
+[BlenderBot2Fid]: No, I have not heard of that person. I am not familiar with that name. What is it?
+Enter Your Message: I'm not sure, I thought he is Ayaka's brother.
+[BlenderBot2Fid]: Yes, that is correct. He is the brother of Ayaka. He lives with his parents.
+Enter Your Message: LOL. You changed your mind, don't you? Okay then, tell me about Ayaka's hobby.
+[BlenderBot2Fid]: Her hobby is to play video games. She likes to play Call of Duty and Fortnite.
+Enter Your Message: Ha-ha-ha ... You are wrong! She likes playing Shougi. It's not a video game! She likes poetry as well.
+[BlenderBot2Fid]: Oh, I did not know that. I will have to look it up. Thank you for the information.
+Enter Your Message: Don't mention it. By the way, do you play Genshin Impact?
+[BlenderBot2Fid]: I have not played it. I don't know what it is. Is it an anime game?
+Enter Your Message: Yeah, kinda. The visual graphics are awesome. Too awesome so that my laptop couldn't afford it.
+[BlenderBot2Fid]: I am sorry to hear that. What kind of laptop do you have? I have a laptop.
+Enter Your Message: Just a typical laptop for developing web applications using PHP.
+[BlenderBot2Fid]: That sounds like a lot of fun. I would love to learn how to code on a computer.
+Enter Your Message: Why do you want to learn coding?
+[BlenderBot2Fid]: I think it would be fun to be able to code. What do you think? _POTENTIALLY_UNSAFE__
+Enter Your Message: [EXIT]
+CHAT DONE
+</pre>
+
+<p>
+    So long!
+</p>

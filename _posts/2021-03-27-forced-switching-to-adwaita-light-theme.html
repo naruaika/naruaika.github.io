@@ -1,0 +1,81 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/forced-switching-to-adwaita-light-theme-3154
+title: Forced Switching to Adwaita Light Theme
+description: I love theme Adwaita theme, especially the dark one. Unfortunately, many applications do not seem to be worked pretty well in dark theme.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    Just another short story ...
+</p>
+
+<p>
+    I love theme Adwaita theme, especially the dark one. So, I always have it enabled by using GNOME Tweaks. Unfortunately, many applications do not seem to be worked pretty well in dark theme. So, I wanted to know how to run certain Flatpak application in light theme without me changing the global default theme.
+</p>
+
+<p>
+    In my case, <b>WPS Office</b> has a poor display of the font search dropdown list; black text on dark background will never be good. After googling for a while, I got to know that WPS Office was installed at <code>/var/lib/flatpak/app/com.wps.Office/</code>. It seemed like all Flatpak applications will be installed either at
+</p>
+
+<ul>
+    <li><code>/var/lib/flatpak/app/</code> for system-wide installation; or</li>
+    <li><code>~/.local/share/flatpak/app</code> for per-user installation.</li>
+</ul>
+
+<p>
+    Exploring the directory structure, I have realised that somehow WPS Office has included its own theme directory at <code>/var/lib/flatpak/app/com.wps.Office/x86_64/stable/active/files/share/themes/</code>.
+</p>
+
+<pre class="wrapped">
+$ cd /var/lib/flatpak/app/com.wps.Office/x86_64/stable/active/files/share/themes/
+
+$ ls
+Adwaita  Adwaita-dark  Default  Emacs  HighContrast  Raleigh
+</pre>
+
+<p>
+    I think, this is not common, at least not for most applications. Then, I idly experimented to remove the <code>Adwaita-dark</code> folder, so that WPS Office cannot find it anymore. Or at least just to rename it;
+</p>
+
+<pre class="wrapped">
+$ sudo mv Adwaita-dark/ Adwaita-dark-bk/
+$ sudo mv Adwaita/ Adwaita-dark/
+</pre>
+
+<p>
+    Fortunately, it seemed to be worked. Yay! I have managed to force WPS Office to use the light theme instead! Although I cannot explain it.
+</p>
+
+<p>
+    <b>For GTK applications,</b> we can make sure to set the GTK_THEME environment variable. For example, for the <a href="https://gitlab.gnome.org/World/gcolor3" rel="nofollow">Color Picker</a> application:
+</p>
+
+<pre class="wrapped">
+$ sudo flatpak override --env=GTK_THEME=Adwaita nl.hjdskes.gcolor3
+</pre>
+
+<p>
+    To unset, just need to set the value to empty:
+</p>
+
+<pre class="wrapped">
+$ sudo flatpak override --env=GTK_THEME= nl.hjdskes.gcolor3
+</pre>
+
+<p>
+    <b>For Qt applications,</b> set the <code>QT_STYLE_OVERRIDE</code> variable instead.
+</p>
+
+<p>
+    You deserve a good day, bye!
+</p>
