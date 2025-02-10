@@ -122,9 +122,32 @@ permalink: /post/
                 gap: 0;
 
                 a {
+                    position: relative;
                     padding: 2rem;
                     font-size: 1.2rem;
                     border: none;
+
+                    &::before,
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        background-color: #FFF;
+                        z-index: 1;
+                    }
+
+                    &::after {
+                        inline-size: 100vw;
+                        block-size: 1px;
+                        inset-inline-start: 0;
+                        inset-block-start: -1px;
+                    }
+
+                    &::before {
+                        inline-size: 1px;
+                        block-size: 100vh;
+                        inset-block-start: 0;
+                        inset-inline-start: -1px;
+                    }
 
                     &:hover {
                         border: none;
