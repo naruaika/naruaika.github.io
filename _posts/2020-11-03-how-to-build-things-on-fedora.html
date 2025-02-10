@@ -1,0 +1,495 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/how-to-build-things-on-fedora-b4g
+title: How to Build Things on Fedora
+description: I am here to provide you an overview to build things on Fedora. I mean, yes, you can also implement these general ideas in other distributions.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    I am here to provide you an overview to build things on Fedora. I mean, yes, you can also implement these general ideas in other distributions. It is highly recommended that you understand what the <a href="https://stackoverflow.com/a/2650423/8791891" rel="nofollow">build actually does</a>. Let's start the story.
+</p>
+
+<h2>
+    A Background
+</h2>
+
+<p>
+    Once upon a time, I was wondering how to get <a href="https://github.com/gi-lom/dialect" rel="nofollow">Dialect</a>, a translation application for GNOME based on Google Translate, on my beloved machine. Dialect was relatively new at that day, so I have doubt that this application is available in the official Fedora's repository. Then I went to GNOME Terminal, typed <code>dnf search dialect</code> and glared at the output.
+</p>
+
+<pre>
+$ dnf search dialect
+Last metadata expiration check: 1:46:27 ago on Mon 02 Nov 2020 15:44:00 WIB.
+====================================================== Name Exactly Matched: dialect =======================================================
+dialect.noarch : A translation app for GNOME based on Google Translate
+========================================================= Summary Matched: dialect =========================================================
+golang-starlark.x86_64 : Dialect of Python intended for use as a configuration language
+golang-starlark-devel.noarch : Dialect of Python intended for use as a configuration language
+owl-lisp.x86_64 : Owl Lisp is a purely functional dialect of Scheme
+...
+</pre>
+
+<p>
+    I was so shocked! It was officially there! I was pinching my cheek to realize it was not a dream! So, I continued my finding by typed <code>dnf info dialect</code> and read the output carefully.
+</p>
+
+<pre>
+$ dnf info dialect
+Last metadata expiration check: 2:59:21 ago on Mon 02 Nov 2020 15:44:00 WIB.
+Available Packages
+Name         : dialect
+Version      : 1.0.0
+Release      : 1.fc33
+Architecture : noarch
+Size         : 37 k
+Source       : dialect-1.0.0-1.fc33.src.rpm
+Repository   : updates
+Summary      : A translation app for GNOME based on Google Translate
+URL          : https://github.com/gi-lom/dialect
+License      : GPLv3+
+Description  : A translation app for GNOME based on Google Translate.
+             :
+             : Features:
+             : * Text translation up to 5000 chars
+             : * Text to speech
+             : * History
+             : * Automatic language detection
+             : * Clipboard buttons
+</pre>
+
+<p>
+    Terrific, the packaging already provided the URL information to <a href="https://github.com/gi-lom/dialect" rel="nofollow">the project homepage</a>. I had expected this was the latest version.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/4fo5gu29gv7rdbtvupim.png" alt="">
+    </div>
+</figure>
+
+<p>
+    Sadly, nope. I have drop behind one minor version. So, what were the possible solutions? I thought, I will wait for the official update. This was like the best option, but do I have to wait until the next Fedora release? No, please don't.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/vk8k7xr7363ncwp07u38.png" alt="">
+    </div>
+</figure>
+
+<p>
+    I want to install it through Flatpak then. It looked promising, but I had pretended not to like Flatpak at the moment. Otherwise, this post will end here. LOL. Let's assume that Dialect was never available on Flatpak and never will be.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/26j13hhb6p2apogsslo2.png" alt="">
+    </div>
+</figure>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/vebqy2t3lx3tazwgx2m4.png" alt="">
+    </div>
+</figure>
+
+<p>
+    What were the remaining options? It was building by myself. Alright, let's dive into it and go back to the present! I am tired of using past sentences. LOL.
+</p>
+
+<h2>
+    Installing the Requirements
+</h2>
+
+<p>
+    Dialect is one well-documented example of software development. It already includes the procedure for building along with the requirements. But consider a situation when we found nothing documented. It is encountered fairly often for many small projects.
+</p>
+
+<p>
+    Now, let's try installing all the requirements described in <a href="https://github.com/gi-lom/dialect" rel="nofollow">the repository page</a>.
+</p>
+
+<pre>
+$ sudo dnf install python python-gobject gtk3 libhandy gstreamer meson ninja python-googletrans python-gtts python-dbus
+Last metadata expiration check: 1:25:05 ago on Mon 02 Nov 2020 19:39:09 WIB.
+Package python-unversioned-command-3.9.0-1.fc33.noarch is already installed.
+Package python3-gobject-3.38.0-2.fc33.x86_64 is already installed.
+Package gtk3-3.24.23-1.fc33.x86_64 is already installed.
+Package libhandy-0.0.13-6.fc33.x86_64 is already installed.
+No match for argument: gstreamer
+No match for argument: ninja
+Package python3-dbus-1.2.16-3.fc33.x86_64 is already installed.
+Error: Unable to find a match: gstreamer ninja
+</pre>
+
+<p>
+    What does the output mean? We do not need to install the <code>python</code>, <code>python-gobject</code>, <code>gtk3</code>, <code>libhandy</code> and <code>python-dbus</code> packages, since they are already installed. Meanwhile, the <code>meson</code>, <code>python-googletrans</code> and <code>python-gtts</code> packages were found but not installed.
+</p>
+
+<p>
+    The error above has stated that we could not find <code>gstreamer</code> and <code>ninja</code> packages. There are two possibilities: 1) they are not already in the repository which is rare or 2) the maintainers have named it differently. So, what we need to do next is search them manually.
+</p>
+
+<pre>
+$ dnf search gstreamer
+Last metadata expiration check: 5:46:28 ago on Mon 02 Nov 2020 15:44:00 WIB.
+==================================================== Name & Summary Matched: gstreamer =====================================================
+...
+gstreamer1.x86_64 : GStreamer streaming media framework runtime
+gstreamer1.i686 : GStreamer streaming media framework runtime
+gstreamer1-devel.i686 : Libraries/include files for GStreamer streaming media framework
+gstreamer1-devel.x86_64 : Libraries/include files for GStreamer streaming media framework
+gstreamer1-doc.noarch : GStreamer documentation
+...
+</pre>
+
+<p>
+    By looking at the output, we could see that the correct package is <code>gstreamer1</code>. Before installing it, let's find another one.
+</p>
+
+<pre>
+$ dnf search ninja
+Last metadata expiration check: 5:54:13 ago on Mon 02 Nov 2020 15:44:00 WIB.
+=========================================================== Name Matched: ninja ============================================================
+backupninja.noarch : Lightweight, extensible backup system
+ninja-build.x86_64 : Small build system with a focus on speed
+sqlninja.noarch : A tool for SQL server injection and takeover
+========================================================== Summary Matched: ninja ==========================================================
+lugaru.x86_64 : Ninja rabbit fighting game
+samurai.x86_64 : ninja-compatible build tool written in C
+</pre>
+
+<p>
+    So, it turns out to be <code>ninja-build</code>. Hereafter, let's try installing both of them and the other three packages.
+</p>
+
+<pre class="wrapped">
+$ sudo dnf install --assumeyes gstreamer1 ninja-build meson python-googletrans python-gtts
+</pre>
+
+<p>
+    Next, we need to verify the versions of the packages required. As said in the documentation, Dialect requires a specific version of libhandy package, it must be greater than or equal to <code>0.90.0</code>. Let's check what version is available in the repository.
+</p>
+
+<pre>
+$ dnf search libhandy
+Last metadata expiration check: 0:24:28 ago on Mon 02 Nov 2020 21:43:29 WIB.
+====================================================== Name Exactly Matched: libhandy ======================================================
+libhandy.x86_64 : Library with GTK+ widgets for mobile phones
+libhandy.i686 : Library with GTK+ widgets for mobile phones
+===================================================== Name & Summary Matched: libhandy =====================================================
+libhandy-devel.i686 : Development files for libhandy
+libhandy-devel.x86_64 : Development files for libhandy
+libhandy1-devel.i686 : Development files for libhandy1
+libhandy1-devel.x86_64 : Development files for libhandy1
+========================================================== Name Matched: libhandy ==========================================================
+libhandy1.x86_64 : Building blocks for modern adaptive GNOME apps
+libhandy1.i686 : Building blocks for modern adaptive GNOME apps
+</pre>
+
+<p>
+    This means there are two different versions of the <code>libhandy</code> package. The <code>libhandy1</code> is supposed to be the one we are looking for. But let's see if they are both installed.
+</p>
+
+<pre>
+$ dnf info --installed libhandy libhandy1
+Installed Packages
+Name         : libhandy
+Version      : 0.0.13
+Release      : 6.fc33
+Architecture : x86_64
+Size         : 468 k
+Source       : libhandy-0.0.13-6.fc33.src.rpm
+Repository   : @System
+From repo    : anaconda
+Summary      : Library with GTK+ widgets for mobile phones
+URL          : https://source.puri.sm/Librem5/libhandy/
+License      : LGPLv2+
+Description  : libhandy provides GTK+ widgets and GObjects to ease developing
+             : applications for mobile phones.
+
+Name         : libhandy1
+Version      : 1.0.0
+Release      : 2.fc33
+Architecture : x86_64
+Size         : 634 k
+Source       : libhandy1-1.0.0-2.fc33.src.rpm
+Repository   : @System
+From repo    : anaconda
+Summary      : Building blocks for modern adaptive GNOME apps
+URL          : https://gitlab.gnome.org/GNOME/libhandy
+License      : LGPLv2+
+Description  : libhandy provides GTK+ widgets and GObjects to ease developing
+             : applications for mobile phones.
+</pre>
+
+<p>
+    As it turns out, the latter is what we are looking for and it is already installed.
+</p>
+
+<h2>
+    Preparing to Compile
+</h2>
+
+<p>
+    Now, we are going to download the source code from the repository. I used to put any source code into the Downloads directory.
+</p>
+
+<pre>
+$ cd Downloads
+
+$ git clone https://github.com/gi-lom/dialect.git
+Cloning into 'dialect'...
+remote: Enumerating objects: 209, done.
+remote: Counting objects: 100% (209/209), done.
+remote: Compressing objects: 100% (154/154), done.
+remote: Total 1446 (delta 128), reused 102 (delta 52), pack-reused 1237
+Receiving objects: 100% (1446/1446), 515.58 KiB | 534.00 KiB/s, done.
+Resolving deltas: 100% (915/915), done.
+
+$ cd dialect
+
+$ ls
+build-aux  data  LICENSE  meson.build  po  preview-2.png  preview-mobile.png  preview.png  README.md  src
+</pre>
+
+<p>
+    After that, we move onto the easiest step, which is preparing to compile.
+</p>
+
+<pre>
+$ meson builddir --prefix=/usr/local
+The Meson build system
+Version: 0.55.3
+Source dir: /home/naru/Downloads/dialect
+Build dir: /home/naru/Downloads/dialect/builddir
+Build type: native build
+Project name: dialect
+Project version: 1.1.0
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Program python3 found: YES (/usr/bin/python3)
+Message: Looking for dependencies
+Program python3 found: YES (/usr/bin/python3)
+Message: Found python3 binary
+Found pkg-config: /usr/bin/pkg-config (1.7.3)
+Did not find CMake 'cmake'
+Found CMake: NO
+Run-time dependency gobject-introspection-1.0 found: NO (tried pkgconfig)
+
+meson.build:29:0: ERROR: Dependency "gobject-introspection-1.0" not found, tried pkgconfig
+
+A full log can be found at /home/naru/Downloads/dialect/builddir/meson-logs/meson-log.txt
+</pre>
+
+<p>
+    Unfortunately, we faced an error! What went wrong in the previous steps? Building something requires the development files of all the requirements. Fedora uses the suffix -devel for its development packages, while some distros use the suffix -dev.
+</p>
+
+<p>
+    Let's try installing the requirements again, but we excluded the <code>python3-devel</code>, <code>meson-devel</code> and <code>ninja-devel</code> packages because they are not required dependencies.
+</p>
+
+<pre class="wrapped">
+$ sudo dnf install -y python3-gobject-devel gtk3 libhandy1-devel gstreamer1-devel python3-googletrans python3-gtts python3-dbus
+</pre>
+
+<p>
+    Then, let's rerun the previous command.
+</p>
+
+<pre>
+$ meson builddir --prefix=/usr/local
+The Meson build system
+Version: 0.55.3
+Source dir: /home/naru/Downloads/dialect
+Build dir: /home/naru/Downloads/dialect/builddir
+Build type: native build
+Project name: dialect
+Project version: 1.1.0
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Program python3 found: YES (/usr/bin/python3)
+Message: Looking for dependencies
+Program python3 found: YES (/usr/bin/python3)
+Message: Found python3 binary
+Found pkg-config: /usr/bin/pkg-config (1.7.3)
+Run-time dependency gobject-introspection-1.0 found: YES 1.66.1
+Run-time dependency gtk+-3.0 found: YES 3.24.23
+Run-time dependency glib-2.0 found: YES 2.66.2
+Run-time dependency pygobject-3.0 found: YES 3.38.0
+Found pkg-config: /usr/bin/pkg-config (1.7.3)
+Program desktop-file-validate found: YES
+Program appstream-util found: YES
+Program glib-compile-schemas found: YES
+Configuring dialect using configuration
+Configuring com.github.gi_lom.dialect.SearchProvider.service using configuration
+Configuring search_provider using configuration
+Program build-aux/meson/postinstall.py found: YES (/home/naru/Downloads/dialect/build-aux/meson/postinstall.py)
+Build targets in project: 6
+
+Found ninja-1.10.1 at /usr/bin/ninja
+</pre>
+
+<p>
+    Looks like everything is going well! Before we go, let's take a look at the <code>meson builddir --prefix=/usr/local</code> command. The <code>builddir</code> argument tells <code>meson</code> to prepare the target files to be built in a separate directory named builddir from the source files. If we run the ls command now, we can see a new directory named builddir has just been created by the <code>meson builddir</code> command.
+</p>
+
+<pre class="wrapped">
+$ ls
+build-aux  builddir  data  LICENSE  meson.build  po  preview-2.png  preview-mobile.png  preview.png  README.md  src
+
+$ ls builddir
+build.ninja  compile_commands.json  data  meson-info  meson-logs  meson-private  po  src
+</pre>
+
+<p>
+    Whilst, the <code>--prefix=/usr/local</code> argument tells <code>meson</code> to install the compiled files into <code>/usr/local</code> directory.
+</p>
+
+<h2>
+    Installing Dialect
+</h2>
+
+<p>
+    Finally, when everything goes well in advance, we can install Dialect by simply running a command. But for study purposes, I suggest to include the <code>-v</code> or <code>--verbose</code> argument as well. So, we can see all the things behind the installation.
+</p>
+
+<pre>
+$ sudo ninja -C builddir --verbose install
+ninja: Entering directory `builddir'
+[0/1] /usr/bin/meson install --no-rebuild
+Installing data/resources/dialect.gresource to /usr/local/share/dialect
+Installing data/com.github.gi_lom.dialect.desktop to /usr/local/share/applications
+Installing data/com.github.gi_lom.dialect.metainfo.xml to /usr/local/share/metainfo
+Installing /home/naru/Downloads/dialect/data/com.github.gi_lom.dialect.gschema.xml to /usr/local/share/glib-2.0/schemas
+Installing /home/naru/Downloads/dialect/data/com.github.gi_lom.dialect.svg to /usr/local/share/icons/hicolor/scalable/apps
+Installing /home/naru/Downloads/dialect/data/com.github.gi_lom.dialect-symbolic.svg to /usr/local/share/icons/hicolor/scalable/apps
+Installing /home/naru/Downloads/dialect/builddir/src/dialect to /usr/local/bin
+Installing /home/naru/Downloads/dialect/src/search_provider/com.github.gi_lom.dialect.SearchProvider.ini to /usr/local/share/gnome-shell/search-providers
+Installing /home/naru/Downloads/dialect/builddir/src/search_provider/com.github.gi_lom.dialect.SearchProvider.service to /usr/local/share/dbus-1/services
+Installing /home/naru/Downloads/dialect/builddir/src/search_provider/search_provider to /usr/local/share/dialect
+Installing /home/naru/Downloads/dialect/src/__init__.py to /usr/local/share/dialect/dialect
+Installing /home/naru/Downloads/dialect/src/main.py to /usr/local/share/dialect/dialect
+Installing /home/naru/Downloads/dialect/src/define.py to /usr/local/share/dialect/dialect
+Installing /home/naru/Downloads/dialect/src/window.py to /usr/local/share/dialect/dialect
+Installing /home/naru/Downloads/dialect/src/preferences.py to /usr/local/share/dialect/dialect
+Installing /home/naru/Downloads/dialect/src/lang_selector.py to /usr/local/share/dialect/dialect
+Running custom install script '/usr/bin/meson --internal gettext install --subdir=po --localedir=share/locale --pkgname=dialect'
+Installing /home/naru/Downloads/dialect/builddir/po/de.gmo to /usr/local/share/locale/de/LC_MESSAGES/dialect.mo
+Installing /home/naru/Downloads/dialect/builddir/po/es.gmo to /usr/local/share/locale/es/LC_MESSAGES/dialect.mo
+Installing /home/naru/Downloads/dialect/builddir/po/fa.gmo to /usr/local/share/locale/fa/LC_MESSAGES/dialect.mo
+Installing /home/naru/Downloads/dialect/builddir/po/hu.gmo to /usr/local/share/locale/hu/LC_MESSAGES/dialect.mo
+Installing /home/naru/Downloads/dialect/builddir/po/id.gmo to /usr/local/share/locale/id/LC_MESSAGES/dialect.mo
+Installing /home/naru/Downloads/dialect/builddir/po/it.gmo to /usr/local/share/locale/it/LC_MESSAGES/dialect.mo
+Installing /home/naru/Downloads/dialect/builddir/po/pt_BR.gmo to /usr/local/share/locale/pt_BR/LC_MESSAGES/dialect.mo
+Installing /home/naru/Downloads/dialect/builddir/po/ru.gmo to /usr/local/share/locale/ru/LC_MESSAGES/dialect.mo
+Installing /home/naru/Downloads/dialect/builddir/po/tr.gmo to /usr/local/share/locale/tr/LC_MESSAGES/dialect.mo
+Running custom install script '/home/naru/Downloads/dialect/build-aux/meson/postinstall.py'
+Updating icon cache...
+Updating desktop database...
+Compiling GSettings schemas...
+</pre>
+
+<p>
+    Once the installation has done, we can find Dialect in the Application Launcher. Congratulations!
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/cber5tlbodhe6y0627d4.png" alt="">
+    </div>
+</figure>
+
+<p>
+    Run it and see if it works!
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/h7wmfyulmlr0wnopdje1.png" alt="">
+    </div>
+</figure>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/1l9v2exfbk93z6f9b2cq.png" alt="">
+    </div>
+</figure>
+
+<h2>
+    My Build Tips
+</h2>
+
+<p>
+    Let's take a look back at the error message we got earlier.
+</p>
+
+<pre class="wrapped">
+...
+meson.build:29:0: ERROR: Dependency "gobject-introspection-1.0" not found, tried pkgconfig
+...
+</pre>
+
+<p>
+    Sometimes, we could not find any development packages that provide the <code>gobject-introspection-1.0</code> package which in our case is provided by the <code>python3-gobject-devel package.</code> If you are curious to check whether the <code>python3-gobject-devel</code> package provides the <code>gobject-introspection-1.0</code> package or not, you can simply run <code>dnf repoquery --deplist python3-gobject-devel</code>.
+</p>
+
+<pre>
+$ dnf repoquery --deplist python3-gobject-devel
+...
+package: python3-gobject-devel-3.38.0-2.fc33.x86_64
+  dependency: /usr/bin/pkg-config
+   provider: pkgconf-pkg-config-1.7.3-5.fc33.x86_64
+   provider: pkgconf-pkg-config-1.7.3-2.fc33.i686
+  dependency: gobject-introspection-devel(x86-64)
+   provider: gobject-introspection-devel-1.66.1-1.fc33.x86_64
+  dependency: pkgconfig(gobject-2.0)
+   provider: glib2-devel-2.66.2-1.fc33.i686
+   provider: glib2-devel-2.66.2-1.fc33.x86_64
+  dependency: pkgconfig(libffi)
+   provider: libffi-devel-3.1-26.fc33.i686
+   provider: libffi-devel-3.1-26.fc33.x86_64
+  dependency: python3-gobject(x86-64) = 3.38.0-2.fc33
+   provider: python3-gobject-3.38.0-2.fc33.x86_64
+
+$ dnf repoquery --deplist gobject-introspection-devel
+...
+package: gobject-introspection-devel-1.66.1-1.fc33.x86_64
+  dependency: (python(abi) = 3.9 if python3)
+   provider: python3-3.9.0-1.fc33.i686
+   provider: python3-3.9.0-1.fc33.x86_64
+  dependency: /usr/bin/pkg-config
+   provider: pkgconf-pkg-config-1.7.3-5.fc33.x86_64
+   provider: pkgconf-pkg-config-1.7.3-2.fc33.i686
+  dependency: /usr/bin/python3
+   provider: python3-3.9.0-1.fc33.i686
+   provider: python3-3.9.0-1.fc33.x86_64
+  dependency: gobject-introspection(x86-64) = 1.66.1-1.fc33
+   provider: gobject-introspection-1.66.1-1.fc33.x86_64
+...
+</pre>
+
+<p>
+    If the <code>python3-gobject-devel</code> package is not in the repository, which actually we do not need it, we can directly install <code>gobject-introspection-devel</code>. Sometimes, however, the development package does not have the name <code><package-name>-devel</code> or it does not have the exact version we needed. If so, search for <code>pkgconfig(gobject-introspection-1.0)</code> on a site like <a href="https://rpmfind.net/" rel="nofollow">rpmfind</a>. It will give you the exact package name to be installed.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/gwf2d318vo8fwdkfpjzi.png" alt="">
+    </div>
+</figure>
+
+<p>
+    That's all. I hope this post will be of use to you.
+</p>

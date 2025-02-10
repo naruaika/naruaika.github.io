@@ -1,0 +1,89 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/using-cuda-for-3d-rendering-on-windows-vs-wsl-2ejk
+title: Using CUDA for 3D Rendering on Windows vs WSL
+description: Today, I am going to give you the premise of why I would go with Windows over WSL2 when it comes to 3D rendering, especially using CUDA with Blender.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    Today, I am going to give you the premise of why I would go with Windows over WSL2 when it comes to 3D rendering, especially using CUDA with Blender. Here are my test specifications:
+</p>
+
+<ul>
+    <li>Software: Blender 2.91.0</li>
+    <li>Driver: NVIDIA 465.12, CUDA 11.2</li>
+    <li>Device: Intel Core i5-8250U, NVIDIA GTX 1050 Mobile</li>
+    <li>File: <a href="https://download.blender.org/demo/test/BMW27_2.blend.zip" rel="nofollow">BMW by Mike Pan</a></li>
+</ul>
+
+<p>
+    The NVIDIA driver is installed on Windows only, whereas the CUDA toolkit is installed on WSL2 only. Below are two pieces of logs on each system. Windows is on the left and on the right is WSL2.
+</p>
+
+<div class="comparison">
+<pre>
+> blender.exe -b bmw27_gpu.blend -o D:\ -F PNG -f -1 -noaudio -- --cycles-device CUDA --cycles-print-stats
+...
+Fra:1000 Mem:261.61M (Peak 286.73M) | Time:05:32.89 | Mem:138.00M, Peak:140.00M | Scene, RenderLayer | Finished
+...
+Profiling information not available (only works with CPU rendering)
+Fra:1000 Mem:40.71M (Peak 286.73M) | Time:05:32.94 | Compositing
+Fra:1000 Mem:44.62M (Peak 286.73M) | Time:05:32.94 | Compositing | Determining resolution
+Fra:1000 Mem:44.62M (Peak 286.73M) | Time:05:32.94 | Compositing | Initializing execution
+Fra:1000 Mem:88.20M (Peak 286.73M) | Time:05:33.26 | Compositing | Tile 1-12
+Fra:1000 Mem:88.20M (Peak 286.73M) | Time:05:33.27 | Compositing | Tile 2-12
+Fra:1000 Mem:88.20M (Peak 286.73M) | Time:05:33.27 | Compositing | Tile 3-12
+Fra:1000 Mem:88.20M (Peak 286.73M) | Time:05:33.27 | Compositing | Tile 4-12
+Fra:1000 Mem:88.20M (Peak 286.73M) | Time:05:33.33 | Compositing | Tile 5-12
+...
+Fra:1000 Mem:88.20M (Peak 286.73M) | Time:05:33.35 | Compositing | Tile 8-12
+Fra:1000 Mem:88.20M (Peak 286.73M) | Time:05:33.36 | Compositing | Tile 9-12
+Fra:1000 Mem:88.20M (Peak 286.73M) | Time:05:33.36 | Compositing | Tile 10-12
+Fra:1000 Mem:88.20M (Peak 286.73M) | Time:05:33.36 | Compositing | Tile 11-12
+Fra:1000 Mem:88.20M (Peak 286.73M) | Time:05:33.36 | Compositing | Tile 12-12
+Fra:1000 Mem:88.13M (Peak 286.73M) | Time:05:33.36 | Compositing | De-initializing execution
+Fra:1000 Mem:54.51M (Peak 286.73M) | Time:05:33.37 | Sce: Scene Ve:0 Fa:0 La:0
+Saved: 'D:\1000.png'
+ Time: 05:34.44 (Saving: 00:01.07)
+</pre>
+
+<pre>
+$ blender -b bmw27_gpu.blend -o ../ -F PNG -f -1 -noaudio -- --cycles-device CUDA --cycles-print-stats
+...
+Fra:1000 Mem:261.50M (Peak 286.53M) | Time:06:08.72 | Mem:138.00M, Peak:140.00M | Scene, RenderLayer | Finished
+...
+Profiling information not available (only works with CPU rendering)
+Fra:1000 Mem:40.60M (Peak 286.53M) | Time:06:08.77 | Compositing
+Fra:1000 Mem:44.51M (Peak 286.53M) | Time:06:08.78 | Compositing | Determining resolution
+Fra:1000 Mem:44.51M (Peak 286.53M) | Time:06:08.78 | Compositing | Initializing execution
+Fra:1000 Mem:88.09M (Peak 286.53M) | Time:06:09.12 | Compositing | Tile 1-12
+Fra:1000 Mem:88.09M (Peak 286.53M) | Time:06:09.12 | Compositing | Tile 2-12
+Fra:1000 Mem:88.09M (Peak 286.53M) | Time:06:09.15 | Compositing | Tile 3-12
+Fra:1000 Mem:88.09M (Peak 286.53M) | Time:06:09.15 | Compositing | Tile 4-12
+Fra:1000 Mem:88.09M (Peak 286.53M) | Time:06:09.18 | Compositing | Tile 5-12
+...
+Fra:1000 Mem:88.09M (Peak 286.53M) | Time:06:09.20 | Compositing | Tile 8-12
+Fra:1000 Mem:88.09M (Peak 286.53M) | Time:06:09.21 | Compositing | Tile 9-12
+Fra:1000 Mem:88.09M (Peak 286.53M) | Time:06:09.21 | Compositing | Tile 10-12
+Fra:1000 Mem:88.09M (Peak 286.53M) | Time:06:09.21 | Compositing | Tile 11-12
+Fra:1000 Mem:88.09M (Peak 286.53M) | Time:06:09.21 | Compositing | Tile 12-12
+Fra:1000 Mem:88.03M (Peak 286.53M) | Time:06:09.21 | Compositing | De-initializing execution
+Fra:1000 Mem:54.40M (Peak 286.53M) | Time:06:09.21 | Sce: Scene Ve:0 Fa:0 La:0
+Saved: '../1000.png'
+ Time: 06:10.27 (Saving: 00:01.05)
+</pre>
+</div>
+
+<p>
+    In conclusion, Fedora on WSL2 takes longer rendering time, but the time needed on set up things for both is the same.
+</p>

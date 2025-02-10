@@ -1,0 +1,314 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/understanding-why-i-couldn-t-find-installed-packages-2pie
+title: Understanding Why I Couldn't Find Installed Packages
+description: The problem usually occurs if they have just followed tutorials from different sources on the internet, but the instructors did not go into any detail about what is going on.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    For you guys, as always, I would recommend to completing <a href="https://docs.python.org/3/tutorial/" rel="nofollow">the official tutorial</a>. Try not to end up impatiently learning something. "Reading is a window to the world!"&mdash;Lynn Butler
+</p>
+
+<p>
+    Today, we are going to share with the world some insights on how to properly install packages. Despite using Python here, we will probably find those ideas useful for other language as well. This article is written carefully for we have been asked such a question many times from the beginners. The problem usually occurs if they have just followed tutorials from different sources on the internet, but the instructors did not go into any detail about what is going on.
+</p>
+
+<h2>
+    Multiple Installations
+</h2>
+
+<p>
+    She came up to me with grinning and said, <i>"I have already installed the package. So, why does it always disobey me with no module named blablabla?"</i> The story has begun inadvertently;
+</p>
+
+<pre>
+> python
+...
+>>> from gtts import gTTS
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'gtts'
+</pre>
+
+<p>
+    <i>"Show me how you installed&mdash;,"</i> asked me.
+</p>
+
+<p>
+    <i>"I believe I managed to install it a while ago,"</i> she continued;
+</p>
+
+<pre>
+> pip install gTTS
+Collecting gTTS
+...
+Installing collected packages: urllib3, idna, chardet, certifi, requests, click, gTTS
+Successfully installed certifi-2020.12.5 chardet-4.0.0 click-7.1.2 gTTS-2.2.1 idna-2.10 requests-2.25.1 urllib3-1.26.2
+
+> pip list
+Package    Version
+---------- ---------
+appdirs    1.4.4
+certifi    2020.12.5
+chardet    4.0.0
+click      7.1.2
+distlib    0.3.1
+filelock   3.0.12
+gTTS       2.2.1
+idna       2.10
+pip        20.3.3
+requests   2.25.1
+setuptools 49.2.1
+six        1.15.0
+urllib3    1.26.2
+virtualenv 20.1.0
+</pre>
+
+<p>
+    <i>"There are no other possibilities besides the fact that you have multiple installations of Python interpreter. The safest way to install packages is to use <code>python -m pip install gTTS</code> any time!"</i>
+</p>
+
+<p>
+    <i>"Oh my God, you are right! It is working now! But how can that be?"</i>
+</p>
+
+<p>
+    <i>"I honestly meant to explain further."</i>
+</p>
+
+<p>
+    We possibly have a number of different interpreter at one time, it could be either from different sources or as different versions. You know, as we can have it installed from:
+</p>
+
+<ol>
+    <li>the official installer (from python.org);</li>
+    <li>the Microsoft Store (not recommended);</li>
+    <li>the Anaconda (if preferred);</li>
+    <li>the Visual Studio Installer (not usual);</li>
+    <li>compiled by ourselves (not needed);</li>
+    <li>copy pasted all files from somewhere;</li>
+    <li>embedded in a software (like Blender did);</li>
+    <li>brought in an operating system distribution (as did Fedora);</li>
+    <li>linked from anywhere (in the case of using virtualisation, e.g. Docker and WSL2); and</li>
+    <li>etc.</li>
+</ol>
+
+<p>
+    <b>On Windows,</b> we probably have:
+</p>
+
+<pre>
+> where.exe python
+C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\python.exe
+C:\Users\Naufan Rusyda Faikar\AppData\Local\Programs\Python\Python39\python.exe
+
+> where.exe pip
+C:\Users\Naufan Rusyda Faikar\AppData\Local\Programs\Python\Python39\Scripts\pip.exe
+C:\Users\Naufan Rusyda Faikar\AppData\Roaming\Python\Python37\Scripts\pip.exe
+</pre>
+
+<p>
+    The commands above tell us that we have two Python installed:
+</p>
+
+<ul>
+    <li>Python 3.7 from the official installer; and</li>
+    <li>Python 3.9 from the Microsoft Visual Studio Installer.</li>
+</ul>
+
+<p>
+    In fact, we have one more from Anaconda, but I decided not to have it included in the system path.
+</p>
+
+<p>
+    The <code>where.exe python</code> command simply searches for all <code>python</code> executables within the specified environment variables and then prints the list in descending order&mdash;the highest priority of <code>python.exe</code> to be called occupies the first place&mdash;. In Powershell, we might just want to see which executable was called-by typing its name;
+</p>
+
+<pre class="wrapped">
+> Get-Command python | Select-Object -ExpandProperty Definition
+C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\python.exe
+
+> Get-Command pip | Select-Object -ExpandProperty Definition
+C:\Users\Naufan Rusyda Faikar\AppData\Local\Programs\Python\Python39\Scripts\pip.exe
+</pre>
+
+<p>
+    Of there, we have realised that the <code>python.exe</code> (is Python 3.7) and <code>pip.exe</code> (from Python 3.9) above do not belong to each other.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/ecsik14y8r97qp90yiph.png" alt="">
+    </div>
+</figure>
+
+<p>
+    To correct this inconsistency is to rearrange the priority order of the paths. For example changing from:
+</p>
+
+<ol>
+    <li>Python 3.7;</li>
+    <li>Python 3.9;</li>
+    <li>Scripts from Python 3.9;</li>
+    <li>Scripts from Python 3.7.</li>
+</ol>
+
+<p>
+    to:
+</p>
+
+<ol>
+    <li>Python 3.7;</li>
+    <li>Scripts from Python 3.7;</li>
+    <li>Python 3.9;</li>
+    <li>Scripts from Python 3.9.</li>
+</ol>
+
+<p>
+    where the <code>pip.exe</code> is included in the <code>scripts</code> directory. If we tend to use Python 3.9 over 3.7, just put the 3.9 and its scripts at the beginning. Do not forget to reopen the Command Prompt or Powershell once the edits have been applied.
+</p>
+
+<p>
+    <b>On Linux,</b> we can run <code>whereis python</code> and <code>which python</code> instead;
+</p>
+
+<pre class="wrapped">
+$ whereis python3
+python3: /usr/bin/python3.8 /usr/bin/python3.9 /usr/bin/python3.8-config /usr/bin/python3.9-config /usr/bin/python /usr/bin/python3.8-x86_64-config /usr/bin/python3.9-x86_64-config /usr/lib/python3.8 /usr/lib/python3.9 /usr/lib64/python3.8 /usr/lib64/python3.9 /usr/local/lib/python3.8 /usr/include/python3.8 /usr/include/python3.9
+
+$ which python3
+/usr/bin/python3
+
+$ ls -l /usr/bin/python3
+lrwxrwxrwx 1 root root 9 Dec  8 22:00 /usr/bin/python3 -> python3.9
+
+$ pip --version
+pip 20.3.1 from /home/naru/.local/lib/python3.9/site-packages/pip (python 3.9)
+</pre>
+
+<p>
+    It is recommended to include the version in the command whenever installing packages: <code>python3.9 -m pip install gTTS</code>.
+</p>
+
+<p>
+    In spite of having multiple installations, if we are <i>IPython</i> or <i>Jupyter Notebook</i> users, we may prefer to install packages directly by running <code>!pip install gTTS</code> in there. That special command is intended to permanently install the package. So, no need to run it again.
+</p>
+
+<pre>
+> ipython
+...
+
+In [1]: import gtts
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+<ipython-input-1-d9e65c664aca> in <module>
+----> 1 import gtts
+
+ModuleNotFoundError: No module named 'gtts'
+
+In [2]: !pip install gTTS
+...
+
+In [3]: import gtts
+
+In [4]: gtts.__version__
+Out[4]: '2.2.1'
+</pre>
+
+<h2>
+    Virtual Environments
+</h2>
+
+<p>
+    On another day, she has come back and complained, <i>"Why on earth the exact error came back?"</i>
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/o1bhqqyo510n0h96cweb.png" alt="">
+    </div>
+</figure>
+
+<p>
+    After she sent me a screenshot of all the things she could give, I smile with amusement.
+</p>
+
+<p>
+    <i>"Are you insulting me?"</i>
+</p>
+
+<p>
+    <i>"No way! You are using PyCharm, are not you? Have you paid attention to the dialog that appears when creating a new project?"</i>
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/qiaypvudafsdgsg8f29j.png" alt="">
+    </div>
+</figure>
+
+<p>
+    <i>"Do not make me feel guilty!"</i>
+</p>
+
+<p>
+    <i>"Of course you must! Ha ha ha ... Uh, never mind! Whenever you choose to work with PyCharm, make sure you install packages via its integrated terminal."</i>
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/jsui0h3q5lfhf73cqwnr.png" alt="">
+    </div>
+</figure>
+
+<p>
+    <i>"Ah, cool! You have made my day! But why is that?"</i>
+</p>
+
+<p>
+    <i>PyCharm</i> by default will create us a virtual environment every time we create a new project. A virtual environment usually belongs to only one project. Anytime we see a prompt like:
+</p>
+
+<pre>
+(venv) D:\Testing\test8>
+</pre>
+
+<p>
+    rather than:
+</p>
+
+<pre>
+D:\Testing\test8>
+</pre>
+
+<p>
+    we are obviously in a virtual environment named <i>venv</i>. It will isolate the current one's environment from other projects, so there will be no possibility of having dependency issues of installing two or more packages. Most notably, installing packages that are no longer maintained after years. Therefore, the package installation had better to be done in its specific environment.
+</p>
+
+<p>
+    Of course, we always have the goo-ey (GUI—Graphical User Interface) for it. We can find more interesting finding by reading <a href="Of course, we always have the goo-ey (GUI—Graphical User Interface) for it. We can find more interesting finding by reading the PyCharm's official help." rel="nofollow">the PyCharm's official help</a>.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/ld1dwx569giq0llodcu3.png" alt="">
+    </div>
+</figure>
+
+<p>
+    Please do read, read again and read more. It is never too late! A final note, in almost all cases, the best practice is to have a virtual environment for every single project.
+</p>
+
+<p>
+    Do you have other problems finding packages? Please let me know.
+</p>

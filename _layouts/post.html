@@ -116,12 +116,12 @@ layout: default
                 font-size: 1.4rem;
             }
 
-            p, ul, figure, pre, .ielement {
+            p, ul, ol, figure, pre, .ielement {
                 margin-block-start: 1rem;
                 margin-block-end: 1rem;
             }
 
-            ul {
+            ul, ol {
                 padding-inline-start: 3rem;
             }
 
@@ -153,16 +153,16 @@ layout: default
                 background-color: #333;
                 font-family: monospace;
                 font-size: 90%;
-                hyphens: manual;
+                hyphens: unset;
+                word-break: break-all;
             }
 
             pre {
                 margin: 0;
                 padding: 1rem;
                 font-family: monospace;
-                font-size: 80%;
+                font-size: 1rem;
                 background-color: #333;
-                border: 3px solid #333;
                 overflow-x: auto;
                 scroll-behavior: smooth;
 
@@ -181,7 +181,6 @@ layout: default
                     display: flex;
                     justify-content: center;
                     background-color: #333;
-                    border: 3px solid #333;
 
                     > img {
                         max-width: 100%;
@@ -195,10 +194,16 @@ layout: default
                 }
             }
 
+            .comparison {
+                grid-column: full;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
             .ielement {
                 > .container {
                     box-sizing: border-box;
-                    border: 3px solid #333;
                 }
 
                 > .caption {
@@ -252,8 +257,9 @@ layout: default
                     font-size: 2.5rem;
                 }
 
-                pre {
-                    font-size: 60%;
+                > pre {
+                    grid-column: full;
+                    font-size: 0.9rem;
                 }
 
                 figure > figcaption,
@@ -261,14 +267,22 @@ layout: default
                     font-size: .8rem;
                 }
 
-                figure > .container {
-                    justify-content: start;
-                    overflow-x: auto;
+                figure {
+                    grid-column: full;
 
-                    img {
-                        max-height: 50vh;
-                        max-width: unset;
-                        margin: 0 auto;
+                    > .container {
+                        justify-content: start;
+                        overflow-x: auto;
+
+                        img {
+                            max-height: 50vh;
+                            max-width: unset;
+                            margin: 0 auto;
+                        }
+                    }
+
+                    > figcaption {
+                        padding: 0 2rem;
                     }
                 }
 
@@ -277,9 +291,14 @@ layout: default
                     margin-block-end: .8rem;
                 }
 
-                p, ul, figure, pre, .ielement {
+                p, ul, ol, figure, pre, .ielement {
                     margin-block-start: .8rem;
                     margin-block-end: .8rem;
+                }
+
+                .comparison {
+                    grid-column: full;
+                    grid-template-columns: 1fr;
                 }
             }
 }

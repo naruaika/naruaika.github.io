@@ -1,0 +1,173 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/using-cuda-for-3d-rendering-on-fedora-vs-podman-26lo
+title: Using CUDA for 3D Rendering on Fedora vs Podman
+description: Last December, I have managed to see how 3D rendering is done with CUDA on Windows and WSL2. To follow up, I made the same test to see how it performs both on Fedora 34 and Toolbox.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    Last December, <a href="/post/2020/12/24/using-cuda-for-3d-rendering-on-windows-vs-wsl.html">I have managed</a> to see how 3D rendering is done with CUDA on Windows and WSL2.
+</p>
+
+<p>
+    It turned out that Windows 10 outperformed WSL2 (running Fedora 33). To follow up, I recently made the same test to see how it performs both on Fedora 34 and <a href="https://github.com/containers/toolbox" rel="nofollow">Toolbox</a> (built on top of Podman).
+</p>
+
+<p>
+    <b>Using the same machine as the previous,</b>
+</p>
+
+<pre>
+$ cat /etc/os-release
+NAME=Fedora
+VERSION="34 (Workstation Edition)"
+ID=fedora
+VERSION_ID=34
+VERSION_CODENAME=""
+PLATFORM_ID="platform:f34"
+PRETTY_NAME="Fedora 34 (Workstation Edition)"
+...
+
+$ cat /proc/driver/nvidia/version
+NVRM version: NVIDIA UNIX x86_64 Kernel Module  465.31  Thu May 13 22:24:36 UTC 2021
+GCC version:  gcc version 11.1.1 20210531 (Red Hat 11.1.1-3) (GCC)
+
+$ podman --version
+podman version 3.2.1
+
+$ toolbox --version
+toolbox version 0.0.99.1
+
+$ ./blender --version
+Blender 3.0.0 Alpha
+    build date: 2021-06-13
+    build time: 00:44:59
+    build commit date: 2021-06-12
+    build commit time: 03:00
+    build hash: 7b0c8097a7d1
+    build platform: Linux
+    build type: release
+...
+</pre>
+
+<p>
+    Fedora on the left, while on the right, Toolbox.
+</p>
+
+<div class="comparison">
+<pre>
+$ ./blender -b bmw27_gpu.blend -o . -F PNG -f -1 -noaudio -- --cycles-device CUDA --cycles-print-stats
+...
+Profiling information not available (only works with CPU rendering)
+Fra:1000 Mem:41.28M (Peak 301.66M) | Time:04:47.81 | Compositing
+Fra:1000 Mem:45.20M (Peak 301.66M) | Time:04:47.81 | Compositing | Determining resolution
+Fra:1000 Mem:45.20M (Peak 301.66M) | Time:04:47.81 | Compositing | Initializing execution
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:48.13 | Compositing | Tile 1-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:48.14 | Compositing | Tile 2-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:48.15 | Compositing | Tile 3-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:48.15 | Compositing | Tile 4-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:48.17 | Compositing | Tile 5-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:48.19 | Compositing | Tile 6-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:48.20 | Compositing | Tile 7-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:48.20 | Compositing | Tile 8-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:48.20 | Compositing | Tile 9-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:48.21 | Compositing | Tile 10-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:48.21 | Compositing | Tile 11-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:48.21 | Compositing | Tile 12-12
+Fra:1000 Mem:88.72M (Peak 301.66M) | Time:04:48.21 | Compositing | De-initializing execution
+Saved: '.1000.png'
+ Time: 04:49.34 (Saving: 00:01.12)
+</pre>
+
+<pre>
+$ ./blender -b bmw27_gpu.blend -o . -F PNG -f -1 -noaudio -- --cycles-device CUDA --cycles-print-stats
+...
+Profiling information not available (only works with CPU rendering)
+Fra:1000 Mem:41.29M (Peak 301.66M) | Time:04:46.35 | Compositing
+Fra:1000 Mem:45.20M (Peak 301.66M) | Time:04:46.36 | Compositing | Determining resolution
+Fra:1000 Mem:45.20M (Peak 301.66M) | Time:04:46.36 | Compositing | Initializing execution
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:46.67 | Compositing | Tile 1-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:46.69 | Compositing | Tile 2-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:46.69 | Compositing | Tile 3-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:46.69 | Compositing | Tile 4-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:46.72 | Compositing | Tile 5-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:46.73 | Compositing | Tile 6-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:46.73 | Compositing | Tile 7-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:46.73 | Compositing | Tile 8-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:46.73 | Compositing | Tile 9-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:46.73 | Compositing | Tile 10-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:46.73 | Compositing | Tile 11-12
+Fra:1000 Mem:88.78M (Peak 301.66M) | Time:04:46.74 | Compositing | Tile 12-12
+Fra:1000 Mem:88.72M (Peak 301.66M) | Time:04:46.74 | Compositing | De-initializing execution
+Saved: '.1000.png'
+ Time: 04:47.86 (Saving: 00:01.12)
+</pre>
+</div>
+
+<p>
+    Whoops, I got to realise after running those tests that I had CUDA installed for both from different sources, although I used the same source for the NVidia driver;
+</p>
+
+<div class="comparison">
+<pre>
+$ dnf list installed | grep nvidia
+akmod-nvidia.x86_64                              3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+kmod-nvidia-5.12.10-300.fc34.x86_64.x86_64       3:465.31-1.fc34                        @@commandline
+kmod-nvidia-5.12.11-300.fc34.x86_64.x86_64       3:465.31-1.fc34                        @@commandline
+kmod-nvidia-5.12.12-300.fc34.x86_64.x86_64       3:465.31-1.fc34                        @@commandline
+nvidia-persistenced.x86_64                       3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+nvidia-settings.x86_64                           3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia.x86_64                       3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-cuda.x86_64                  3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-cuda-libs.x86_64             3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-kmodsrc.x86_64               3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-libs.x86_64                  3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+
+$ dnf list installed | grep cuda
+cuda.x86_64                                      11.3.1-1                               @cuda-fedora33-x86_64
+cuda-11-3.x86_64                                 11.3.1-1                               @cuda-fedora33-x86_64
+...
+cuda-toolkit-11-3.x86_64                         11.3.1-1                               @cuda-fedora33-x86_64
+cuda-toolkit-11-3-config-common.noarch           11.3.109-1                             @cuda-fedora33-x86_64
+cuda-toolkit-11-config-common.noarch             11.3.109-1                             @cuda-fedora33-x86_64
+cuda-toolkit-config-common.noarch                11.3.109-1                             @cuda-fedora33-x86_64
+cuda-tools-11-3.x86_64                           11.3.1-1                               @cuda-fedora33-x86_64
+...
+xorg-x11-drv-nvidia-cuda.x86_64                  3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-cuda-libs.x86_64             3:465.31-1.fc34
+</pre>
+
+<pre>
+$ dnf list installed | grep nvidia
+akmod-nvidia.x86_64                         3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+nvidia-persistenced.x86_64                  3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+nvidia-settings.x86_64                      3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+nvidia-texture-tools.x86_64                 2.1.2-1.fc34                           @fedora
+xorg-x11-drv-nvidia.x86_64                  3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-cuda.x86_64             3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-cuda-libs.i686          3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-cuda-libs.x86_64        3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-kmodsrc.x86_64          3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-libs.i686               3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-libs.x86_64             3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+
+$ dnf list installed | grep cuda
+xorg-x11-drv-nvidia-cuda.x86_64             3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-cuda-libs.i686          3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+xorg-x11-drv-nvidia-cuda-libs.x86_64        3:465.31-1.fc34                        @rpmfusion-nonfree-updates
+</pre>
+</div>
+
+<p>
+    But you got the point! That is why I have been running Steam in Toolbox instead. Holy moly!
+</p>

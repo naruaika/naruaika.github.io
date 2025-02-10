@@ -1,0 +1,70 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/don-t-treat-one-like-another-1ld9
+title: Don't Treat One Like Another
+description: One day, someone has asked on Discord, "Why numpy is doing so?" They are not the same as we already know. So, why do we expect them to behave the same?
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    One day, someone has asked on Discord:
+</p>
+
+<pre>
+>>> import numpy as np
+>>> my_list = [[1,2], [2,3], [3,4], [4,5]]
+>>> [1,3] in my_list
+False
+>>> my_array = np.array(my_list)
+>>> [1,3] in my_array
+True
+</pre>
+
+<p>
+    <i>Why <code>numpy</code> is doing so?</i>
+</p>
+
+<p>
+    They are not the same as we already know. So, why do we expect them to behave the same? Every programming language, library, and whatsoever has its own implementation. True, it is all about different implementations, after all. We can even have this weirdo:
+</p>
+
+<pre>
+>>> a = 1
+>>> b = 1
+>>> a == b
+True
+>>> a is b
+True
+>>> a = 9999
+>>> b = 9999
+>>> a == b
+True
+>>> a is b
+False
+</pre>
+
+<p>
+    See? So, it is not ever a good idea to treat anybody the same way, for you and I are unique~ Although, in some ways, we are still comparable.
+</p>
+
+<p>
+    By the way, if you are curious of the two, you can follow up by reading:
+</p>
+
+<ul>
+    <li><a href="https://stackoverflow.com/a/30690604/8791891">https://stackoverflow.com/a/30690604/8791891</a></li>
+    <li><a href="https://stackoverflow.com/a/15172182/8791891">https://stackoverflow.com/a/15172182/8791891</a></li>
+</ul>
+
+<p>
+    Take care!
+</p>

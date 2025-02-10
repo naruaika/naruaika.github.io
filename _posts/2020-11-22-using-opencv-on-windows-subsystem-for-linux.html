@@ -1,0 +1,330 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/using-opencv-on-windows-subsystem-for-linux-1ako
+title: Using OpenCV on Windows Subsystem for Linux
+description: I am not going to walk you through the whole story, but rather I am going to tell you the interesting passages of was being a Fedora user with a spring in my step.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    I am not going to walk you through the whole story of using GPU-supported OpenCV in Python on the WSL2, because I have not been a very good storyteller. But rather I am going to tell you the interesting passages of was being a Fedora user with a spring in my step. Let us get ready to fly towards the sky!
+</p>
+
+<h2>
+    Installing the Requirements
+</h2>
+
+<p>
+    Please note, it is important to understand how it works as shown on <a href="https://developer.nvidia.com/cuda/wsl" rel="nofollow">the NVIDIA blog</a>.
+</p>
+
+<p>
+    <b>First</b>, at the time of writing, there is no GPU support for WSL2 by default. So, we had to sign-up as a <a href="https://insider.windows.com/en/getting-started" rel="nofollow">Windows Insider</a> participant, make an update from the System Settings and then reboot our machine.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/pr1g568iqzpa8x6ixz7m.png" alt="">
+    </div>
+    <figcaption>
+        Setting up Windows Insider Program.
+    </figcaption>
+</figure>
+
+<p>
+    <b>Second</b>, we had to sign-in to our NVIDIA Developer account, install <a href="https://developer.nvidia.com/cuda/wsl/download" rel="nofollow">the NVIDIA driver</a> for CUDA on WSL and then reboot one more time.
+</p>
+
+<pre>
+> nvidia-smi.exe
+Fri Nov 20 23:08:43 2020
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 465.12       Driver Version: 465.12       CUDA Version: 11.2     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name            TCC/WDDM | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 1050   WDDM  | 00000000:01:00.0 Off |                  N/A |
+| N/A   50C    P8    N/A /  N/A |     75MiB /  4096MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+...
+</pre>
+
+<p>
+    Third, we had to install <a href="https://developer.nvidia.com/cuda-downloads" rel="nofollow">the CUDA toolkit</a> along with <a href="https://developer.nvidia.com/rdp/cudnn-download" rel="nofollow">the cuDNN</a> and then add it into the Fedora system path;
+</p>
+
+<pre class="wrapped">
+$ curl https://developer.download.nvidia.com/compute/cuda/11.1.1/local_installers/cuda_11.1.1_455.32.00_linux.run -o cuda_11.1.1_455.32.00_linux.run
+...
+
+$ sudo sh cuda_11.1.1_455.32.00_linux.run
+...
+
+$ curl https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.0.5/11.1_20201106/RHEL8_1-x64/libcudnn-8.0.5.39-1.cuda11.1.x86_64.rpm -o libcudnn8-8.0.5.39-1.cuda11.1.x86_64.rpm
+...
+
+$ sudo rpm -ivh libcudnn8-8.0.5.39-1.cuda11.1.x86_64.rpm
+...
+
+$ echo 'export PATH="/usr/local/cuda-11.1/bin:$PATH"' >> ~/.zshrc # or .bashrc if you are using BASH
+$ echo 'export LD_LIBRARY_PATH="/usr/local/cuda-11.1/lib64"' >> ~/.zshrc
+$ source ~/.zshrc
+</pre>
+
+<p>
+    <b>Fourth</b>, we had to make sure that we have installed all the following necessary build tools;
+</p>
+
+<pre class="wrapped">
+$ sudo dnf install -y cmake python-devel ffmpeg-devel gstreamermm-devel
+...
+</pre>
+
+<p>
+    <b>Fifth</b>, it is highly recommended to install OpenCV into a virtual environment rather than directly to the system. So, we need to create one and do not forget to install the <code>numpy</code> module in it;
+</p>
+
+<pre class="wrapped">
+$ python3.8 -m pip install virtualenv # Fedora 33 has made Python 3.9 the default
+...
+
+$ pwd # just to see where we are
+/home/naru
+
+$ cd Research # or wherever you have decided
+$ python3.8 -m virtualenv venv # or whatever name you have preferred
+$ source venv/bin/activate
+
+$ pip install numpy
+...
+</pre>
+
+<p>
+    <b>Sixth</b>, we had to download OpenCV with the extra modules source codes and extracted them;
+</p>
+
+<pre class="wrapped">
+$ cd ..
+$ mkdir Downloads
+$ cd Downloads
+
+$ curl -L https://github.com/opencv/opencv/archive/4.5.0.tar.gz | tar xz
+...
+
+$ curl -L https://github.com/opencv/opencv_contrib/archive/4.5.0.tar.gz | tar xz
+...
+</pre>
+
+<p>
+    Once everything was set up, we were ready for the real journey starting from here!
+</p>
+
+<h2>
+    Installing OpenCV
+</h2>
+
+<p>
+    <b>Seventh</b>, we are going to compile all needed. But we need to adjust the arguments to suit our system:
+</p>
+
+<ul>
+    <li>
+        <code>CUDA_ARCH_BIN</code> specifies the NVIDIA GPU architecture version is used. See yours on <a href="https://developer.nvidia.com/cuda-gpus#compute" rel="nofollow">the official website</a>.
+    </li>
+    <li>
+        <code>OPENCV_EXTRA_MODULES_PATH</code> specifies the path to the source code of the extra modules relative to the build directory. It is also possible to use an absolute path.
+    </li>
+    <li>
+        <code>PYTHON_EXECUTABLE</code> determines which Python interpreter we are going to use.
+    </li>
+    <li>
+        <code>PYTHON3_NUMPY_INCLUDE_DIRS</code> determines where the <code>numpy</code> module is installed.
+    </li>
+    <li>
+        <code>CMAKE_INSTALL_PREFIX</code> defines the prefix installation path where the files to be compiled are placed.
+    </li>
+    <li>
+        <code>../opencv-4.5.0</code> defines the path to the source code of the main modules.
+    </li>
+</ul>
+
+<pre>
+$ mkdir --parents build
+$ cd build
+
+$ cmake -D CUDA_ARCH_BIN=6.1 \
+> -D WITH_CUDA=ON \
+> -D WITH_CUDNN=ON \
+> -D OPENCV_DNN_CUDA=ON \
+> -D ENABLE_FAST_MATH=1 \
+> -D CUDA_FAST_MATH=1 \
+> -D WITH_CUBLAS=1 \
+> -D OPENCV_ENABLE_NONFREE=ON \
+> -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib-4.5.0/modules \
+> -D PYTHON_EXECUTABLE=$HOME/Research/venv/bin/python \
+> -D PYTHON3_NUMPY_INCLUDE_DIRS=$HOME/Research/venv/lib64/python3.8/site-packages/numpy/core/include \
+> -D CMAKE_INSTALL_PREFIX=$HOME/Research/venv \
+> -D CUDNN_LIBRARY=/usr/lib64/libcudnn.so.8 \
+> -D CUDNN_INCLUDE_DIR=/usr/include \
+> ../opencv-4.5.0
+...
+
+$ make
+...
+</pre>
+
+<p>
+    Get a cup of coffee or two. But I would have preferred tea to coffee. Hahaha... Once it has done, <b>eighth</b>, install it using a simple command;
+</p>
+
+<pre class="wrapped">
+$ sudo make install
+...
+</pre>
+
+<p>
+    Tada! We are done! You could run it and see if everything works! Well, I do not have enough experience to give you examples of using any CUDA OpenCV modules.
+</p>
+
+<pre class="wrapped">
+>>> import cv2
+>>> cv2.cuda.getDevice()
+0
+>>> cv2.cuda.getCudaEnabledDeviceCount()
+1
+</pre>
+
+<p>
+    <b>Ninth</b>, unfortunately, at the moment, there is no audio and video support for WSL2 by default. But we could try to hack a few things to make it happen! There is a guide on <a href="https://wiki.ubuntu.com/WSL#Running_Graphical_Applications" rel="nofollow">the Ubuntu wiki</a> for that. Just for now, I do not really need any kind of access to the audio/video input device. Might be sometime in the near future, I will make a post about it. But I seriously doubt that I will.
+</p>
+
+<h2>
+    My Build Tips
+</h2>
+
+<p>
+    <b>First</b>, we could not rely on the <code>nvidia-smi</code> but a few. It has been broken in many aspects both on Windows and WSL2. Anyway, if you want but could not find the <code>nvidia-smi.exe</code> command, just add <code>C:<wbr>\<wbr>Program Files<wbr>\<wbr>NVIDIA Corporation<wbr>\<wbr>NVSMI</code> into the Windows system path and then reopen the Windows Powershell or Command Prompt. Still indeed, there is no point having it on Windows!
+</p>
+
+<p>
+    <b>Second</b>, we might have become aware of an error message that has faced our world after installing the CUDA toolkit. It has told us that it has failed to install the CUDA driver. But there is no need to worry even a slightest bit. We do not need it and not ever will.
+</p>
+
+<pre>
+===========
+= Summary =
+===========
+
+Driver:   Not Selected
+Toolkit:  Installed in /usr/local/cuda-11.1/
+Samples:  Installed in /home/naru/, but missing recommended libraries
+
+Please make sure that
+ -   PATH includes /usr/local/cuda-11.1/bin
+ -   LD_LIBRARY_PATH includes /usr/local/cuda-11.1/lib64, or, add /usr/local/cuda-11.1/lib64 to /etc/ld.so.conf and run ldconfig as root
+
+To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.1/bin
+***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least 455.00 is required for CUDA 11.1 functionality to work.
+To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
+    sudo <CudaInstaller>.run --silent --driver
+
+Logfile is /var/log/cuda-installer.log
+</pre>
+
+<p>
+    <b>Third</b>, we might have been confused since we could not find any <code>libcudnn*.so.*</code> files at <code>/usr<wbr>/<wbr>local<wbr>/<wbr>cuda-11.1<wbr>/<wbr>lib64</code> after installing the <code>libcudnn*.rpm</code> file. The reason behind this is the RPM file has installed all compiled library files into a different directory, i.e. <code>/usr/lib64</code>.
+</p>
+
+<pre>
+$ rpm -qlp libcudnn8-8.0.5.39-1.cuda11.1.x86_64.rpm
+...
+/usr/lib64/libcudnn.so.8
+/usr/lib64/libcudnn.so.8.0.5
+/usr/lib64/libcudnn_adv_infer.so.8
+/usr/lib64/libcudnn_adv_infer.so.8.0.5
+/usr/lib64/libcudnn_adv_train.so.8
+/usr/lib64/libcudnn_adv_train.so.8.0.5
+/usr/lib64/libcudnn_cnn_infer.so.8
+/usr/lib64/libcudnn_cnn_infer.so.8.0.5
+/usr/lib64/libcudnn_cnn_train.so.8
+/usr/lib64/libcudnn_cnn_train.so.8.0.5
+/usr/lib64/libcudnn_ops_infer.so.8
+/usr/lib64/libcudnn_ops_infer.so.8.0.5
+/usr/lib64/libcudnn_ops_train.so.8
+/usr/lib64/libcudnn_ops_train.so.8.0.5
+</pre>
+
+<p>
+    If we did not like this behaviour, we could download <a href="https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.0.5/11.1_20201106/cudnn-11.1-linux-x64-v8.0.5.39.tgz" rel="nofollow">the archived file</a> instead and then extract it manually;
+</p>
+
+<pre class="wrapped">
+$ curl https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.0.5/11.1_20201106/cudnn-11.1-linux-x64-v8.0.5.39.tgz -o cudnn-11.1-linux-x64-v8.0.5.39.tgz
+...
+
+$ tar -xzvf cudnn-11.1-linux-x64-v8.0.5.39.tgz
+...
+
+$ sudo cp cuda/include/cudnn*.h /usr/local/cuda-11.1/include
+$ sudo cp cuda/lib64/libcudnn* /usr/local/cuda-11.1/lib64
+$ sudo chmod a+r /usr/local/cuda-11.1/include/cudnn*.h /usr/local/cuda-11.1/lib64/libcudnn*
+</pre>
+
+<p>
+    <b>Fourth</b>, to list all available OpenCV build options as we might want to configure more, we could run <code>cmake -LA</code>;
+</p>
+
+<pre>
+$ cmake -LA
+...
+BUILD_CUDA_STUBS:BOOL=OFF
+BUILD_DOCS:BOOL=OFF
+BUILD_EXAMPLES:BOOL=OFF
+BUILD_IPP_IW:BOOL=ON
+BUILD_ITT:BOOL=ON
+BUILD_JASPER:BOOL=OFF
+BUILD_JAVA:BOOL=ON
+BUILD_JPEG:BOOL=OFF
+BUILD_LIST:STRING=
+BUILD_OPENEXR:BOOL=OFF
+BUILD_OPENJPEG:BOOL=OFF
+BUILD_PACKAGE:BOOL=ON
+BUILD_PERF_TESTS:BOOL=ON
+BUILD_PNG:BOOL=OFF
+BUILD_PROTOBUF:BOOL=ON
+BUILD_SHARED_LIBS:BOOL=ON
+BUILD_TBB:BOOL=OFF
+BUILD_TESTS:BOOL=ON
+BUILD_TIFF:BOOL=OFF
+BUILD_USE_SYMLINKS:BOOL=OFF
+BUILD_WEBP:BOOL=OFF
+BUILD_WITH_DEBUG_INFO:BOOL=OFF
+BUILD_WITH_DYNAMIC_IPP:BOOL=OFF
+BUILD_ZLIB:BOOL=OFF
+...
+</pre>
+
+<h2>
+    Further Reading
+</h2>
+
+<ul>
+    <li>
+        <a href="https://docs.microsoft.com/en-us/windows/win32/direct3d12/gpu-cuda-in-wsl">Enable NVIDIA CUDA on WSL</a>
+    </li>
+    <li>
+        <a href="https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html">OpenCV: Installation on Linux</a>
+    </li>
+</ul>
