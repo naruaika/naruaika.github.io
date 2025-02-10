@@ -1,0 +1,468 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/hacks-ive-learned-in-developing-interactive-web-pages-4672
+title: How I Managed to Pre-processing Musshaf Images
+description: To the best of my knowledge, the Medina Quran is always written, by King Fahd Glorious Quran Printing Complex at Saudi Arabia, by hand.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    You know, just another random story ...
+</p>
+
+<h2>
+    Behind the Scenes
+</h2>
+
+<p>
+    If you have been <a href="https://dev.to/naruaika" rel="nofollow">following me</a> from the very beginning of my journey on this wonderful blogging platform, at DEV.to for sure, you have already noticed that I am using the Windows Subsystem for Linux aka WSL2 at the moment. But, starting from three months ago, or four, I have decided to go back to Fedora. Eh? <i>Uh, what?</i> So, today I am going to tell you another story, rather than a technical blog post, about a personal project started on February 15th which I have committed to.
+</p>
+
+<p>
+    <i>Wait, what is the relationship between moving to Fedora and developing this project?</i> You may be wondering, are not you? No? It is okay, LOL. Anyhow, one of the main reasons I always end up with Fedora is that I get the original flavor of the GNOME desktop environment. No custom themes, nothing changes at all except for a few extensions that I installed later, GSConnect for example.
+</p>
+
+<p>
+    I just love the whole GNOME ecosystem, which made me run into installing almost all GNOME applications every time I found a new one, despite being unused, LOL. I mean, all the applications that are written in GTK, especially since they all have a beautiful header bars. That very reason was bring me to think when I need to find an application for specific purposes, that has to be GTK application on the first place. Similarly, when I got to develop a desktop application. Err ... Even though, this consideration has nothing to do with this post. Ha-ha-ha ... <i>Well, enough talking then!</i> Okay, let us move on!
+</p>
+
+<h2>
+    A Background
+</h2>
+
+<p>
+    Meanwhile, this discussion will only be limited to the main issues that I have experienced with. Do you know how <a href="https://en.wikipedia.org/wiki/Quran" rel="nofollow">the Quran</a>, or Koran, has always been written down today? Exempli gratia, to the best of my knowledge, the Medina Quran is always written, by <a href="https://qurancomplex.gov.sa/" rel="nofollow">King Fahd Glorious Quran Printing Complex</a> at Saudi Arabia, by hand. We may have heard Uthman Taha, the calligrapher of <a href="https://en.wikipedia.org/wiki/Mus%27haf" rel="nofollow">Musshaf</a> Al-Madina, or we even have KFGQPC Uthman Taha Naskh installed.
+</p>
+
+<p>
+    I am pretty sure that the Quran which everyone owns was written by someone has hand. <i>I meant to write: someone's; does it sound differently? Please tell me, O, you good.</i> And then the copies were reproduced and distributed around the world. Nowadays, for some reason, we can easily get the Quran in our pockets as a digital application. So, we can read wherever and whenever we want to. For those messages of kindness can be searched, copied, and shared, many people struggle to meet unicode standards, instead of providing the Quran as images only. Unfortunately, this manner happened to bring a new issue. Before continuing, you can try to figure out the difference between <a href="https://sourceforge.net/projects/zekr/" rel="nofollow">Zekr</a> and <a href="https://quran.ksu.edu.sa/index.php?l=en" rel="nofollow">Ayat</a> application.
+</p>
+
+<p>
+    The pagination, layouting, typeface, <i>et cetera</i>, in a digital world often look differently. If we used to read and memorise the Quran from the Musshaf, this could be so annoying, at least for someone doing a <a href="https://en.wikipedia.org/wiki/Halaqa" rel="nofollow">halaqa</a>. Many scholars who are great at memorising the Quran also memorise, things that people thought, including me before, were not really important, such as where the page which this specific <a href="https://en.wikipedia.org/wiki/%C4%80yah" rel="nofollow">ayah</a>, or verse, is belong to. Even more specific things: on which line and in which word position. So, each time got a question, they can quickly turn to the related pages. Hence, I have decided to display the Quran as images based on the official printed Medina Quran. Meanwhile, these ayah can still be searched and copied, as we have included a database of the Quran in machine-encoded texts.
+</p>
+
+<p>
+    <i>But the true story has not been told ...</i> I know, I know, I am about to tell you. Using images, how does the application know that the area of the page that we click on belongs to which surah and ayah? <i></i>Ah, got it! So, the problem is how do we do the mapping. In a simpler way, how to select an ayah on a picture.</i> Exactly! Once we managed to find the best method, we could apply it to other standards, and other <a href="https://en.wikipedia.org/wiki/Qira%CA%BCat" rel="nofollow">Qira'at</a> printings as well. <i>However, better go with a cross-platform graphical user interface (GUI) framework or toolkit, if you want to target that broad audience.</i> Yeah, that was under my consideration, and seems to remain. That is merely my ego at all.
+</p>
+
+<h2>
+    The Main Story
+</h2>
+
+<p>
+    The story began with downloading <a href="https://qurancomplex.gov.sa/kfgqpc-quran-hafs/" rel="nofollow">a Quran PDF</a> file from the official Quran Complex website. I had better take a cup of tea, for it took a while for my potato ...
+</p>
+
+<p>
+    Along the way, I got some ideas in my head to solve that. Most of them were not possible for me at the moment, as it turned out that I need to learn some machine learning techniques which I would be stupid to learn myself. I know best, if I try hard to learn it, I will make up my own opportunities! But since I am doing this to provide only a proof-of-concept of my digital Quran application, <a href="https://github.com/naruaika/grapik-quran" rel="nofollow">Grapik Quran</a>, I am not willing to take too much effort into it yet. Not to mention that I just started learning GTK+; there is a lot to learn, so I have to manage my time as best I can.
+</p>
+
+<p>
+    Some of them required me to learn about computer vision and image processing stuff, which I am enjoy with. But I am still pretty beginner at this, as well. And well, let me start writing a true story of mine ...
+</p>
+
+<p>
+    Too lazy to begin with manual work of writing computer vision algorithms or even to just use them since they could easily be imported by simply calling <code>import cv2</code>, yes, I am. So, I was wondering if I could make predictions with some kind of machine learning model; someone else's model, of course. After looking for it for a while, I found nothing.
+</p>
+
+<p>
+    Okay, let me have a think of it. I was too naive not to write down what I exactly needed. It happened to someone who really thought of him as a pretty smart, or to someone who is too hasty in doing something; I have learnt a lesson from it. In order to segment ayahs from the image pages, we need to:
+</p>
+
+<ol>
+    <li>
+        Extract all the lines with ayah(s), excluding all other information such as page numbers, juz, hizb, and all ornaments. The lines should be sorted by appearance from top to bottom;
+    </li>
+    <li>
+        Find all surah and ayah markers on each lines, if any; and
+    </li>
+    <li>
+        Iterate over all the markers from the very first line to the end. Doing this sequentially from the first page of the Quran, where Surah Al-Fathihah is located, we will able to map them correctly to each surah and ayah.
+    </li>
+</ol>
+
+<p>
+    It sounds simple, is not it? To get a better idea, let me show you how the final results should look like:
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/js0fe8ohwsw5rfizmstm.png" alt="A Preview of Preprocessed Quran Images">
+    </div>
+</figure>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/3ukhohm42nllw6cdij4b.png" alt="A Preview of Preprocessed Quran Images">
+    </div>
+</figure>
+
+<p>
+    They look great, right? Let us jump into the main story now ...
+</p>
+
+<h2>
+    1. Extracting Page Lines
+</h2>
+
+<p>
+    <b>First trial;</b> My first intention was to write a decent code to extract all lines from any type of Musshaf images. It has to be worked for pages that have a different number of rows without specifying them first. After doing a research, I finally came up with several algorithms.
+</p>
+
+<p>
+    As I already said, I was lazy and still I am ... Therefore, I was thinking of looking for Python libraries to achieve it. Then I was made to understand that it has something to do with optical character recognition. So, I had been playing around with <a href="https://pypi.org/project/pytesseract/" rel="nofollow">PyTesseract</a>:
+</p>
+
+<pre>
+import cv2
+from pytesseract import image_to_data, Output
+
+image = cv2.imread('dataset/quran-images/3.png')
+d = image_to_data(image, 'ara', output_type=Output.DICT)
+print(d.keys())
+
+n_boxes = len(d['text'])
+for i in range(n_boxes):
+    if int(d['conf'][i]) > 60:
+        (x, y, w, h) = (d['left'][i], d['top'][i], d['width'][i], d['height'][i])
+        image = cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+cv2.imshow('Result', image)
+cv2.waitKey(0)
+</pre>
+
+<p>
+    and also <a href="https://github.com/JaidedAI/EasyOCR" rel="nofollow">EasyOCR</a>:
+</p>
+
+<pre>
+import easyocr
+
+reader = easyocr.Reader(['ar'])
+result = reader.readtext('dataset/quran-images/3.png')
+</pre>
+
+<p>
+    Unfortunately, they were not capable of. PyTesseract was the worst; EasyOCR at least could give me some insights, but it was neither stable nor accurate. The real challenge here is that the texts are handwritten and they all have diacritics. The idea behind this approach is that I would like to extract as much information as possible, including the surah, ayah, juz, and hizb numbers.
+</p>
+
+<p>
+    I had also played with a number of different machine learning approaches downloaded from their GitHub repositories without considering modifying them even a line of code! As lazyness had came to me. In short, they were all doomed to fail. You know, and moreover, there is not any artificial general intelligence!
+</p>
+
+<p>
+    <b>Second trial;</b> Learning from the previous failure, I had decided to focus on a specific thing and it should be extracting page lines. By reading some papers, either talking on extracting page lines in general or only on extracting from arabic pages, I have tried several approaches of theirs. Either just did <code>git clone</code>, again, or implemented them by myself.
+</p>
+
+<p>
+    First of all, since they all need a page containing only the texts we want to extract from, we have to get rid of everything else outside the page border and the border itself for sure. You already know, as for by doing a simple code should be enough. Uh, wait, we need to install all required libraries and their dependencies:
+</p>
+
+<pre class="wrapped">
+$ sudo dnf install --yes poppler-utils
+...
+
+$ pip install pdf2image opencv-python matplotlib
+...
+</pre>
+
+<p>
+    Then, inside my Jupyter notebook, I wrote these:
+</p>
+
+<pre>
+from pdf2image import convert_from_path
+
+pages = convert_from_path('dataset/quran-images/hafs-standard39.pdf', dpi=190)
+</pre>
+
+<p>
+    Somehow, it has eaten up all my memory;
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/x6zm89dyv4brxusggcjx.png" alt="">
+    </div>
+</figure>
+
+<p>
+    Thus, I did this instead:
+</p>
+
+<pre>
+from pdf2image import convert_from_path
+import tempfile
+
+with tempfile.TemporaryDirectory() as outdir:
+    filepath = 'dataset/quran-images/hafs-standard39.pdf'
+    pages = convert_from_path(filepath, dpi=190, output_folder=outdir)
+</pre>
+
+<p>
+    Or even do a sampling to get 5–8 images only.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/sytgxb87ucbd1p2shva1.png" alt="">
+    </div>
+</figure>
+
+<p>
+    Next, these lines:
+</p>
+
+<pre>
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+img = cv2.cvtColor(np.array(pages[5]), cv2.COLOR_RGB2BGR)
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+img_mod = cv2.GaussianBlur(img_gray, (15, 15), 0)
+_, img_mod = cv2.threshold(
+    img_mod, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+w = 456  # image preview width in pixels
+scale = w / img.shape[1]
+h = int(img.shape[0] * scale)
+plt.rcParams.update({
+    'figure.figsize': (h / (96 / 3), w / (96 / 3)),
+    'axes.spines.left': False,
+    'axes.spines.right': False,
+    'axes.spines.top': False,
+    'axes.spines.bottom': False,
+    'xtick.bottom': False,
+    'xtick.labelbottom': False,
+    'ytick.labelleft': False,
+    'ytick.left': False
+})
+
+plt.imshow(img_mod)
+plt.show()
+</pre>
+
+<p>
+    will result:
+</p>
+
+<figure>
+    <div class="container" style="background-color:#440154;">
+        <img src="/assets/posts/br9sofkvitagb3yg7g5u.png" alt="">
+    </div>
+</figure>
+
+<p>
+    Got it, ya? Let us continue writing ...
+</p>
+
+<pre>
+img_mod = cv2.Canny(img_mod, 100, 200)
+kernel = np.ones((2, 2), np.uint8)
+img_mod = cv2.dilate(img_mod, kernel)
+cv2.floodFill(img_mod, None, (0, 0), 255)
+cv2.floodFill(img_mod, None, (0, 0), 0)
+
+plt.imshow(img_mod)
+plt.show()
+</pre>
+
+<p>
+    And ta-da!
+</p>
+
+<figure>
+    <div class="container" style="background-color:#440154;">
+        <img src="/assets/posts/ibitsc4t1e8a50sx5nij.png" alt="">
+    </div>
+</figure>
+
+<p>
+    Then we could do something like:
+</p>
+
+<pre>
+bboxes = cv2.findContours(img_mod, cv2.RETR_EXTERNAL,
+                          cv2.CHAIN_APPROX_SIMPLE)
+bboxes = bboxes[0] if len(bboxes) == 2 else bboxes[1]
+x, y, w, h = cv2.boundingRect(max(bboxes, key=cv2.contourArea))
+</pre>
+
+<p>
+    and finally:
+</p>
+
+<pre>
+img_mod[y:y+h, x:x+w] = img_thres[y:y+h, x:x+w]
+</pre>
+
+<p>
+    to obtain the page border and all of its content inside. Great! Next, let us talk about several algorithms to segment page lines. For that, you shall let me write this as is in the Google search box:
+</p>
+
+<pre>
+line segmentation site:github.com
+</pre>
+
+<p>
+    LOL! Well, you do not judge me at all.
+</p>
+
+<p>
+    After doing a screening, I came up with a conclusion:
+</p>
+
+<ul>
+    <li>I did not want any path finding approaches as they do not seem to give me straight lines;</li>
+    <li>I did not want any codes written in anything other than Python, because I was not familiar with;</li>
+    <li>I did not want this and that ...</li>
+</ul>
+
+<p>
+    After all, I needed to implement my own by combining all those approaches to-get-her. Until a week later, I had been such the happiest person in the world when it seemed to be working for <a href="https://quran.ksu.edu.sa/ayat/?l=en&pg=patches" rel="nofollow">Quran images</a> from the King Saud University, which had been used for the Ayat application. But, come on, the code was messy (you will not even like seeing its related public commits in my GitHub repository; it is still there) and I had no luck in applying for other Musshafs.
+</p>
+
+<p>
+    <b>Third trial;</b> Make it simple, dude! I lost my hope while still being lazy. It had me realised: sometimes, it is okay to be lazy, because it might turn us into creative people, just like what Bill Gates has said (if I am not wrong). But indeed, sometimes: <q cite="https://news.ycombinator.com/item?id=18180017">Programmers like to come up with clever ways to solve non-existing problems.</q>
+</p>
+
+<p>
+    Since then, I have come back to the easiest ways to do this and that;
+</p>
+
+<ol>
+    <li>defining the number of lines in that page;</li>
+    <li>obtaining the page border; and then</li>
+    <li>dividing the area equally.</li>
+</ol>
+
+<p>
+    Dots.
+</p>
+
+<h2>
+    2. Finding Ayah Markers
+</h2>
+
+<p>
+    Okay, just do a template matching for it. Simply,
+</p>
+
+<ol>
+    <li>open the PDF using <a href="https://wiki.gnome.org/Apps/Evince" rel="nofollow">Evince</a> or any PDF reader;</li>
+    <li>set the zoom to 100%;</li>
+    <li>press the <code>shift</code> and <code>prt sc</code> (print screen) keys, then use a mice to collect a screenshot of the surah, bismillah, and ayah markers as samples; and</li>
+    <li>Google on how to do template matching in Python!</li>
+</ol>
+
+<p>
+    Here is the result:
+</p>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <img src="/assets/posts/uj4ccsycbp2dx5j6p07g.png" alt="">
+    </div>
+</figure>
+
+<p>
+    Nah, as simple as that!
+</p>
+
+<h2>
+    3. Iterating Over Lines
+</h2>
+
+<p>
+    Yeah, the next steps to take are (1) iterating each line while incrementing the surah and ayah numbers, (2) segmenting each line based on the appearance of the ayah markers in there if any, and (3) saving all the information into a single CSV file. We may want to apply some post-processing later on. Well, I am too tired to elaborate. Sigh ... I hope that you got the idea. That CSV file might contain something like:
+</p>
+
+<pre>
+page,sura,aya,x1,y1,x2,y2
+4,1,1,248,537,578,591
+4,1,2,158,537,248,591
+4,1,2,202,591,578,645
+4,1,3,158,591,202,645
+4,1,3,384,645,578,699
+4,1,4,158,645,384,699
+4,1,5,238,699,578,753
+4,1,6,158,699,238,753
+4,1,6,354,753,578,807
+4,1,7,158,753,354,807
+4,1,7,158,807,578,861
+4,1,7,158,861,578,921
+</pre>
+
+<p>
+    If you feel interested, since all of these stuff has been uploaded, you can always access all my random things on here: <a href="https://github.com/naruaika/my-playground" rel="nofollow">https://github.com/naruaika/my-playground</a>.
+</p>
+
+<h2>
+    After Story
+</h2>
+
+<p>
+    I figured out that there was wasted space around the page border;
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/j1dh0tr97wf0pfkxgpj7.png" alt="">
+    </div>
+</figure>
+
+<p>
+    ending up taking up my screen for no better reason than having page number, juz, and hizb boxes, and others, next to the page border. For I want to deal all those in my application navigation system. Come on, let us fix it!
+</p>
+
+<pre>
+$ ls
+alasbahani-mad.pdf  hafs-standard39.pdf     kasr-elbadl.pdf       qiraat-naskh.pdf   qiraat-sousi.pdf
+albahrain.pdf       hafs-standardthree.pdf  muyassar-ghareeb.pdf  qiraat-qaloon.pdf  qiraat-warsh39.pdf
+hafs-jawamee39.pdf  hafs-wasat39.pdf        qiraat-douri.pdf      qiraat-shuba.pdf   tawassot-elbadl.pdf
+
+# Convert PDF to JPEG images
+$ mkdir -p hafs-standard39
+$ pdftoppm -jpeg -r 190 -e hafs-standard39.pdf hafs-standard39/even
+$ pdftoppm -jpeg -r 190 -o hafs-standard39.pdf hafs-standard39/odd
+
+# Optimise the output images
+$ sudo dnf install --yes jpegoptim
+$ mkdir -p hafs-standard39/optimized
+$ jpegoptim hafs-standard39/*.jpg --dest hafs-standard39/optimized/
+...
+</pre>
+
+<p>
+    Then, using GIMP;
+</p>
+
+<ol>
+    <li>Open <code>even-*.jpg</code> as layers (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>O</kbd>);</li>
+    <li>Crop all the even pages at (57, 127) in the size 774 by 1190 pixels manually. Do not forget to enable the "Delete cropped pixel" option when cropping;</li>
+    <li>Export all of them as separate JPEG images using a plugin <a href="https://khalim19.github.io/gimp-plugin-export-layers/" rel="nofollow">Export Layers</a>; and</li>
+    <li>Repeat for all the odd pages.</li>
+</ol>
+
+<p>
+    Since the first two pages and before apparently have a different alignment, repeat for them separately. Although we need additional manual operations such as aligning and resizing the images over layers. You might decide not to include all the pages that did not contain any ayahs. But since I wanted to maintain the number of the pages as the original, I have cut them too.
+</p>
+
+<p>
+    Afterward, using <a href="https://apps.gnome.org/Nautilus/" rel="nofollow">Files</a> we are able to batch rename them to remove the <code>even-</code> and <code>odd-</code> prefixes. To remove the zero prefix, rename them by using a template: <code>[1, 2, 3]</code>.
+</p>
+
+<p>
+    As we now have JPEG images instead of PDF files, it so happens that we will have to change the initial few lines of our code. But that is all for now. See you again soon!
+</p>

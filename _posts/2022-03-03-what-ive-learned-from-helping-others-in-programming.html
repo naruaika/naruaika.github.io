@@ -1,0 +1,282 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/what-ive-learned-from-helping-others-in-programming-f
+title: What I've Learned From Helping Others in Programming
+description: Only a few times a month or two, I may visit the server looking for people who need help. Am I seeking for reputation? That's only a consequence. Of what? Practising!
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    It just happened that I used Python for months to work on my thesis. Those few months weren't enough for me to become a master in Python. It's almost two years from my graduation and I haven't touch Python since then. I'm currently using PHP at work and having no personal projects in Python.
+</p>
+
+<p>
+    Nor am I an active helper volunteer at <a href="https://discord.gg/python">https://discord.gg/python</a>. Only a few times a month or two, I may visit the server looking for people who need help.
+</p>
+
+<p>
+    Am I seeking for reputation? With all these thanks?
+</p>
+
+<figure>
+    <div class="container" style="background-color:#36393f;">
+        <img src="/assets/posts/bhrdbdxoxj5nryxtenh9.png" alt="Someone thanked me">
+    </div>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#36393f;">
+        <img src="/assets/posts/tvxlidafmbhkuuwyvqae.png" alt="Someone thanked me">
+    </div>
+</figure>
+
+<p>
+    It could be the case, but firstly, I have no inclination to publish it on LinkedIn. So, there's no one on the internet will know about it. Secondly, no one at my company will be interested in it. Because we're not using Python, haven't, and likely won't. You may ask why on earth it must be Python in the first place? Simply, just because I already joined into the server, not to any Laravel server.
+</p>
+
+<p>
+    So, am I seeking for reputation? That's only a consequence. Of what? Practising!
+</p>
+
+<h2>
+    Getting real-world problems
+</h2>
+
+<p>
+    We can always look for any problem, but it's often only something we've made up. While having solutions for someone's real-world problems may solve our own problems some day.
+</p>
+
+<p>
+    The solution may not solve other problems directly. Consider we had this yesterday:
+</p>
+
+<pre>
+1 + 2 * 3 = 7
+</pre>
+
+<p>
+    But we have this today:
+</p>
+
+<pre>
+1 - 2 * 3 = ?
+</pre>
+
+<p>
+    The number 7 cannot be the solution, but our approaches yesterday can lead us to the solution.
+</p>
+
+<p>
+    One day, someone chatted me in private, asking me to help with his technical problem for his thesis. The problem was so simple: how to run a Python script from PHP. I asked why and he replied that he wanted to trigger the opening of a window, that'll run his computer vision project, by clicking on a button on a web page. I said that it's possible, until we run into the environment variable isolation issues. A few days later, when I encountered a similar situation, I already knew that the approaches wouldn't work. So, need to find another solution.
+</p>
+
+<h2>
+    Defining problems better
+</h2>
+
+<p>
+    Not all problems are clear. The ability to recognise problems is a skill in itself.
+</p>
+
+<p>
+    Consider someone asks about this bug in JavaScript:
+</p>
+
+<pre>
+// 1st case
+console.log("0" + "1" == "01"); // returns true
+
+// 2nd case
+console.log("0" + "1" == 1  ); // returns true
+console.log("1"       == 1  ); // returns true
+console.log("0" + "1" == "1"); // returns false
+
+// 3rd case
+console.log("01"     == 1); // returns true
+console.log("01" + 1 == 2); // returns false
+</pre>
+
+<p>
+    We know that this isn't a bug in JavaScript, but rather a bug in his understanding. Digging into his question, Ben explained that he has a unique column for his SQLite table below.
+</p>
+
+<pre>
++----+-------------+
+| id | invoice     |
++----+-------------+
+| 17 | 0001/A/2022 |
+| 18 | 0001/B/2022 |
+| 19 | 0002/B/2022 |
+| 20 | 0002/A/2022 |
++----+-------------+
+</pre>
+
+<p>
+    Of the sample records above, without Ben needs to continue explain further, we already know where the question is headed.
+</p>
+
+<p>
+    If we hadn't asked Ben what he's trying to do, we'd have gone too far to explain, we'd never come with:
+</p>
+
+<pre>
+var newInvoice = ((+"0002") + 1 + "").padStart(4, "0");
+console.log(newInvoice); // returns "0003"
+</pre>
+
+<p>
+    In real life, I'd asked to add a feature in response to the client's problem, but the solution brought up to me won't solve the problem. So we got into a fight just because she was too lazy to discuss further with a hard-to-compromise client. I've lost. As a result, I wasted some times just to see the feature removed completely. It's hard not to admit as to, "Just hit the delete button, right?" Correct!
+</p>
+
+<p>
+    It's just a small feature. I've had the experience of deleting an entire rebuilt page from scratch. The client asked to come back with the non-digitalised solution, when I believe that we only needed to make some adjustments to our solution if only we could have spotted the real problem earlier. Today, the problem still exists; there's no alternative solution yet to integrate the spreadsheets into the database, since I'm refusing to rebuild the page a second time.
+</p>
+
+<h2>
+    Responding questions nicer
+</h2>
+
+<p>
+    Talking is an art in social life. Not everyone can gently say, "Next time, please ask the actual problem, okay?" Instead, some people find it easier to say, "Don't waste my precious time with XY problems." They don't realise that they left another problem without solving anything, "What's the <a href="https://xyproblem.info/" rel="nofollow">XY problem</a>?"
+</p>
+
+<p>
+    I've seen someone come up with, "How do I print hello world in Python?" Many times, people would solely throw away some how-to-codes article links. Or demeaning by saying, "Learn the basics and come back with quality questions." What if he had done with:
+</p>
+
+<pre>
+print 'hello world'
+</pre>
+
+<p>
+    But it didn't work at all, because he had a newer Python but an older lecturer.
+</p>
+
+<h2>
+    Avoiding problems gentler
+</h2>
+
+<p>
+    Not everything can be answered. Sometimes, it's against the law. Other times, it gets out of context.
+</p>
+
+<p>
+    Because it's a Python Discord server, so anything not related to Python isn't welcome. The moderator can respond nicely, "Sorry, but we're not mastering JavaScript here," instead of burning more energy yelling, "Do you know how to read? Read the rules!!!"
+</p>
+
+<p>
+    Unfortunately, I often come across such bad habits from people who, sadly, do more in commenting than writing articles on DEV.
+</p>
+
+<h2>
+    Maintaining own behavior
+</h2>
+
+<p>
+    Sometimes our kindness isn't rewarded with good behavior. We'd spent our precious time answering his question, but he just disappeared. So, we'd been waiting for him forever in case he'd respond.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#36393f;">
+        <img src="/assets/posts/j1rge4bipf1ckq0loq54.png" alt="The questioner disappeared">
+    </div>
+</figure>
+
+<p>
+    Sometimes, we'd managed to solve his question, but he forgot to say thank-you.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#36393f;">
+        <img src="/assets/posts/dk3gqgvyaniuv44t77ar.png" alt="Leaving no thanks">
+    </div>
+</figure>
+
+<p>
+    Another time, we're forced to deal with someone who's grumpy.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#36393f;">
+        <img src="/assets/posts/iv68oqywv2bzwmwnixmn.png" alt="Someone's grumpy">
+    </div>
+</figure>
+
+<p>
+    This is quite problematic, even today for me. We don't want the questioner to ruin our whole wonderful day, by leaving us to respond with similar tension and bad words. Don't let him turn our good behavior into an equally toxic person.
+</p>
+
+<p>
+    With many practises, we can definitely become better-behaved people in dealing with chaos.
+</p>
+
+<h2>
+    Googling more effectively
+</h2>
+
+<p>
+    We can master anything, but not everything.
+</p>
+
+<p>
+    Sometimes, we don't even know the context of the question at all, because it's new to us. So, we need to do a quick review before starting to think of a solution. To find out more, we can read the official documentation or the <code>man</code> pages. But oftentimes, googling for the problem or similar ones is more effective. Also more efficient than buying a book.
+</p>
+
+<p>
+    Sometimes, we can't think of any solution. Or we doubt that our solution is the best. Or we're bad at explaining the solution. Or we don't know to compare two solutions. We need not to worry because someone may have done it somewhere on the internet.
+</p>
+
+<p>
+    Helping others can help us practice googling better, discovering best practises ourselves.
+</p>
+
+<h2>
+    Picking suitable solutions
+</h2>
+
+<p>
+    When we get more than a solution, we must decide carefully which solution is the most suitable. What'll be the most suitable? Here's what I've learned: get to know the questioner well, his background and himself. If he's among the beginners, we don't put any concerns against big-O notation or other advanced topics. Just keep it simple!
+</p>
+
+<p>
+    Someone may ask how to perform mathematical operations in string. I've seen this quite often. So, let him do:
+</p>
+
+<pre>
+math_op = "1 - 2 * 3"
+result = eval(math_op)
+print(math_op, "=", result)
+</pre>
+
+<p>
+    Don't bother him with security issues and suggest moving to <code>ast.literal_eval()</code>. But well, usually, someone asking such a question isn't allowed to use <code>eval()</code>. That's just an example case.
+</p>
+
+<h2>
+    Learning from others
+</h2>
+
+<p>
+    I sometimes fail to prevent myself joining the conversation. That's a big shame. Not because I don't want to help, but just because I'm incompetent. In that case, let people answer the question while we learn together with the questioner.
+</p>
+
+<p>
+    Not only can we learn about the solution itself, but also learn how people arrange kind words to answer the question. And learn how people deal gently with someone who misinterprets the problem thus gives the wrong solution.
+</p>
+
+<p>
+    So, again, am I seeking for reputation? Yes, I do. Having better soft skills can improve our reputation in the workplace, indirectly. It'll be more effective than waiting for opportunities in the office that might never come.
+</p>
+
+<p>
+    But more importantly, <q cite="https://greatergood.berkeley.edu/article/item/happiness_for_a_lifetime">If you want happiness for an hour, take a nap. If you want happiness for a day, go fishing. If you want happiness for a month, get married. If you want happiness for a year, inherit a fortune. <b>If you want happiness for a lifetime, help somebody else.</b></q>&mdash;Chinese proverb.
+</p>
