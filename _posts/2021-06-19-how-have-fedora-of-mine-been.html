@@ -1,0 +1,299 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/how-have-fedora-of-mine-been-439j
+title: How Have Fedora of Mine Been
+description: Hearing of Fedora thirty-four which has just officially launched, doing a fresh install of the operating system (OS) had been emerging in my mind, all the time.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    I, sometimes, love being as a researcher. In just a minute or two, my machine, oftentimes, ended up be a mess. Hearing of Fedora thirty-four which has just officially launched, doing a fresh install of the operating system (OS) had been emerging in my mind, all the time. But how could clean installation clean up the mess? Nay, that is not possible! Once I got my hands dirty, everything will not be alright. Con&shy;se&shy;quent&shy;ly, I have thoughts of keeping myself away from messing around for this time.
+</p>
+
+<p>
+    As many of people in many different communities have mentioned what is new in the thirty-four edition, followed by how-tos when installing Fedora for the first time, or even again, I have nothing more to share. Still and all, it is rather not a bad idea to capture and talk about decisions I have made.
+</p>
+
+<p>
+    Most of people will do update all the pre-installed packages on their newly installed operating system, so did I. On Fedora, to update/upgrade packages, we need to do:
+</p>
+
+<pre>
+$ sudo dnf --assumeyes upgrade
+...
+
+$ systemctl reboot
+</pre>
+
+<p>
+    Thereafter, I started to setup this armament of mine.
+</p>
+
+<h2>
+    #1
+</h2>
+
+<p>
+    I have concerned that my cheap wireless earbuds is not working correctly on PipeWire. There are audio skips and out-of-sync issues, constantly. So, I have decided to switch back to PulseAudio by:
+</p>
+
+<pre>
+$ sudo dnf swap --allowerasing pipewire-pulseaudio pulseaudio
+...
+</pre>
+
+<p>
+    I will give PipeWire a second chance after hearing that this issue is resolved in the upstream. Until then, we are done. Or until someone gives me more supported earbuds. LOL.
+</p>
+
+<h2>
+    #2
+</h2>
+
+<p>
+    To play a wide variety of multimedia, especially those with restricted codecs, we need to:
+</p>
+
+<pre class="wrapped">
+# Enable the RPMFusion repositories
+$ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+...
+
+# Install the restricted codecs
+$ sudo group upgrade --with-optional Multimedia
+...
+</pre>
+
+<p>
+    So, I can now play all of them using the default video player on Fedora, GNOME Videos, or formerly known as Totem. I know, it is not the best choice, but it just worked for me.
+</p>
+
+<h2>
+    #3
+</h2>
+
+<p>
+    Since my machine has a dedicated graphics processing unit (GPU), the GeForce GTX 10 Series for mobile, I have also grabbed the proprietary driver by:
+</p>
+
+<pre class="wrapped">
+$ sudo dnf install -y akmod-nvidia
+...
+</pre>
+
+<p>
+    And then restart my machine once again.
+</p>
+
+<h2>
+    #4
+</h2>
+
+<p>
+    We are all know that technology is changing too fast these days. They are unpredictable anymore. It seems like every day, new programming languages and frameworks are born. Sometimes they are solutions, sometimes they are new problems.
+</p>
+
+<p>
+    As a software developer, or even just a normal computer user, the need to testing out which tool works best cannot be avoided. This is the another reason why my Fedora-yey is getting bloated and unkempt by the day.
+</p>
+
+<p>
+    I was thinking to keep my host as minimum as possible by installing all the generic software—such as multimedia players, internet browsers, and text editors—on the host and separating all the specific things into container groups.
+</p>
+
+<p>
+    Gratefully, Fedora comes with Podman and Toolbox pre-installed. Let us take the curiosity out by looking into how I organised my workspaces into groups.
+</p>
+
+<pre>
+$ podman ps -a | grep -v toolbox
+CONTAINER ID  IMAGE                                         COMMAND               CREATED       STATUS                      PORTS                   NAMES
+45da333221a9  docker.io/vulnerables/web-dvwa:latest                               5 weeks ago   Created                     0.0.0.0:8080->80/tcp    dvwa
+00cd783bf551  docker.io/raesene/bwapp:latest                /run.sh               5 weeks ago   Exited (137) 5 weeks ago    0.0.0.0:8080->80/tcp    bwapp
+6d248675f778  docker.io/bkimminich/juice-shop:latest        npm start             5 weeks ago   Exited (0) 5 weeks ago      0.0.0.0:8080->3000/tcp  juice-shop
+feea59da1a18  docker.io/szsecurity/webgoat:latest           /usr/bin/supervis...  5 weeks ago   Exited (0) 5 weeks ago      0.0.0.0:8080->80/tcp    webgoat
+7f791fa949e1  docker.io/library/postgres:latest             postgres              40 hours ago  Created                                             postgres
+</pre>
+
+<p>
+    For other cases, I need to have them installed on the root;
+</p>
+
+<pre>
+$ sudo podman ps -a
+CONTAINER ID  IMAGE                                      COMMAND               CREATED      STATUS                    PORTS                                           NAMES
+cef6fbe452f6  docker.io/tleemcjr/metasploitable2:latest  sh -c /bin/servic...  4 weeks ago  Exited (137) 4 weeks ago                                                  metasploitable
+db82745c519b  k8s.gcr.io/pause:3.5                                             2 weeks ago  Created                   0.0.0.0:3000->3000/tcp, 0.0.0.0:3306->3306/tcp  18235f9b87b5-infra
+</pre>
+
+<p>
+    Having those containers, I rarely boot up GNU/Linux OSes with GNOME Boxes. Although, I still need them for a couple of things.
+</p>
+
+<p>
+    You might noticed that all the above containers can be easily obtained by, for instance:
+</p>
+
+<pre class="wrapped">
+# Download the PostgreSQL image
+$ podman pull docker.io/library/postgres
+...
+
+# Create and run a new PostgreSQL container
+$ podman run --name postgres --network=host -e POSTGRES_PASSWORD=pass -d postgres
+...
+
+# Enter the PostgreSQL client
+$ podman exec -it postgres psql -U postgres
+...
+</pre>
+
+<p>
+    Each one is pre-configured by every great maintainers around the globe; nothing more to configure anything. But what if I want to customise a container from scratch? Meaning, just give me a <code>rootfs</code> (if I am not mistaken) and I will do the rest. In this case, Toolbox <a href="https://docs.fedoraproject.org/en-US/fedora-silverblue/toolbox/" rel="nofollow">has some advantages</a> over the others;
+</p>
+
+<pre>
+$ toolbox list
+
+IMAGE ID      IMAGE NAME                                    CREATED
+9c649cf455d4  registry.fedoraproject.org/fedora-toolbox:34  7 weeks ago
+
+CONTAINER ID  CONTAINER NAME  CREATED      STATUS      IMAGE NAME
+25dba789f9c7  build-tool      13 days ago  exited      registry.fedoraproject.org/fedora-toolbox:34
+17e258afdc85  games           6 days ago   exited      registry.fedoraproject.org/fedora-toolbox:34
+b1263fcbb2f3  iot-dev         3 days ago   configured  registry.fedoraproject.org/fedora-toolbox:34
+788dea945c07  mobile-dev      7 days ago   configured  registry.fedoraproject.org/fedora-toolbox:34
+b68dcf5c322f  texlive         6 weeks ago  configured  registry.fedoraproject.org/fedora-toolbox:34
+709bab881755  web-dev         13 days ago  exited      registry.fedoraproject.org/fedora-toolbox:34
+6317f74b06ae  web-sec         5 weeks ago  exited      registry.fedoraproject.org/fedora-toolbox:34
+</pre>
+
+<p>
+    Whensoever it is required to build a package from the source code, I will do so in the <code>build-tool</code> container and grab the executable to the host if needed. This is pretty much where I installed the <code>-devel</code> packages.
+</p>
+
+<p>
+    I have all games, with all the dependencies for the wine to run correctly, installed in the <code>games</code> container. Despite being not a pro gamer, but rather a programmer, I have included Steam as well.
+</p>
+
+<p>
+    Although we have installed the GPU driver and have fully access to the GPU from the box, out-of-the-box, until now we need to install the driver again inside the box (read: container). There is a discussion and work-in-progress solution for this.
+</p>
+
+<p>
+    By the way, do not forget to set the launch game options with <code>__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%</code> to every Steam games to run it using the Nvidia GPU.
+</p>
+
+<p>
+    For programming, I have <code>iot-dev</code>, <code>mobile-dev</code>, and <code>web-dev</code> containers, even though they can all be put together (not to-get-her, sorry) into a single container.
+</p>
+
+<p>
+    For writing, as I prefer LaTeX to LibreOffice Writer and Google Docs, I have created <code>texlive</code> container. Why not the host? Is not it a generic-purpose software? Because of:
+</p>
+
+<pre class="wrapped">
+$ sudo dnf install texlive-scheme-full
+...
+</pre>
+
+<p>
+    There are so many packages that need to be installed, whoops, that is it.
+</p>
+
+<h2>
+    #5
+</h2>
+
+<p>
+    Firefox is by default comes with Fedora Workstation installation. I love Firefox, she is a nice friend, not a pet. But I love Firefox Developer Edition more. So, sorry, got to move on. Unluckly, there is not any Firefox Developer Edition in the official Fedora repository. Therefore, I had to download the <code>tar</code> file, extract, and install it manually.
+</p>
+
+<p>
+    By the way, Firefox has its own way to get an update, thus need not to do it by hand. It means no more downloading, extracting, and installing it manually.
+</p>
+
+<p>
+    Apparently, Visual Studio Code (VSCode) Insider has no idea about this behaviour. But it is relatively easier to install compared to Firefox Developer Edition.
+</p>
+
+<p>
+    Besides these two, I have also installed Krita, GIMP, and Inkscape for daily use. For Krita, I am not using it for creating artworks, but for writing/sketching notes (please, do not blame me). For setting up my programmable mouse, I have Piper. For recording my screen, I have chosen Kooha. For connecting my desktop to mobile devices, I have been using GSConnect. And it goes on ... As everyone has their own preferences.
+</p>
+
+<h2>
+    #6
+</h2>
+
+<p>
+    You might be wondering, how do I compile <code>*.tex</code> files? The host does not have LaTeX compiler, but the <code>texlive</code> container does. With Visual Studio Code, it is easy to remote access to the container.
+</p>
+
+<p>
+    First of all, let us run and enter the container:
+</p>
+
+<pre class="wrapped">
+$ toolbox enter texlive
+</pre>
+
+<p>
+    Second, give write permission to the <code>/root</code> directory for our user. This is important for the VSCode to write server configuration files to the <code>/root</code>. In spite of not the best workaround, I tend to change the ownership instead;
+</p>
+
+<pre class="wrapped">
+$ sudo chown -R naru /root
+</pre>
+
+<p>
+    Third, attach the VSCode to the running container named texlive. We need the Remote - Containers extension installed on the VSCode.
+</p>
+
+<p>
+    Forth, open a folder contains our LaTeX files.
+</p>
+
+<p>
+    Fifth, happy writing! You probably would like to install LaTeX Workshop extension for VSCode.
+</p>
+
+<p>
+    We actually need not to enter the texlive container, just run it. So, we can safely exit from the container now. Next time, make sure to run the container:
+</p>
+
+<pre class="wrapped">
+$ toolbox run -c texlive true
+</pre>
+
+<p>
+    before VSCode, if not already run.
+</p>
+
+<p>
+    That is all. Have a nice day!
+</p>
+
+<h2>
+    Further Reading
+</h2>
+
+<ul>
+    <li><a href="https://fedoraproject.org/wiki/Changes/DefaultPipeWire" rel="nofollow">https://fedoraproject.org/wiki/Changes/DefaultPipeWire</a></li>
+    <li><a href="https://rpmfusion.org/Configuration" rel="nofollow">https://rpmfusion.org/Configuration</a></li>
+    <li><a href="https://rpmfusion.org/Howto/Multimedia?highlight=%28%5CbCategoryHowto%5Cb%29" rel="nofollow">https://rpmfusion.org/Howto/Multimedia?highlight=%28%5CbCategoryHowto%5Cb%29</a></li>
+    <li><a href="https://rpmfusion.org/Howto/NVIDIA?highlight=%28%5CbCategoryHowto%5Cb%29" rel="nofollow">https://rpmfusion.org/Howto/NVIDIA?highlight=%28%5CbCategoryHowto%5Cb%29</a></li>
+    <li><a href="https://docs.fedoraproject.org/en-US/fedora-silverblue/toolbox/" rel="nofollow">https://docs.fedoraproject.org/en-US/fedora-silverblue/toolbox/</a></li>
+    <li><a href="https://support.steampowered.com/kb_article.php?ref=1040-JWMT-2947" rel="nofollow">https://support.steampowered.com/kb_article.php?ref=1040-JWMT-2947</a></li>
+    <li><a href="https://download.nvidia.com/XFree86/Linux-x86_64/435.17/README/primerenderoffload.html" rel="nofollow">https://download.nvidia.com/XFree86/Linux-x86_64/435.17/README/primerenderoffload.html</a></li>
+    <li><a href="https://docs.fedoraproject.org/en-US/neurofedora/latex/" rel="nofollow">https://docs.fedoraproject.org/en-US/neurofedora/latex/</a></li>
+    <li><a href="https://github.com/containers/toolbox/issues/610#issuecomment-726057756" rel="nofollow">https://github.com/containers/toolbox/issues/610#issuecomment-726057756</a></li>
+</ul>

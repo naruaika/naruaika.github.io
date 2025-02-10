@@ -41,12 +41,8 @@ permalink: /post/
 
                 &:hover {
                     background-color: var(--accent-color, #FFF);
-                    border: 3px solid var(--accent-color, #FFF);
+                    border-color: var(--accent-color, #FFF);
                     color: #222;
-
-                    h2 {
-                        border-color: #222;
-                    }
                 }
             }
         }
@@ -55,7 +51,7 @@ permalink: /post/
             display: flex;
             flex-direction: column;
             list-style: none;
-            gap: 1rem;
+            gap: .5rem;
 
             p {
                 margin: 0;
@@ -162,7 +158,7 @@ permalink: /post/
     <h1>#my-posts</h1>
     <ul>
         {% for post in site.posts %}
-            <a href="{{ post.url }}" style="--accent-color: #{{ post.accent_color }};">
+            <a href="{{ post.url }}" {% if post.accent_color %} style="--accent-color: #{{ post.accent_color }};" {% endif %}>
                 <li>
                     <h2>
                         {{ post.title }}
@@ -172,12 +168,12 @@ permalink: /post/
                             Series: {{ post.series }}&mdash;Part {{ post.part }}
                         </div>
                     {%- endif -%}
+                    <time datetime="{{ post.date | date_to_xmlschema }}" title="{{ post.date | date: '%B %d, %Y' }}">
+                        Posted on {{ post.date | date: '%B %d, %Y' }}
+                    </time>
                     <p>
                         {{ post.description }}
                     </p>
-                    <time datetime="{{ post.date | date_to_xmlschema }}" title="{{ post.date | date: '%B %d, %Y' }}">
-                        Posted: {{ post.date | date: '%B %d, %Y' }}
-                    </time>
                 </li>
             </a>
         {% endfor %}
