@@ -307,8 +307,6 @@ button {
         });
         htmlEditor.onDidChangeModelContent(() => requestToReloadViewer());
         cssEditor.onDidChangeModelContent(() => requestToReloadViewer());
-        htmlEditor.setPosition({ lineNumber: 4, column: 1, });
-        cssEditor.setPosition({ lineNumber: 14, column: 1, });
         htmlEditor.focus();
         reloadPreview();
     });

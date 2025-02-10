@@ -1,0 +1,210 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/why-i-didn-t-install-python-from-the-microsoft-store-5cbd
+title: Why I Didn't Install Python from the Microsoft Store
+description: I am a big Python fan! So, please do not stop me from installing Python on Windows.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    I am a big Python fan! So, please do not stop me from installing Python on Windows. As far as I know, we have two ways of doing it. The first option is we can download the installer from <a href="https://www.python.org/downloads/" rel="nofollow">the official page</a> which I believe this is the solution preferred by the most users.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/bcoxp5fb3qn86sdwz5vb.png" alt="">
+    </div>
+    <figcaption>
+        SmartScreen tells me that he unable to help me.
+    </figcaption>
+</figure>
+
+<p>
+    But come on, I do not want to bother Microsoft Defender SmartScreen! So, I went to the second option which is to download it from Microsoft Store! Love it! This is the easiest way to take it home! Please note that there are actually a few other options, but I am just too lazy to say it all.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/pevwmsbrna7xs907br3d.png" alt="">
+    </div>
+    <figcaption>
+        Installing Python from the Microsoft Store.
+    </figcaption>
+</figure>
+
+<p>
+    After the installation has finished, I went to the Windows Terminal, typed in <code>python</code> and hit enter or return key within a second or two. Suddenly, I got a horror error message screaming at me in red.
+</p>
+
+<pre>
+> python
+python : The term 'python' is not recognized as the name of a cmdlet, function, script file, or operable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ python
++ ~~~~~~
+    + CategoryInfo          : ObjectNotFound: (python:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+> where.exe python
+INFO: Could not find files for the given pattern(s).
+</pre>
+
+<p>
+    Then I checked my user path variables and I found nothing but a single entry sitting there for an unknown amount of time.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/gor4ngm4lhs26beudgln.png" alt="">
+    </div>
+    <figcaption>
+        Python isn't registered in Environment Variables.
+    </figcaption>
+</figure>
+
+<p>
+    No Python! But since it is the path for all applications installed from the Microsoft Store, I took the initiative to go to <code>C:<wbr>\<wbr>Users<wbr>\<wbr>Naufan Rusyda Faikar<wbr>\<wbr>AppData<wbr>\<wbr>Local<wbr>\<wbr>Microsoft<wbr>\<wbr>WindowsApps</code> using File Explorer.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/iimm7ugu4vv6rov0ogyv.png" alt="">
+    </div>
+    <figcaption>
+        File Explorer shows the Python executables.
+    </figcaption>
+</figure>
+
+<p>
+    From there, I had found that it have to be <code>python3.9</code> with the specific version as a suffix. Alright, I had no problem with that.
+</p>
+
+<pre class="wrapped">
+> where.exe python3.9
+C:\Users\Naufan Rusyda Faikar\AppData\Local\Microsoft\WindowsApps\python3.9.exe
+
+> where.exe pip
+C:\Users\Naufan Rusyda Faikar\AppData\Local\Microsoft\WindowsApps\pip.exe
+</pre>
+
+<p>
+    Before installing some packages, I used to upgrade <code>pip</code>. Inspite of my success, a warning had plagued the day.
+</p>
+
+<pre>
+> python3.9 -m pip install --upgrade pip
+Collecting pip
+  Downloading pip-20.2.4-py2.py3-none-any.whl (1.5 MB)
+     |████████████████████████████████| 1.5 MB 525 kB/s
+Installing collected packages: pip
+  WARNING: The scripts pip.exe, pip3.9.exe and pip3.exe are installed in 'C:\Users\Naufan Rusyda Faikar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed pip-20.2.4
+</pre>
+
+<p>
+    Do you realize where the inconsistency lies? Let me make it clearer.
+</p>
+
+<pre class="wrapped">
+> where.exe pip
+C:\Users\Naufan Rusyda Faikar\AppData\Local\Microsoft\WindowsApps\pip.exe
+
+> pip --version
+pip 20.2.4 from C:\Users\Naufan Rusyda Faikar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\pip (python 3.9)
+</pre>
+
+<p>
+    The <code>where.exe</code> command had no knowledge of where the "usable" <code>pip</code> command is. Even if I did get more specific.
+</p>
+
+<pre class="wrapped">
+> where.exe python3.9
+C:\Users\Naufan Rusyda Faikar\AppData\Local\Microsoft\WindowsApps\python3.9.exe
+
+> python3.9 -m pip --version
+pip 20.2.4 from C:\Users\Naufan Rusyda Faikar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\pip (python 3.9)
+
+> & 'C:\Users\Naufan Rusyda Faikar\AppData\Local\Microsoft\WindowsApps\pip.exe' --version
+pip 20.2.4 from C:\Users\Naufan Rusyda Faikar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\pip (python 3.9)
+</pre>
+
+<p>
+    Then I just realized that somehow all the files under <code>C:<wbr>\<wbr>Users<wbr>\<wbr>Naufan Rusyda Faikar<wbr>\<wbr>AppData<wbr>\<wbr>Local<wbr>\<wbr>Microsoft<wbr>\<wbr>WindowsApps</code> are "shortcuts" to the actual executable. I do not care anymore because I got the latest version of <code>pip</code>!
+</p>
+
+<p>
+    Next, I wanted to create a virtual environment for testing.
+</p>
+
+<pre>
+> pip install virtualenv
+...
+
+> virtualenv venv
+virtualenv : The term 'virtualenv' is not recognized as the name of a cmdlet, function, script file, or operable
+program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ virtualenv venv
++ ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (virtualenv:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+</pre>
+
+<p>
+    Wait, how come! It had been confusing me. The package went into somewhere which in my case went into <code>%USERPROFILE%<wbr>\<wbr>AppData<wbr>\<wbr>Local<wbr>\<wbr>Packages<wbr>\<wbr>PythonSoftwareFoundation.<wbr>Python.<wbr>3.<wbr>9_qbz5n2kfra8p0<wbr>\<wbr>LocalCache<wbr>\<wbr>local-packages<wbr>\<wbr>Python39<wbr>\<wbr>Scripts</code>. Okay, let's go another way.
+</p>
+
+<pre>
+> python3.9 -m virtualenv venv
+RuntimeError: failed to build image pip because:
+Traceback (most recent call last):
+    File "C:\Users\Naufan Rusyda Faikar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\virtualenv\seed\embed\via_app_data\via_app_data.py", line 57, in _install
+    installer.build_image()
+    File "C:\Users\Naufan Rusyda Faikar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\virtualenv\seed\embed\via_app_data\pip_install\base.py", line 54, in build_image
+    zip_ref.extractall(str(self._image_dir))
+    File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.240.0_x64__qbz5n2kfra8p0\lib\zipfile.py", line 1633, in extractall
+    self._extract_member(zipinfo, path, pwd)
+    File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.240.0_x64__qbz5n2kfra8p0\lib\zipfile.py", line 1687, in _extract_member
+    open(targetpath, "wb") as target:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\Naufan Rusyda Faikar\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\Local\\pypa\\virtualenv\\wheel\\3.9\\image\\1\\CopyPipInstall\\pip-20.2.4-py2.py3-none-any\\pip\\_vendor\\urllib3\\packages\\ssl_match_hostname\\_implementation.py'
+</pre>
+
+<p>
+    Huh!? Microsoft is making things complicated! I have read from <a href="https://github.com/pypa/virtualenv/issues/1971" rel="nofollow">a GitHub issue page</a> that I had most likely just reached the Windows long path limit.  But I had to stop here, so that this post will not be too long in resentment.
+</p>
+
+<p>
+    Please note, if you want to install Python on Windows, I would recommend to go with the first option. As you can see in the attachment below, the installer gives you the option to disable the path length limit.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/fd1aj31bn0e0xlshsi9b.png" alt="">
+    </div>
+    <figcaption>
+        Python installed using the official installer.
+    </figcaption>
+</figure>
+
+<p>
+    Actually, it will run a similar command in PowerShell as below.
+</p>
+
+<pre class="wrapped">
+> & 'C:\Users\Naufan Rusyda Faikar\AppData\Local\Programs\Python\Python39\pythonw.exe' -c "import winreg; winreg.SetValueEx(winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r'SYSTEM\CurrentControlSet\Control\FileSystem'), 'LongPathsEnabled', None, winreg.REG_DWORD, 1)"
+</pre>
+
+<p>
+    You can read from <a href="https://docs.python.org/3/using/windows.html#the-microsoft-store-package" rel="nofollow">the official website</a> on this specific issue. I hope you get the idea. Thanks for reading!
+</p>

@@ -59,7 +59,7 @@ title: Naufan Rusyda Faikar - Software Engineer
                 grid-row: 1 / span 2;
                 font-family: "DM Serif Display", serif;
                 background-color: #FFF;
-                color: #000;
+                color: #222;
                 font-size: 4rem;
                 line-height: 1.25;
 
@@ -72,12 +72,12 @@ title: Naufan Rusyda Faikar - Software Engineer
                     color: inherit;
                     text-decoration: none;
                     font-family: "Fira Sans", sans-serif;
-                    border: 3px solid #000;
+                    border: 3px solid #222;
                     background-color: transparent;
                     cursor: pointer;
 
                     &:hover {
-                        background-color: #000;
+                        background-color: #222;
                         color: #FFF;
                     }
                 }
@@ -114,7 +114,7 @@ title: Naufan Rusyda Faikar - Software Engineer
         margin: 3.5rem auto 0;
         font-family: "DM Serif Display", serif;
         font-style: italic;
-        font-size: 4rem;
+        font-size: 3.5rem;
         line-height: 1.25;
         text-align: center;
 
@@ -132,8 +132,8 @@ title: Naufan Rusyda Faikar - Software Engineer
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: auto;
-        font-size: 1.625rem;
-        line-height: 1.5;
+        font-size: 1.4rem;
+        line-height: 1.75;
         overflow: hidden;
 
         .box {
@@ -166,7 +166,7 @@ title: Naufan Rusyda Faikar - Software Engineer
                 font-family: "DM Serif Display", serif;
                 font-size: 2.5rem;
                 background-color: #FFF;
-                color: #000;
+                color: #222;
             }
         }
     }
@@ -177,8 +177,8 @@ title: Naufan Rusyda Faikar - Software Engineer
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: auto;
-        font-size: 1.625rem;
-        line-height: 1.5;
+        font-size: 1.4rem;
+        line-height: 1.75;
         overflow: hidden;
 
         .box {
@@ -211,7 +211,7 @@ title: Naufan Rusyda Faikar - Software Engineer
                 font-family: "DM Serif Display", serif;
                 font-size: 2.5rem;
                 background-color: #FFF;
-                color: #000;
+                color: #222;
             }
         }
     }
@@ -329,9 +329,9 @@ title: Naufan Rusyda Faikar - Software Engineer
         <div class="box">Great. Greater. Gratefully.</div>
         <div class="box">Think about investments. Not about costs.</div>
         <div class="box">Don't be ordinary, be extraordinary.</div>
-        <div class="box contact">Let's connect:<br>@naruaika</div>
-        <div class="box contact">Don't be a stranger.<br>hello@naruaika.me</div>
-        <div class="box contact">Up for a brew?<br>+62 821-3000-3006</div>
+        <div class="box contact">Let's connect:<br>{{ site.social }}</div>
+        <div class="box contact">Don't be a stranger.<br>{{ site.email }}</div>
+        <div class="box contact">Up for a brew?<br>{{ site.phone }}</div>
         <div class="box">Waste no more time. Time to build something useful.</div>
     </div>
 
@@ -364,13 +364,13 @@ title: Naufan Rusyda Faikar - Software Engineer
     <div id="my-experiences" aria-label="My Experience">
         <div class="box">#my-experiences</div>
         <div class="box" aria-label="Experience">
-            I have 3+ years of experience as a software engineer working directly under two different Chief Technology Officers (CTOs) in small and medium-sized companies. To some degree, it gave me the opportunity to work with the best people from many departments and teams, as well as understand the end-to-end business.
-        </div>
-        <div class="box" aria-label="Freelance experience">
-            As a freelancer, I have worked with a variety of clients from various industries, mostly startups, including education, <span style="white-space:nowrap">e-commerce</span>, and food-and-beverage.
+            I have 3+ years of experience as a software engineer working directly under two different Chief Technology Officers (CTOs) in small and medium-sized companies. To some degree, it gave me the opportunity to work with the best people across departments and teams, as well as understand the end-to-end business.
         </div>
         <div class="box" aria-label="Team experience">
             I also had 2+ years of experience working with a small team building a SaaS product for B2C. The product still has a large user base and is doing well to this day. I learned a lot from that experience, especially through my leadership failures.
+        </div>
+        <div class="box" aria-label="Freelance experience">
+            As a freelancer, I have worked with a variety of clients from various industries, mostly startups, including education, <span style="white-space:nowrap">e-commerce</span>, and food-and-beverage.
         </div>
         <div class="box" aria-label="Volunteer experience">
             As a volunteer, I have also worked with various non-profit organizations, mainly on the field of graphic design and event organization. In addition, I also have teaching experience for some time.

@@ -1,0 +1,106 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/switching-to-windows-subsystem-for-linux-2493
+title: Switching to Windows Subsystem for Linux
+description: Even though I could go with Fedora almost entirely as a daily driver, I am still missing some "good" and "professional" software on Windows.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    I have bought a pre-installed Windows 10 notebook last year. But earlier this year, I have decided to completely migrate to Fedora Workstation before working on my undergraduate thesis. Indeed, I had some experience in using Linux on my previous notebook while studying at my university&mdash;where no one has used single boot Linux even in the computer science education department except just me and a teaching partner of mine under the supervision of the same lecturer&mdash;.
+</p>
+
+<p>
+    After graduating last October, on the 13th to be precise, I was considering to "return" to Windows. That's not what actually happened, as I have been doing some research to find out what WSL2 really is. Is that really worth it to replace my current single boot operating system?
+</p>
+
+<p>
+    Multi-booting, for me, was painful. There were many problems that I have faced. I have no idea why I could not synchronise the clock time between the two on my UEFI computer. I know, right, that I am so embarrassing! Also, having to reboot into a different OS was very uncomfortable.
+</p>
+
+<p>
+    I am still in a dilemma today. Even though I could go with Fedora almost entirely as a daily driver, I am still missing some "good" and "professional" software on Windows. As we already know, some of them have no substitutes. Not really, but every software tends to be unique. Even if there is <a href="https://www.winehq.org/" rel="nofollow">Wine</a> and <a href="https://www.protondb.com/" rel="nofollow">Proton</a> with Steam Play on Linux nowadays, it does not count. Apart from PC desktop, I think, using Nvidia on GNU/Linux-based laptop is still less pleasant. I could not put my laptop into sleep safely without losing control of the Nvidia GPU and Wi-Fi adapter. I have never tried <a href="https://wiki.archlinux.org/index.php/bumblebee" rel="nofollow">Bumblebee</a> for Nvidia Optimus before. Do you think Bumblebee can get rid of it?
+</p>
+
+<p>
+    I have no issue with X.Org using my GPU, since Fedora uses Wayland by default. I hope everyone considers switching to Wayland because I have heard such <a href="https://www.theregister.com/2020/10/30/x_server_lead_maintainer_declares/" rel="nofollow">sad news</a>.
+</p>
+
+<p>
+    To be honest, I have no real reason to leave my beloved Fedora. Still, it is perhaps only my ego. Depending on what work I will do in the future, maybe I really have no reason at all to write this article.
+</p>
+
+<h2>
+    Two Computers
+</h2>
+
+<p>
+    Do not ask me to explain this. That is self-explanatory.
+</p>
+
+<h2>Dual Booting</h2>
+
+<p>
+    As I have mentioned above, I dislike multiple booting for whatsoever reason. Stick with Windows or use Fedora instead. Not so, in reality, the latter is my strong suggestion. Well, it does not have to be Fedora.
+</p>
+
+<p>
+    In the most common case, you have nothing to lose. But you may run into some problems, if so, please consider to turn off <a href="https://docs.microsoft.com/en-us/windows-hardware/test/weg/delivering-a-great-startup-and-shutdown-experience#fast-startup" rel="nofollow">the fast startup</a> in Windows 8+ and/or <a href="https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/secure-boot-landing" rel="nofollow">the secure boot</a> in UEFI. For the well-known problem of losing Windows boot entry from the GRUB-like menu, this could easily be fixed by recreating the GRUB boot loader configuration.
+</p>
+
+<p>
+    Perhaps someone out there will yell at you later if it is inefficient or bloated! But this is the only way if you want to run Windows and Fedora natively.
+</p>
+
+<h2>Virtual Machine</h2>
+
+<p>
+    For many reasons, regardless of which OS I am using, I always run multiple Linux distros in virtual machines. But what if running Windows in a virtual machine? What can be expected of that? Well, you could still run Visual Studio to develop Windows native applications, namely Windows Forms (WPF) and Universal Windows Platform (UWP), and other tasks smoothly. But it will require a <a href="https://download.microsoft.com/download/9/8/d/98d6a56c-4d79-40f4-8462-da3ecba2dc2c/licensing_windows_desktop_os_for_virtual_machines.pdf" rel="nofollow">special license</a>.
+</p>
+
+<p>
+    There is no need to worry about using the GPU on a virtual machine, you will have the opportunity to perform a <a href="https://docs.fedoraproject.org/en-US/Fedora/13/html/Virtualization_Guide/chap-Virtualization-PCI_passthrough.html" rel="nofollow">PCI passthrough</a> if you own multiple dedicated GPUs. Seriously, even if you only have one dedicated GPU, you can still survive but with intermediate skills.
+</p>
+
+<p>
+    What I like best is that we can easily get snapshots of the entire OS. You only need to pay most attention to sharing resources. Anyway, never ask for too much while using a virtual machine.
+</p>
+
+<h2>Windows Subsystem for Linux</h2>
+
+<p>
+    The last option is using Windows Subsystem for Linux (WSL), right? I have nothing to say about this new technology from having only used it a week. But let me try to tell what I have learned about WSL2.
+</p>
+
+<p>
+    I am neither into writing a how-to nor a technical details in here, since there are so many awesome articles around. We can install WSL2 just by following a few steps from <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" rel="nofollow">the official documentation</a>. Despite finding it disappointed, there are several distros available in the Microsoft Store. No Fedora unfortunately. However, you can install it yourself by following <a href="https://dev.to/bowmanjd/install-fedora-on-windows-subsystem-for-linux-wsl-4b26" rel="nofollow">a great article</a> written by Bowman.
+</p>
+
+<p>
+    Using <a href="https://www.docker.com/why-docker" rel="nofollow">Docker</a> on Windows 10 Home is no longer impossible! You can install <a href="https://docs.docker.com/desktop/" rel="nofollow">Docker Desktop</a> on it by following <a href="https://docs.docker.com/docker-for-windows/install-windows-home/#install-docker-desktop-on-windows-10-home" rel="nofollow">the official documentation</a>. What about Podman/Buildah? It just works out of the box! <del>Note that <i>systemd</i> is not supported in the WSL2 yet. But do not even worry at all, there are certain <a href="https://github.com/DamionGans/ubuntu-wsl2-systemd-script" rel="nofollow">little hacks</a> that have been done.</del> <ins>As per September 21st, 2022, systemd support <a href="https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/" rel="nofollow">is now available</a> officially.</ins>
+</p>
+
+<p>
+    For my sake, I will stick with Docker instead. <a href="https://code.visualstudio.com/docs/remote/wsl-tutorial" rel="nofollow">It allows me</a> to easily integrate those containers with Visual Studio Code. I cannot find a way to connect to the Podman's containers running on WSL2 other than using <a href="https://marketplace.visualstudio.com/items?itemName=liximomo.sftp" rel="nofollow">an SFTP extension</a> in theory. But why does it have to be a choice?
+</p>
+
+<p>
+    Working on a machine learning project in WSL2 seems promising, although setup is not so easy at this point. I have to admit that I have not tried it myself, but <a href="https://docs.microsoft.com/en-us/windows/wsl/tutorials/gpu-compute" rel="nofollow">it is said</a> that it is perfectly possible!
+</p>
+
+<p>
+    One thing I have noticed the most is the increasing use of the memory when running some containers in the WSL2. Even though then I stopped it all, I did not get automatic reclaiming to the memory. Yet we can <a href="https://devblogs.microsoft.com/commandline/memory-reclaim-in-the-windows-subsystem-for-linux-2/" rel="nofollow">do it manually</a> for sure or just shutdown the WSL2 after using it.
+</p>
+
+<p>
+    Another one is the poor performance across Windows file system as explained in <a href="https://docs.microsoft.com/en-us/windows/wsl/compare-versions" rel="nofollow">the official overview</a>. All we need to do is move our project directories into the WSL2 file system.
+</p>

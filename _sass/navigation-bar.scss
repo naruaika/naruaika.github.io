@@ -15,8 +15,8 @@
         display: flex;
         justify-content: flex-end;
         flex-wrap: wrap;
-        gap: 1.5rem;
-        font-size: 1.4rem;
+        gap: 1.25rem;
+        font-size: 1.2rem;
 
         a {
             color: #AAA;
@@ -35,7 +35,7 @@
                     position: absolute;
                     left: 0;
                     right: 0;
-                    top: 1.25rem;
+                    top: 1rem;
                     text-align: center;
                     transform: scaleY(0.5);
                 }

@@ -16,7 +16,7 @@
         font-size: 14px;
         font-weight: 800;
         text-transform: uppercase;
-        color: #000;
+        color: #222;
         background-color: #fff;
         border: 1px solid rgba(0, 0, 0, 0.6);
         border-radius: 50px;
@@ -90,10 +90,10 @@
           transparent 80% 90%,
           #161616 90% 100%
         );
-        animation: c2animate 3s linear infinite;
+        animation: tb2-anim 3s linear infinite;
       }
 
-      @keyframes c2animate {
+      @keyframes tb2-anim {
         0% { background-position: 0 0; }
         to { background-position: 400px 0; }
       }
@@ -185,7 +185,7 @@
       }
 
       .tb4:hover {
-        color: #000;
+        color: #222;
       }
 
       .tb4:hover:after {
@@ -305,7 +305,7 @@
         height: 100%;
         bottom: -50%;
         left: 0;
-        background-color: #000;
+        background-color: #222;
         transform-origin: bottom center;
         transform: skewY(9.3deg) scaleY(0);
         z-index: 50;
@@ -427,10 +427,10 @@
         text-transform: uppercase;
         color: var(--tb8-c);
         background:
-          conic-gradient(from 90deg at var(--tb8-b) var(--tb8-b), #0000 90deg, var(--tb8-c) 0)
+          conic-gradient(from 90deg at var(--tb8-b) var(--tb8-b), #2220 90deg, var(--tb8-c) 0)
           var(--tb8-p) var(--tb8-p) / calc(100% - var(--tb8-b) - 2 * var(--tb8-p)) calc(100% - var(--tb8-b) - 2 * var(--tb8-p));
         border: none;
-        outline: var(--tb8-b) solid #0000;
+        outline: var(--tb8-b) solid #2220;
         outline-offset: .6em;
         cursor: pointer;
         user-select: none;
@@ -577,11 +577,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #fff;
         font-size: 14px;
         font-weight: 800;
         text-transform: uppercase;
-        color: #000;
+        color: #222;
         border: 3px solid;
         box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
         cursor: pointer;

@@ -1,0 +1,624 @@
+---
+layout: post
+title: How Do CSS Animations Help Your Business?
+series: Animate the World Using CSS
+part: 1
+description: A company logo or product name is difficult to convey the core values of a brand itself. A sentence is not convincing enough, but a paragraph may feel too long.
+accent_color: c0ff2d
+hero_content: >-
+    <div style="
+        --c1: #c0ff2d;
+        --c2: #b2ec28;
+        --c3: #9dd123;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<style>
+    .kukukaki-navbar {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #FFF;
+        color: #000;
+        padding: 1rem;
+
+        > div {
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        > ul {
+            margin: 0 !important;
+            padding: 0 !important;
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+
+            > li {
+                position: relative;
+                box-sizing: border-box;
+                padding: 0.25rem 0.75rem;
+                font-size: 1.05rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: #222;
+                background-color: #c0ff2d;
+                border: 3px solid #222;
+                cursor: pointer;
+                user-select: none;
+                -webkit-user-select: none;
+
+                &:hover {
+                    color: #c0ff2d;
+                    background-color: #000;
+                    border-color: #000;
+
+                    > ul {
+                        visibility: visible;
+                        opacity: 1;
+                        translate: 0 0;
+                    }
+                }
+
+                > ul {
+                    position: absolute;
+                    box-sizing: border-box;
+                    top: calc(100% - 1px);
+                    right: -3px;
+                    margin: 0 !important;
+                    padding: 1rem !important;
+                    width: 200px;
+                    display: flex;
+                    flex-direction: column;
+                    background-color: #222;
+                    border: 3px solid #000;
+                    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+                    list-style: none;
+                    cursor: default;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    z-index: 1;
+
+                    visibility: hidden;
+                    opacity: 0;
+                    translate: 0 5px;
+
+                    > li {
+                        box-sizing: border-box;
+                        font-size: 1.05rem;
+                        font-weight: 500;
+                        line-height: 2;
+                        color: #EEE;
+                        cursor: pointer;
+                        user-select: none;
+                        -webkit-user-select: none;
+
+                        &:hover {
+                            color: #FFF;
+                            text-decoration: underline;
+                            text-decoration-thickness: 2px;
+                            text-underline-offset: .3em;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.alt1 > ul > li > ul {
+            transition: all 0.25s ease-in-out;
+        }
+
+        &.alt2 > ul > li {
+            background-color: #FFF;
+            cursor: default;
+
+            &:hover {
+                color: #222;
+                background-color: #FFF;
+                border-color: #222;
+            }
+        }
+
+        &.alt3 > div:nth-child(1) {
+            transition: all 0.05s ease-in;
+
+            &:hover {
+                transform: skewY(-5deg) scale(1.1);
+            }
+        }
+    }
+
+    .kukukaki-hero {
+        position: relative;
+        box-sizing: border-box;
+        padding: 1rem;
+        padding-bottom: 0;
+        display: flex;
+        gap: 1rem;
+        height: 5rem;
+        background-color: #FFF;
+        border-top: 3px solid #222;
+        overflow: hidden;
+
+        &::after {
+            position: absolute;
+            content: '';
+            left: -20px;
+            right: -20px;
+            bottom: 0;
+            height: 50px;
+            box-shadow: inset 0 -30px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        > div {
+            min-height: 10rem;
+        }
+
+        > div:nth-child(1) {
+            flex: 8;
+            box-sizing: border-box;
+            --s: 60px;
+            --c1: #EEE;
+            --c2: #DDD;
+            background:
+                conic-gradient(
+                var(--c2) atan(2), var(--c1) 0 calc(180deg - atan(2)),
+                var(--c2) 0 180deg, var(--c1) 0 calc(180deg + atan(2)),
+                var(--c2) 0 calc(360deg - atan(2)), var(--c1) 0);
+            background-size: calc(2 * var(--s)) var(--s);
+            border: 3px solid #222;
+            border-bottom: none;
+        }
+
+        > div:nth-child(2) {
+            flex: 4;
+            --s: 60px;
+            box-sizing: border-box;
+            background: repeating-linear-gradient(45deg, #EEE, #EEE 50%, #DDD 50%, #DDD);
+            background-size: var(--s) var(--s);
+            border: 3px solid #222;
+            border-bottom: none;
+        }
+
+        &.alt1 {
+            height: 20rem;
+
+            > div:nth-child(1) {
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #222;
+                background: #c0ff2d;
+
+                span {
+                    max-width: 500px;
+                    margin: 2rem;
+                    font-size: 2.5rem;
+                    font-weight: 600;
+                    line-height: 1.25;
+                }
+            }
+        }
+
+        &.alt2 > div:nth-child(1) {
+            --s: 60px;
+            --c1: #c0ff2d;
+            --c2: #b2ec28;
+            --l: var(--c1) 20%, #0000 0;
+            --g: 35%, var(--c2) 0 45%, var(--c1) 0;
+            background:
+                linear-gradient(45deg, var(--l) 45%, var(--c1) 0 70%, #0000 0),
+                linear-gradient(-45deg, var(--l) var(--g) 70%, #0000 0),
+                linear-gradient(45deg, var(--c1) var(--g));
+            background-size: var(--s) var(--s);
+            text-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+            animation: 4s linear infinite move-to-bottom;
+        }
+
+        &.alt3 > div:nth-child(1) {
+            animation: 1s linear infinite move-to-bottom;
+        }
+
+        &.alt4 > div:nth-child(1) {
+            transition: all 0.05s ease-in;
+
+            span {
+                transition: all 0.05s ease-in;
+            }
+
+            &:hover {
+                filter: hue-rotate(-15deg);
+
+                span {
+                    transform: skewY(-5deg) scale(1.1);
+                }
+            }
+        }
+    }
+
+    @media (width < 720px) {
+        .kukukaki-navbar {
+            flex-direction: column;
+            gap: .5rem;
+        }
+
+        .kukukaki-hero {
+            flex-direction: column;
+
+            > div:nth-child(1) {
+                --s: 30px;
+                border-bottom: 3px solid #222;
+            }
+
+            > div:nth-child(2) {
+                --s: 30px;
+            }
+
+            &.alt1 {
+                height: 15rem;
+
+                > div:nth-child(1) span {
+                    font-size: 1.5rem;
+                    line-height: 1.25;
+                }
+            }
+
+            &.alt2 > div:nth-child(1) {
+                background-size: calc(var(--s) / 2) calc(var(--s) / 2);
+                animation: 8s linear infinite move-to-bottom;
+            }
+
+            &.alt3 > div:nth-child(1) {
+                animation: 2s linear infinite move-to-bottom;
+            }
+        }
+
+        .kukukaki-loading {
+            height: 15rem;
+        }
+    }
+
+    @keyframes move-to-bottom {
+        0% {
+            background-position: 0 0;
+            filter: hue-rotate(0deg);
+        }
+        100% {
+            background-position: 0 calc(60px * 3);
+            filter: hue-rotate(0deg);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .kukukaki-hero {
+            &.alt2 > div:nth-child(1),
+            &.alt3 > div:nth-child(1) {
+                animation: none;
+            }
+        }
+    }
+</style>
+
+<p>
+    In a world where people believe that <a href="https://time.com/6197849/metaverse-future-matthew-ball/" rel="nofollow"><i>metaverse</i> will be the future</a>, and more companies do <a href="https://www.interaction-design.org/literature/article/micro-interactions-ux" rel="nofollow">care about micro-interactions</a>, what are the most valid reasons to invest our time and energy in animations? Surely, it isn't just because more people will love it, as it looks aesthetically pleasing anyway.
+</p>
+
+<p>
+    If we just think of it as a decorative purpose, to make a good first impression, it might work well. But what happen when people have to see it a second time or even a tenth time? Bored? No, they will get irritated. It's only wasting our precious time, adding no value. Worse yet, if there's no way to avoid it, we'd get sued by our selfishness, for not caring about the others.
+</p>
+
+<p>
+    Doesn't matter if the animation doesn't get in the way of anything, because anyway it could potentially distract people from accomplishing their goals. <cite>Nielsen Norman Group</cite> <a href="https://www.nngroup.com/videos/distracting-animations/" rel="nofollow">concludes</a> that we're driven to pay attention to any sort of movement. Consider animations for important notification bubbles, it'd be very useful. But the back-to-top button? Really isn't.
+</p>
+
+<blockquote>
+    It doesn't, until we need to explain better or express ourselves clearer.
+</blockquote>
+
+<p>
+    Soon after we realize we have to be more careful with animations, we're on the right track. As <cite>Simon Sinek</cite> <a href="https://www.youtube.com/watch?v=llKvV8_T95M" rel="nofollow">said</a>, "If you don't understand people, you don't understand business." It isn't about how cool the movements are, it's about how people think they're cool when using our products. It's about how the motions can connect and express their feelings. It's about how they can understand better themselves.
+</p>
+
+<p>
+    Let's wrap up the prologue and start looking at some examples.
+</p>
+
+<h2>
+    To think of our brand
+</h2>
+
+<p>
+    A company logo or product name is difficult to convey the core values, if not all, of a brand itself. One single sentence is not convincing enough, but a paragraph may feel too long. Because a brand is essentially <a href="https://www.forsta.com/what-is-brand-experience/" rel="nofollow">the overall experiences</a> of everything a brand does. Take a look at several visual alternatives below for a creative agency called <i>kukukaki</i>&mdash;I know the name sounds weird, that's on purpose, try your best to pretend you're not bothered.
+</p>
+
+<div class="ielement">
+    <div class="container">
+        <div class="kukukaki-navbar">
+            <div>kukukaki</div>
+            <ul>
+                <li>
+                    Hover Me
+                    <ul>
+                        <li>Item A</li>
+                        <li>Item B</li>
+                        <li>Item C</li>
+                    </ul>
+                </li>
+                <li>
+                    Hover Me
+                    <ul>
+                        <li>Item A</li>
+                        <li>Item B</li>
+                        <li>Item C</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="kukukaki-hero">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="caption">
+        Navigation bar without animation.
+    </div>
+</div>
+
+<div class="ielement">
+    <div class="container">
+        <div class="kukukaki-navbar alt1">
+            <div>kukukaki</div>
+            <ul>
+                <li>
+                    Hover Me
+                    <ul>
+                        <li>Item A</li>
+                        <li>Item B</li>
+                        <li>Item C</li>
+                    </ul>
+                </li>
+                <li>
+                    Hover Me
+                    <ul>
+                        <li>Item A</li>
+                        <li>Item B</li>
+                        <li>Item C</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="kukukaki-hero">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="caption">
+        Navigation bar with fade-in-out animation.
+    </div>
+</div>
+
+<p>
+    The first one is more into giving the control to the user, whereas the latter is more about a sense of peace or helpfulness. The movements, while subtle, make it easier for the eye to track on which areas are changing on the page. <i>Normally I don't stand with menus expanding on hover, or there should at least be a proper delay like <i>Apple</i> does on their website, but this is just a simple example.</i>
+</p>
+
+<p>
+    Furthermore, we can take an analogy from badminton. Where the more stiff the racquet, the more control we have. The more flexible it is, the more it helps us generate more power, which is suitable for beginners, if not most people. But how exactly does this first version apply to the real world?
+</p>
+
+<p>
+    This may not be obvious to some. One of the valid use case for the first one is an administration dashboard. Where when there's a critical issue, we really don't appreciate fancy animations. Often times, it will hinder the entire maintenance process. It's easy to overlook this sort of thing especially for people who don't interact with it every day.
+</p>
+
+<p>
+    Let's look at a few more examples, this time more implicit.
+</p>
+
+<div class="ielement">
+    <div class="container">
+        <div class="kukukaki-navbar alt1 alt2">
+            <div>kukukaki</div>
+            <ul>
+                <li>Menu A</li>
+                <li>Menu B</li>
+            </ul>
+        </div>
+        <div class="kukukaki-hero alt1">
+            <div>
+                <span>
+                    Don't wait for tommorow.
+                    Grow your business today.
+                </span>
+            </div>
+            <div></div>
+        </div>
+    </div>
+    <div class="caption">
+        Hero section without animation.
+    </div>
+</div>
+
+<div class="ielement">
+    <div class="container">
+        <div class="kukukaki-navbar alt1 alt2">
+            <div>kukukaki</div>
+            <ul>
+                <li>Menu A</li>
+                <li>Menu B</li>
+            </ul>
+        </div>
+        <div class="kukukaki-hero alt1 alt2">
+            <div>
+                <span>
+                    Don't wait for tommorow.
+                    Grow your business today.
+                </span>
+            </div>
+            <div></div>
+        </div>
+    </div>
+    <div class="caption">
+        Hero section with background animation.
+    </div>
+</div>
+
+<div class="ielement">
+    <div class="container">
+        <div class="kukukaki-navbar alt1 alt2">
+            <div>kukukaki</div>
+            <ul>
+                <li>Menu A</li>
+                <li>Menu B</li>
+            </ul>
+        </div>
+        <div class="kukukaki-hero alt1 alt2 alt3">
+            <div>
+                <span>
+                    Don't wait for tommorow.
+                    Grow your business today.
+                </span>
+            </div>
+            <div></div>
+        </div>
+    </div>
+    <div class="caption">
+        Hero section with faster background animation.
+    </div>
+</div>
+
+<p>
+    Without animations, the hero section communicates minimalism and inclusivity to everyone, welcoming those with motion sensitivity. The second symbolizes a sense of progress, slow but steady growth, which feels reliable and deliberate. Faster animations evoke urgency and excitement, less steady but exponential growth, resonates with startups and younger audiences.
+</p>
+
+<p>
+    When viewed in isolation, it can be challenging to conclude that the third represents faster growth, since there is nothing to compare with. It cannot be faster if there isn't anything slower, right? However, we as humans can sense whether something is moving naturally or not. In this case, the movement feels too fast to be organic. It's just difficult for our eyes to follow.
+</p>
+
+<p>
+    They're more examples to this. Let's say we want our brand to be perceived as the one that  cares about every detail, so we need more of micro-animations and sometimes a branded loading screen. (Try to move the cursor over the brand logo and the hero section).
+</p>
+
+<div class="ielement">
+    <div class="container">
+        <div class="kukukaki-navbar alt1 alt2 alt3">
+            <div>[hoverme]</div>
+            <ul>
+                <li>Menu A</li>
+                <li>Menu B</li>
+            </ul>
+        </div>
+        <div class="kukukaki-hero alt1 alt4">
+            <div>
+                <span>
+                    Don't wait for too long.
+                    [Hover me] right away.
+                </span>
+            </div>
+            <div></div>
+        </div>
+    </div>
+    <div class="caption">
+        Micro-animations on brand logo and hero section.
+    </div>
+</div>
+
+<p>
+    One of the benefits of this perception is <a href="https://www.peoplefirstcontent.com/blog/importance-of-attention-to-detail-in-business" rel="nofollow">more trusts from customers</a>. If we do care about small things, why don't we care about big things, like our customers for instance? Everything is of the highest quality.
+</p>
+
+<p>
+    Including a logo or brand name, like <a href="https://codepen.io/CrocoDillon/pen/DMNWjR" rel="nofollow"><i>Slack</i> does</a> or <i>Apple</i> for its <i>iPhone</i>, is not a necessity to have a unique visual progress. In general, a logo is the best choice. But for some unique cases, it is better to highlight a specific value we're trying to communicate. While not directly related to the loading page, <a href="https://en.wikipedia.org/wiki/Share_a_Coke" rel="nofollow"><i>Share a Coke</i></a> campaign from <i>Coca-Cola</i> and <a href="https://doodles.google/" rel="nofollow"><i>Google Doodles</i></a> are great examples.
+</p>
+
+<p>
+    <i>For those of you who are still with me, thank you for your time. I'll make sure you will be rewarded with more practical ideas, as well as more worthy examples as you are to me.</i>
+</p>
+
+<h2>
+    To feel that we belong
+</h2>
+
+<p>
+    Imagine we're visiting a web page. The longer we interact, the more we feel at home. We feel comfortable in the company of people and environments we love. If we're not around, everyone's looking for us. There is great potential for us to invite other people into the group.
+</p>
+
+<p>
+    Once we get to that point, we'll stay there at all costs. That's how we feel as a customer and how all our loyal customers feel. There is no easy way. It hurts, but that's the truth. The harder we work to create a bond with our customers, the more time we spend on it, the more we value the relationship.
+</p>
+
+<p>
+    Think about our partner. Do we fall in love just because he/she gave us a happy birthday present? Or because he/she said <i>you made my day</i> and <i>I love you</i>? We never even realize let alone remember when and what caused the feeling of love to start growing.
+</p>
+
+<p>
+    To win hearts and be won, there is no single cause. No single event. There is no specific time. Instead, it forms over time. It could be days, weeks, even a few summers. It could be after 2 or 10 times receiving birthday wishes. It could be not after receiving our favorite surprise, but after being only accompanied to chat every weekend for 7 years straight.
+</p>
+
+<!-- <p>
+    We didn't know, even until it happened. Probably (read: most likely) never will. The strategy is to try to create a relationship with our customers as natural as possible. Ideally, it should not be easy to spot. "When done well, software is invisible," <a href="https://www.wired.com/story/c-plus-plus-inventor/" rel="nofollow">says</a> <i>Bjarne Stroustrup</i>, the creator of <i>C++</i>.
+</p> -->
+
+<!-- <p>
+    Not the most innovative, but all things that are often overlooked. Of which our customers never mention, but once it gets removed, it'll soon became a trend on social media and we could no longer handle our phones. Things that our top 1% employees often avoid because they're too boring to work on.
+</p> -->
+
+<!-- Example: user achievement history/timeline:
+     slide 1: do you remember the first time we met?
+     slide 2: you introduce yourself as Naru
+     slide 3: i wait for you to come every single day
+     slide 4: at first, you only read other's articles
+     slide 5: one day, you published your first article
+     slide 6: a year later, you got the first 1M viewers
+     slide 7: two years later, you became a community moderator
+     slide 8: now, here you are, our brightest star
+-->
+<!-- Example: heartbeat animation on smartwatch -->
+
+<!-- Example: animated flow diagram -->
+<!-- Example: application onboarding -->
+<!-- Example: invisible/abstract process, like scientific phenomena -->
+<!-- Example: before/after updates, e.g. bigger screen, thinner body; missed if blink when no transition -->
+
+<p>
+    ...
+</p>
+
+<p>
+    It feels intimidating when there are too many controls on the first visit. Nobody wants to get lost.
+</p>
+
+<p>
+    ...
+</p>
+
+<h2>
+    Doubling the impacts
+</h2>
+
+<p>
+    ...
+</p>
+
+<!-- Example: growing bar chart -->
+<!-- Example: global temperature over decades -->
+<!-- Example: congratulate on working on new company -->
+<!-- Example: careless when crossing (https://www.youtube.com/watch?v=BSv9hUmT7_A) -->
+
+<h2>
+    Ready for your turn?
+</h2>
+
+<p>
+    Before we work together, please check out my previous works below.
+</p>
+
+<ul>
+    <li><a href="https://giveblood.sg/discover/" rel="nofollow">The Journey of Blood</a></li>
+    <li><a href="https://giveblood.sg/blood-bag-rush/" rel="nofollow">Stock Up the Blood Bank</a></li>
+    <li><a href="https://giveblood.sg/iron-rich-food/" rel="nofollow">Iron-Rich Food Dash</a></li>
+</ul>

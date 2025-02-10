@@ -1,0 +1,305 @@
+---
+layout: default
+---
+<style>
+    :root {
+        --accent-color: #{{ page.accent_color }};
+    }
+
+    #navigation-bar > .icon {
+        box-sizing: border-box;
+        border: 5px solid var(--accent-color, #FFF);
+        border-radius: 50%;
+        outline: 2px solid #222;
+        outline-offset: -5px;
+    }
+
+    main {
+        container-type: inline-size;
+        box-sizing: border-box;
+        padding: 3.5rem 2rem;
+        font-size: 1.625rem;
+        line-height: 1.75;
+
+        h1 {
+            box-sizing: border-box;
+            margin: 0;
+            margin-block-end: 1rem;
+            display: inline-block;
+            font-family: "DM Serif Display", serif;
+            font-size: 2.5rem;
+            line-height: 1.25;
+        }
+
+        h1, h2, h3, blockquote {
+            color: var(--accent-color, #FFF);
+        }
+
+        > .series {
+            margin-block-end: 0;
+            font-size: 80%;
+            font-style: italic;
+        }
+
+        > time {
+            margin-block-end: 3.5rem;
+            display: block;
+            font-size: 80%;
+        }
+
+        .content {
+            --minimum-content-padding: 2rem;
+
+            --full-max-width: 1fr;
+            --popout-max-width: 1400px;
+            --content-max-width: 1060px;
+            --inset-max-width: 840px;
+
+            --full: minmax(var(--minimum-content-padding), var(--full-max-width));
+            --popout: minmax(0, calc((var(--popout-max-width) - var(--content-max-width)) * 0.5));
+            --content: minmax(0, calc((var(--content-max-width) - var(--inset-max-width)) * 0.5));
+            --inset: min(var(--inset-max-width), 100% - var(--minimum-content-padding) * 2);
+
+            display: grid;
+            grid-template-columns:
+                [full-start]
+                var(--full)
+                    [popout-start]
+                    var(--popout)
+                        [content-start]
+                        var(--content)
+                            [inset-start]
+                            var(--inset)
+                            [inset-end]
+                        var(--content)
+                        [content-end]
+                    var(--popout)
+                    [popout-end]
+                var(--full)
+                [full-end];
+
+            > * {
+                grid-column: content;
+            }
+
+            .inset {
+                grid-column: inset;
+            }
+
+            .popout {
+                grid-column: popout;
+            }
+
+            .full {
+                grid-column: full;
+            }
+
+            .hero {
+                position: relative;
+                margin-block-end: 2.5rem;
+                height: 75vh;
+                background-color: #FFF;
+            }
+
+            h2 {
+                margin-block-start: 3.5rem;
+                margin-block-end: 1rem;
+                font-size: 2rem;
+                line-height: 1.25;
+            }
+
+            p {
+                hyphens: auto;
+            }
+
+            p, li, a, pre {
+                font-size: 1.4rem;
+            }
+
+            p, ul, figure, pre, .ielement {
+                margin-block-start: 1rem;
+                margin-block-end: 1rem;
+            }
+
+            ul {
+                padding-inline-start: 3rem;
+            }
+
+            blockquote {
+                margin: 3rem 0;
+                font-family: 'DM Serif Display', serif;
+                font-size: 3.5rem;
+                line-height: 1.25;
+                font-style: italic;
+                text-align: center;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: dotted underline;
+                text-underline-offset: .2em;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            ins {
+                text-decoration: none;
+            }
+
+            code {
+                padding: 0 3px;
+                background-color: #444;
+                font-family: monospace;
+                font-size: 90%;
+                hyphens: manual;
+            }
+
+            pre {
+                margin: 0;
+                padding: 1rem;
+                font-family: monospace;
+                font-size: 80%;
+                background-color: #000;
+                border: 3px solid #000;
+                overflow-x: auto;
+                scroll-behavior: smooth;
+
+                &.wrapped {
+                    white-space: pre-wrap;
+                    word-break: break-all;
+                }
+            }
+
+            figure {
+                margin-inline-start: 0;
+                margin-inline-end: 0;
+
+                > .container {
+                    box-sizing: border-box;
+                    display: flex;
+                    justify-content: center;
+                    background-color: #000;
+                    border: 3px solid #000;
+
+                    > img {
+                        max-width: 100%;
+                    }
+                }
+
+                > figcaption {
+                    margin-block-start: .25rem;
+                    font-size: 1rem;
+                    font-style: italic;
+                }
+            }
+
+            .ielement {
+                > .container {
+                    box-sizing: border-box;
+                    border: 3px solid #000;
+                }
+
+                > .caption {
+                    margin-block-start: .25rem;
+                    font-size: 1rem;
+                    font-style: italic;
+                }
+            }
+        }
+    }
+
+    @container (width < 1280px) {
+        main .content blockquote {
+            font-size: min(10vmin, 4rem);
+        }
+    }
+
+    @media (width < 720px) {
+        main {
+            padding: 0;
+
+            h1,
+            > .series,
+            > time {
+                padding: 0 2rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin-block-end: .8rem;
+            }
+
+            > .series, > time {
+                font-size: 1.2rem;
+            }
+
+            > time {
+                margin-block-end: 2.5rem;
+            }
+
+            .content {
+                h2 {
+                    font-size: 1.7rem;
+                }
+
+                p, li, a, pre {
+                    font-size: 1.2rem;
+                }
+
+                blockquote {
+                    font-size: 2.5rem;
+                }
+
+                pre {
+                    font-size: 60%;
+                }
+
+                figure > figcaption,
+                .ielement > .caption {
+                    font-size: .8rem;
+                }
+
+                figure > .container {
+                    justify-content: start;
+                    overflow-x: auto;
+
+                    img {
+                        max-height: 50vh;
+                        max-width: unset;
+                        margin: 0 auto;
+                    }
+                }
+
+                h2 {
+                    margin-block-start: 2.5rem;
+                    margin-block-end: .8rem;
+                }
+
+                p, ul, figure, pre, .ielement {
+                    margin-block-start: .8rem;
+                    margin-block-end: .8rem;
+                }
+            }
+}
+    }
+</style>
+
+<main>
+    <h1>{{ page.title }}</h1>
+    <p class="series">
+        {%- if page.series -%}
+            Series: {{ page.series }}&mdash;Part {{ page.part }}
+        {%- endif -%}
+    </p>
+    <time datetime="{{ page.date | date_to_xmlschema }}" title="{{ page.date | date: '%B %d, %Y' }}">
+        Posted: {{ page.date | date: '%B %d, %Y' }}
+    </time>
+    <div class="content">
+        <div class="full hero">
+            {{ page.hero_content }}
+        </div>
+        {{ content }}
+    </div>
+</main>

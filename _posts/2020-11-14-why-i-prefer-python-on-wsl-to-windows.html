@@ -1,0 +1,221 @@
+---
+layout: post
+canonical_url: https://dev.to/naruaika/why-i-prefer-python-on-wsl-to-windows-1e05
+title: Why I Prefer Python on WSL to Windows
+description: I love bleeding edge technology, so I have Python 3.9 installed by the time of writing. Of course, I have concerned that not all of my needs can be obtained easily.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+
+<p>
+    The only question is why? Even though it is only a three word question, it needs some explanations. I hate getting people to do things without telling, at least, a reason or two behind them. Most likely, in fact in this post, I just wanted to tell my stories using Python on WSL2.
+</p>
+
+<p>
+    I love <a href="https://en.wikipedia.org/wiki/Bleeding_edge_technology" rel="nofollow">bleeding edge technology</a>, so I have Python 3.9 installed by the time of writing. Of course, I have concerned that not all of my needs can be obtained easily. Notably, I did not get some wheel packages in <a href="https://pypi.org/" rel="nofollow">the PyPI</a> available for this version 3.9. Despite knowing there are lots of great developers on the internet who provided <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" rel="nofollow">those wheels</a> unofficially, I just do not want to always rely on them. So, let us look at different scenarios.
+</p>
+
+<p>
+    Uh, wait, first we need to prepare the tools for building. Since by default, Fedora on WSL2 has brought these tools, we have nothing else to do. On Windows, we need several C++ development tools, i.e. MSVC v142 and Windows 10 SDK, provided by <a href="https://visualstudio.microsoft.com/downloads/" rel="nofollow">Visual Studio Installer</a> as shown below.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/23s8nl6iy9ycmgyj3364.png" alt="">
+    </div>
+    <figcaption>
+        Installing required C++ development tools.
+    </figcaption>
+</figure>
+
+<p>
+    For my sake, I have created a separated virtual environment only for this experiment on both Fedora and Windows system.
+</p>
+
+<h2>
+    #1
+</h2>
+
+<p>
+    At the moment, the <code>scikit-learn</code> developer does not provide the wheel package for Python 3.9 yet, so we are going to build and install our own. The installation can be done simply by <code>pip install scikit-learn</code>. After a while, it has finished on both systems without having to worry at all. To confirm everything is okay, we just need to do a little checking by <code>python -c "import sklearn"</code>. Fedora did not show any output meaning it was running correctly, while Windows has made me feeling blue.
+</p>
+
+<pre>
+> python -c "import sklearn"
+ ** On entry to DGEBAL parameter number  3 had an illegal value
+ ** On entry to DGEHRD  parameter number  2 had an illegal value
+ ** On entry to DORGHR DORGQR parameter number  2 had an illegal value
+ ** On entry to DHSEQR parameter number  4 had an illegal value
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\Naufan Rusyda Faikar\venv0\lib\site-packages\sklearn\__init__.py", line 80, in <module>
+    from .base import clone
+  File "C:\Users\Naufan Rusyda Faikar\venv0\lib\site-packages\sklearn\base.py", line 17, in <module>
+    import numpy as np
+  File "C:\Users\Naufan Rusyda Faikar\venv0\lib\site-packages\numpy\__init__.py", line 305, in <module>
+    _win_os_check()
+  File "C:\Users\Naufan Rusyda Faikar\venv0\lib\site-packages\numpy\__init__.py", line 302, in _win_os_check
+    raise RuntimeError(msg.format(__file__)) from None
+RuntimeError: The current Numpy installation ('C:\\Users\\Naufan Rusyda Faikar\\venv0\\lib\\site-packages\\numpy\\__init__.py') fails to pass a sanity check due to a bug in the windows runtime. See this issue for more information: https://tinyurl.com/y3dm3h86
+</pre>
+
+<p>
+    By reading the message and going to <a href="https://tinyurl.com/y3dm3h86" rel="nofollow">the given link</a>, I should realised that I only came to lament. To sit on my knees waiting for uncertainty. It is still being investigated! Maybe we will get a patch updates tomorrow morning, but consider the other things similar can happen after installing the patch. Is this meant by design? I wish no.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/t262jw1kvo16p35idpn1.png" alt="">
+    </div>
+    <figcaption>
+        Windows Update introduces a new issue related to <code>NumPy</code> package.
+    </figcaption>
+</figure>
+
+<h2>
+    #2
+</h2>
+
+<p>
+    When trying to install <code>PyAudio</code> for the first time without setting up anything beforehand, we are bound to get an error as shown below.
+</p>
+
+<pre class="wrapped">
+> pip install PyAudio
+...
+src/_portaudiomodule.c(29): fatal error C1083: Cannot open include file: 'portaudio.h': No such file or directory
+    error: command 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.28.29333\\bin\\HostX86\\x64\\cl.exe' failed with exit code 2
+...
+</pre>
+
+<p>
+    Similar errors will be faced at Fedora as well. It appears that an attempt was made to find <code>portaudio.h</code> in the system. On Windows, we can build it manually using one of <a href="http://portaudio.com/docs/v19-doxydocs/tutorial_start.html" rel="nofollow">the three options</a>. But they are kind of painful tasks! So I was not willing to even intend to try it. Meanwhile, as expected, we only need to run a short command on Fedora to bring it home.
+</p>
+
+<pre>
+$ sudo dnf -y install portaudio-devel
+Last metadata expiration check: 0:01:54 ago on Sat Nov 14 14:27:02 2020.
+Dependencies resolved.
+========================================================================================================================
+ Package                          Architecture            Version                        Repository                Size
+========================================================================================================================
+Installing:
+ portaudio-devel                  x86_64                  19-32.fc33                     fedora                   282 k
+Installing dependencies:
+ alsa-lib-devel                   x86_64                  1.2.4-5.fc33                   updates                  775 k
+ portaudio                        x86_64                  19-32.fc33                     fedora                    95 k
+
+Transaction Summary
+========================================================================================================================
+Install  3 Packages
+
+Total download size: 1.1 M
+Installed size: 17 M
+...
+
+$ pip install PyAudio
+Collecting PyAudio
+  Using cached PyAudio-0.2.11.tar.gz (37 kB)
+Building wheels for collected packages: PyAudio
+  Building wheel for PyAudio (setup.py) ... done
+  Created wheel for PyAudio: filename=PyAudio-0.2.11-cp39-cp39-linux_x86_64.whl size=51785 sha256=eacf6885675e75fa6ab23a4c592c35b22a2caff88f0c894dc516d821f26c5419
+  Stored in directory: /home/naru/.cache/pip/wheels/76/e7/d6/193c174cc4cba9409e8eecea8f9e986fc9c88e08160759dfe8
+Successfully built PyAudio
+Installing collected packages: PyAudio
+Successfully installed PyAudio-0.2.11
+</pre>
+
+<p>
+    Is that going to work? Yes, at least it can be imported without any error. But no, for WSL does not support audio, although there is <a href="https://x410.dev/cookbook/wsl/enabling-sound-in-wsl-ubuntu-let-it-sing/" rel="nofollow">a way of</a> making it work.
+</p>
+
+<p>
+    Anyway, you got the idea! I sincerely hope that <code>winget</code> will take on the same level of benefits of GNU/Linux distribution package manager!
+</p>
+
+<h2>
+    #3
+</h2>
+
+<p>
+    I am very much to know that this will not be a fair comparison, but I will let you decide. On Windows, we got:
+</p>
+
+<pre>
+> ipython
+Python 3.7.8 (tags/v3.7.8:4b47a5b6ba, Jun 28 2020, 08:53:46) [MSC v.1916 64 bit (AMD64)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.19.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: class Hello:
+   ...:     def __init__(self):
+   ...:         ...
+   ...:     @staticmethod
+   ...:     def greeting():
+   ...:         ...
+   ...:
+
+In [2]: %timeit Hello()
+141 ns ± 1.54 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+
+In [3]: %timeit Hello.greeting()
+82.7 ns ± 0.527 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+
+In [4]: import sys
+
+In [5]: sys.getsizeof(Hello())
+Out[5]: 56
+
+In [6]: sys.getsizeof(Hello.greeting())
+Out[6]: 16
+</pre>
+
+<p>
+    While on Fedora, we got:
+</p>
+
+<pre>
+$ ipython
+Python 3.8.6 (default, Sep 25 2020, 00:00:00)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.19.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: class Hello:
+   ...:     def __init__(self):
+   ...:         ...
+   ...:     @staticmethod
+   ...:     def greeting():
+   ...:         ...
+   ...:
+
+In [2]: %timeit Hello()
+126 ns ± 0.996 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+
+In [3]: %timeit Hello.greeting()
+78.3 ns ± 0.546 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+
+In [4]: import sys
+
+In [5]: sys.getsizeof(Hello())
+Out[5]: 48
+
+In [6]: sys.getsizeof(Hello.greeting())
+Out[6]: 16
+</pre>
+
+<p>
+    Why does something on Windows turn out to be so expensive for simple things?
+</p>
+
+<p>
+    I have a lot to share, but that is all for now. <i>Shhh</i>, by the way, <i>Guido van Rossum</i> has <a href="https://twitter.com/gvanrossum/status/1326932991566700549" rel="nofollow">decided to join</a> Microsoft! Will Python be able to do any better on Windows?
+</p>

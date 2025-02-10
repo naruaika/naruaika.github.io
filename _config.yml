@@ -1,16 +1,19 @@
 title: Naufan Rusyda Faikar
-email: mail@naruaika.me
+email: hello@naruaika.me
 phone: +62 821-3000-3006
+social: "@naruaika"
 description: >-
   Offering expert solutions and consultations
   for your business growth using technology.
 baseurl: ""
 url: "https://naruaika.me"
 
-# Build settings
-include:
-  - .well-known
+permalink: /post/:categories/:year/:month/:day/:title.html
+
 plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-seo-tag
+
+include:
+  - .well-known
