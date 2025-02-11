@@ -29,6 +29,7 @@ permalink: /post/
             gap: 1.25rem;
 
             a {
+                flex: 1;
                 box-sizing: border-box;
                 padding: .75rem 1rem;
                 font-size: 1.6rem;
@@ -85,9 +86,13 @@ permalink: /post/
             hyphens: auto;
         }
 
-        .series, time {
+        .series {
             font-size: 75%;
             font-style: italic;
+        }
+
+        time {
+            font-size: 75%;
         }
     }
 
@@ -158,24 +163,24 @@ permalink: /post/
     <h1>My Posts</h1>
     <ul>
         {% for post in site.posts %}
+        <li>
             <a href="{{ post.url }}" {% if post.accent_color %} style="--accent-color: #{{ post.accent_color }};" {% endif %}>
-                <li>
-                    <h2>
-                        {{ post.title }}
-                    </h2>
-                    {%- if post.series -%}
-                        <div class="series">
-                            Series: {{ post.series }}&mdash;Part {{ post.part }}
-                        </div>
-                    {%- endif -%}
-                    <time datetime="{{ post.date | date_to_xmlschema }}" title="{{ post.date | date: '%B %d, %Y' }}">
-                        Posted on {{ post.date | date: '%B %d, %Y' }}
-                    </time>
-                    <p>
-                        {{ post.description }}
-                    </p>
-                </li>
+                <h2>
+                    {{ post.title }}
+                </h2>
+                {%- if post.series -%}
+                    <div class="series">
+                        Series: {{ post.series }}&mdash;Part {{ post.part }}
+                    </div>
+                {%- endif -%}
+                <time datetime="{{ post.date | date_to_xmlschema }}" title="{{ post.date | date: '%B %d, %Y' }}">
+                    Posted on {{ post.date | date: '%B %d, %Y' }}
+                </time>
+                <p>
+                    {{ post.description }}
+                </p>
             </a>
+        </li>
         {% endfor %}
     </ul>
 </main>

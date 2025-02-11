@@ -45,6 +45,21 @@ layout: default
             font-style: italic;
         }
 
+        > .author {
+            margin-block: 0;
+            font-size: 80%;
+
+            a {
+                text-decoration: dotted underline;
+                text-underline-offset: .2em;
+                color: inherit;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
         > time {
             margin-block-end: 3.5rem;
             display: block;
@@ -240,6 +255,7 @@ layout: default
 
             h1,
             > .series,
+            > .author,
             > time {
                 padding: 0 2rem;
             }
@@ -327,6 +343,9 @@ layout: default
         {%- if page.series -%}
             Series: {{ page.series }}&mdash;Part {{ page.part }}
         {%- endif -%}
+    </p>
+    <p class="author">
+        Author: <a href="/">Naufan Rusyda Faikar</a>
     </p>
     <time datetime="{{ page.date | date_to_xmlschema }}" title="{{ page.date | date: '%B %d, %Y' }}">
         Posted on {{ page.date | date: '%B %d, %Y' }}
