@@ -1,0 +1,172 @@
+- name: Business Development for Kasir Warung
+  time: 2024
+  description: The project aims to help the startup to grow with minimal resources.
+  technology_stack: Python, Jupyter Notebook, MySQL
+  responsibilities:
+    - Led a team of three, setting project goals and providing strategic direction.
+    - Conducted data mining, and analysis to generate insights that supported business decision‑making.
+  achievements:
+    - We happened to be able to achieve monthly profits up to 20 times within 3 months while keeping operational costs at 5% of total monthly profits, although the exact nominal profit is not yet interesting to mention.
+
+- name: SaaS Development for Kasir Warung
+  time: 2022&ndash;2024
+  description: The project goal was to develop a point-of-sale mobile application with a freemium business model targeting MSMEs in Indonesia.
+  technology_stack: JavaScript (React Native), JavaScript (Next.js), MySQL, Nginx, Alibaba Cloud
+  responsibilities:
+    - Optimized database performance through query tuning, indexing, and schema improvements up to 16 times faster.
+    - Assisted in reducing the potential cybersecurity threats.
+    - Assisted in designing the initial database schema.
+    - Assisted with technical tasks related to Unix server administration, troubleshooting, and maintenance.
+
+- name: Retention System for MyRepublic Indonesia
+  time: 2023&ndash;2024
+  description: The project aims to help with maintaining churn rates while the entire company works on doubling the number of customers and homepasses.
+  technology_stack: PHP (Laravel), JavaScript (Livewire), Redis, MySQL, Nginx, Postal
+  responsibilities:
+    - Initiated automated customer retention pipelines.
+    - Developed a custom query language to manage customer retention pipelines, including creating master email templates and auto-filling WhatsApp message templates.
+    - Developed a dashboard for customer services to get customer journey information more effectively and efficiently.
+    - Developed a dashboard for supervisors and directors to monitor and export customer retention progress reports.
+    - Integrated with Meta Messaging APIs.
+  achievements:
+    - We happened to be able to achieve our target by maintaining our customer turnover rate at 2% while our competitors were still at 2-5%.
+
+- name: Network Provisioning System for MyRepublic Indonesia
+  time: 2023&ndash;2024
+  description: The project requires maintaining and developing new features needed on the existing network and device provisioning system, as well as scaling up the system to help the company roll out more networks to many new cities in Indonesia.
+  technology_stack: PHP (Slim Framework), MySQL, RabbitMQ, Postal, Odoo, Python
+  responsibilities:
+    - Worked with technical help desk team to improve front-end application UI/UX to increase efficiency of customer device information retrieval.
+    - Worked with the supply network design team to integrate new network devices, such as Broadband Network Gateway (BNG) and Optical Network Terminal (ONT), to the system.
+    - Worked with the IP Core department to develop an early notification system for potential network intermittent and disconnection events on customer devices.
+    - Assisted in finding and resolving some bugs on the system related to data integrity, network mapping, and database query performance.
+    - Assisted in integrating new BSS/OSS with the provisioning system.
+    - Assisted in performing API integration testing for the newly Odoo system.
+
+- name: Ticket Monitoring for MyRepublic Indonesia
+  time: 2024
+  description: The project aims to help the on-the-ground winback team monitor their work progression, as well as automate ticket creation, assignment, and escalation.
+  technology_stack: PHP (Laravel), MySQL, Redis, Odoo, Grafana
+  responsibilities:
+    - Initiated the ticket monitoring dashboard.
+    - Initiated scheduled scripts to automate the ticket management.
+    - Assisted in automating customer devices insurance claims.
+
+- name: Sales Mobile Application for MyRepublic Indonesia
+  time: 2024
+  description: The project requires re-engineering of an existing sales portal application that was running as a web application. The decision to use mobile technology was made to eliminate the limitations of the web ecosystem while maintaining security and data integrity.
+  technology_stack: Flutter
+  responsibilities:
+    - Worked with a UI/UX designer from the IT department to design and develop the system.
+    - Worked with a senior software engineer from the IT department to integrate the application with sales APIs.
+
+- name: Enterprise BSS/OSS for MyRepublic Indonesia
+  time: 2024
+  description: The project entails maintaining the next generation of the enterprise BSS/OSS codenamed Stella.
+  technology_stack: Java (Quarkus), PostgreSQL, Kubernetes, Elastic Stack, Google Cloud Platform
+  responsibilities:
+    - Worked closely with the IT department to resolve the potential bugs due to the Odoo version upgrades.
+    - Assisted in performing API integration testing for the newly Odoo system.
+
+- name: Subscription Management for MyRepublic Indonesia
+  time: 2023&ndash;2024
+  description: The project goal was to maintain a legacy system which handles the customer subscription management of several over-the-top media services.
+  technology_stack: PHP (Slim Framework), MySQL, RabbitMQ
+  responsibilities:
+    - Worked with the commercial team to integrate new Vision+, Vidio, and WeTV subscription products.
+    - Assisted in reconciling customer subscription data with related vendors.
+    - Assisted in finding several bugs in the existing subscription workflow implementation.
+    - Assisted in updating technical documentation of the system.
+
+- name: Customer Mobile Application for MyRepublic Indonesia
+  time: 2023
+  description: The project aims to redesign an existing customer mobile application which was no longer maintainable due to technical issues, as well as help the company rebrand its product.
+  technology_stack: JavaScript (React Native)
+  responsibilities:
+    - Worked with two engineers and a team leader to continue the development of the newly mobile application.
+
+- name: Customer Self-Care for MyRepublic Indonesia
+  time: 2023
+  description: The project requires maintaining a legacy application that provides self-care services to customers.
+  technology_stack: PHP (CodeIgniter), SQLite, Odoo, Google API, Postal
+  responsibilities:
+    - Implemented reCAPTCHA on the user login page.
+    - Resolved several bugs related to Odoo integration and customer subscription payment APIs.
+
+- name: Website for MyRepublic Indonesia
+  time: 2023&ndash;2024
+  description: The project goal was to redesign the existing WordPress website and integrate with more customer related APIs.
+  technology_stack: JavaScript (Next.js), PHP (Laravel), MySQL, Strapi, Nginx, Postal, Odoo, Firebase, Kubernetes
+  responsibilities:
+    - Initiated the middleware API service which handles the website user authentication, as well as integrates with the customer APIs.
+    - Initiated an automated warning notification for monitoring the website down times.
+    - Performed a data migration from WordPress database to Strapi.
+    - Assisted in maintaining the continuous integration/continuous deployment (CI/CD) of the website and the middleware API service.
+    - Assisted in maintaining the self-hosted company’s GitLab instance.
+
+- name: Website for Ne**le Indonesia
+  time: 2023
+  description: The project goal was to develop a new page module to share a Ramadan message recording through Be** Br*** cans.
+  technology_stack: PHP (Drupal), JavaScript
+  responsibilities:
+    - Developed web functionality for recording, storing, sharing, and playing audio recordings with authentication.
+
+- name: Website for PT Aneka Juragan Material
+  time: 2022
+  description: The project aims to help a coworker with a feature on a client's website that is two weeks behind schedule.
+  technology_stack: JavaScript (Vue.js), Google Cloud Platform, Strapi, Clarity
+  responsibilities:
+    - Worked on completing the blogging features page.
+    - Worked on re-designing the user login page to include information about key events that are currently or will be taking place.
+  achievements:
+    - We happened to be able to finish it in two very tight days before the company's big event launch while I was almost completely new to the technology stack.
+
+- name: Business System for Ed*****ge Education Consulting
+  time: 2021&ndash;2022
+  description: The project goal was to develop a fully customized system to assist the client in digitalizing their end-to-end business processes, while updating their existing website.
+  technology_stack: PHP (Laravel), JavaScript (Livewire), MySQL, Nginx, Amazon Web Services
+  responsibilities:
+    - Worked with the company’s UI/UX designer to build a new dynamic landing website.
+    - Worked in a team size of 5 to build a customized enterprise resource planning system.
+  achievements:
+    - My outsourcing team managed to receive a compliment from the client within the first three months of service.
+
+- name: Interactive Web Pages for Techlyon Pte Ltd
+  time: 2021&ndash;2022
+  description: The project aims to develop several interactive and responsive pages as well as update existing pages to include the organization's most current information.
+  technology_stack: HTML/CSS, JavaScript (GSAP), Elementor, WordPress, Amazon Web Services
+  responsibilities:
+    - Developed an interactive and responsive web page, The Journey of Blood, to educate people about the blood donation process.
+    - Developed a web‑based game, Blood Bag Rush, to entertain blood donors in line.
+    - Developed a web‑based game, Iron‑Rich Food Dash, to attract new blood donors.
+    - Re‑designed the donor appreciation page to include the latest information.
+
+- name: Scientific Research for Robotics and AI Laboratory
+  time: 2019&ndash;2020
+  description: The project entails research on modeling automatic human emotion recognition in classroom environments.
+  technology_stack: Python (PyTorch), Jupyter Notebook
+  responsibilities:
+    - In a team of five students and two lecturers, we conduct many studies to design a smart classroom system. My part was on the automatic human emotion recognition module.
+    - Assisted in writing a publication entitled Facial Expression Recognition in the Classroom Environment.
+
+- name: Technical Research for PT Dirgantara Indonesia
+  time: 2019
+  description: The project aims to investigate the potential re-engineering of a legacy desktop application to aid in the creation of aircraft performance graphical analysis reports written in Visual Basic. The goal is to integrate with the extensive Python library for data science, inspired by advances in the Korean aircraft industry.
+  technology_stack: Python (PyQt5)
+  responsibilities:
+    - Conducted an exploration of the legacy application.
+    - Developed re-engineered versions of the key functionalities of the legacy application in Python.
+
+- name: Learning Platform for Indonesia University of Education
+  time: 2019
+  description: The project entails creating Rumah Cerdas, a mobile-based online tutoring platform for internal usage.
+  technology_stack: Java (Android), Python (Flask), JavaScript, PostgreSQL, Apache, DigitalOcean
+  responsibilities:
+    - Partnered with two lecturers and a junior to develop a mobile‑based platform based on the newly Indonesia National Curriculum 2013, APIs to access the educational contents, as well as design, migrate, and maintain the educational database.
+
+- name: Research Platform for Department of Sociology Education
+  time: 2018&ndash;2019
+  description: The project aims to create Sociology Education Research Application (SERA), a mobile-based social media platform for sharing and promoting local wisdom and knowledge.
+  technology_stack: Java (Android), PHP (CodeIgniter), MySQL, Apache, Google Cloud Platform
+  responsibilities:
+    - Partnered with a college friend to develop a user-friendly application for content production and engagement, APIs for smooth access and integration of social content, and a content management system (CMS) for effective moderation and management.

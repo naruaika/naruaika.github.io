@@ -5,19 +5,92 @@ permalink: /work/
 ---
 <style>
     main {
-        position: absolute;
-        padding: 0 2rem;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-        font-weight: 300;
-        text-align: center;
+        container-type: inline-size;
+        box-sizing: border-box;
+        padding: 3.5rem 2rem;
+        font-size: 1.4rem;
+        line-height: 1.75;
+
+        h1 {
+            box-sizing: border-box;
+            margin: 0;
+            margin-bottom: 3.5rem;
+            display: inline-block;
+            font-family: "DM Serif Display", serif;
+            font-size: 2.5rem;
+            line-height: 1.25;
+        }
+
+        > ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3.75rem;
+
+            > li {
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                max-width: 800px;
+                list-style: none;
+            }
+        }
+
+        .time {
+            padding: 0 .6rem;
+            font-size: .8em;
+            font-weight: 600;
+            color: #222;
+            background-color: #FFF;
+        }
+
+        .name {
+            margin-block-start: .8rem;
+            font-size: 1.6rem;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+
+        .description {
+            margin-block: .4rem;
+            font-style: italic;
+        }
+    }
+
+    @media (width < 720px) {
+        main {
+            padding-top: 0;
+            font-size: 1.2rem;
+        }
     }
 </style>
 
 <main>
-    Coming soon...
+    <h1>My Works</h1>
+    <ul>
+        {% for item in site.data.my-projects %}
+            <li>
+                <div class="time">
+                    {{ item.time }}
+                </div>
+                <div class="name">
+                    {{ item.name }}
+                </div>
+                <div class="description">
+                    {{ item.description }}
+                </div>
+                <div class="responsibilities">
+                    <span style="font-weight:500;">
+                        Responsibilities:
+                    </span>
+                    <ul>
+                        {% for item in item.responsibilities %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 </main>
