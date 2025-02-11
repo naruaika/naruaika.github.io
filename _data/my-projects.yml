@@ -3,8 +3,8 @@
   description: The project aims to help the startup to grow with minimal resources.
   technology_stack: Python, Jupyter Notebook, MySQL
   responsibilities:
-    - Led a team of three, setting project goals and providing strategic direction.
-    - Conducted data mining, and analysis to generate insights that supported business decision‑making.
+    - Led a team of three, setting project goals, and providing strategic direction.
+    - Conducted data mining and analysis to generate insights that supported business decision‑making.
   achievements:
     - We happened to be able to achieve monthly profits up to 20 times within 3 months while keeping operational costs at 5% of total monthly profits, although the exact nominal profit is not yet interesting to mention.
 
@@ -62,7 +62,7 @@
 
 - name: Enterprise BSS/OSS for MyRepublic Indonesia
   time: 2024
-  description: The project entails maintaining the next generation of the enterprise BSS/OSS codenamed Stella.
+  description: The project entails maintaining the next generation of the enterprise BSS/OSS.
   technology_stack: Java (Quarkus), PostgreSQL, Kubernetes, Elastic Stack, Google Cloud Platform
   responsibilities:
     - Worked closely with the IT department to resolve the potential bugs due to the Odoo version upgrades.
