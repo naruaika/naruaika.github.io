@@ -10,7 +10,7 @@
 
 - name: SaaS Development for Kasir Warung
   time: 2022&ndash;2024
-  description: The project goal was to develop a point-of-sale mobile application with a freemium business model targeting MSMEs in Indonesia.
+  description: The project goal was to develop a point-of-sale (POS) mobile application with a freemium business model targeting MSMEs in Indonesia.
   technology_stack: JavaScript (React Native), JavaScript (Next.js), MySQL, Nginx, Alibaba Cloud
   responsibilities:
     - Optimized database performance through query tuning, indexing, and schema improvements up to 16 times faster.
@@ -70,7 +70,7 @@
 
 - name: Subscription Management for MyRepublic Indonesia
   time: 2023&ndash;2024
-  description: The project goal was to maintain a legacy system which handles the customer subscription management of several over-the-top media services.
+  description: The project goal was to maintain a legacy system which handles the customer subscription management of several over-the-top (OTT) media services.
   technology_stack: PHP (Slim Framework), MySQL, RabbitMQ
   responsibilities:
     - Worked with the commercial team to integrate new Vision+, Vidio, and WeTV subscription products.
