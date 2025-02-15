@@ -171,17 +171,24 @@ layout: default
                 text-decoration: none;
             }
 
+            kbd {
+                font-size: 1.2rem;
+                border: 1px solid #FFF;
+                padding: 0 0.2rem;
+            }
+
             code {
                 padding: 0 3px;
                 background-color: #333;
                 font-family: monospace;
-                font-size: 90%;
+                font-size: 1.2rem;
                 hyphens: unset;
                 word-break: break-all;
             }
 
             pre {
-                margin: 0;
+                box-sizing: border-box;
+                margin-inline: 0;
                 padding: 1rem;
                 font-family: monospace;
                 font-size: 1rem;
@@ -196,7 +203,7 @@ layout: default
             }
 
             figure {
-                margin: 0;
+                margin-inline: 0;
 
                 > .container {
                     box-sizing: border-box;
@@ -284,6 +291,10 @@ layout: default
 
                 blockquote {
                     font-size: 2.5rem;
+                }
+
+                kbd, code {
+                    font-size: 1rem;
                 }
 
                 pre {

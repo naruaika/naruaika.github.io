@@ -1,0 +1,192 @@
+---
+layout: post
+title: Things You See Everyday But Never Think Of
+series: Level Up Your Web Debugging Skills
+part: 1
+description: As web developers, we use Chrome DevTools all the time. But do we really know how to use it? More than all the things others keep talking about?
+accent_color: c0ff2d
+hero_content: >-
+    <div style="
+        --c1: #c0ff2d;
+        --c2: #b2ec28;
+        --c3: #9dd123;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    As web developers, we use Chrome DevTools all the time. But do we really know how to use it? More than all the things others keep talking about? It is not about being the coolest guy in the room; it's about being more productive than ever. So you can enjoy your lunch better or spend more time with your family.
+</p>
+
+<h2>
+    To get a reference of an element
+</h2>
+
+<p>
+    Consider we want to reference the element below in the console.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#1f2125;">
+        <img src="/assets/posts/Screenshot 2025-02-15 095658.webp" alt="">
+    </div>
+</figure>
+
+<p>
+    In this case, it's more than easy to do:
+</p>
+
+<pre>
+document.querySelector('.SDkEP');
+
+// or alternatively
+document.getElementsByClassName('SDkEP')[0];
+</pre>
+
+<p>
+    as the element have a unique class name <code>SDkEP</code>.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#282828;">
+        <img src="/assets/posts/Screenshot 2025-02-15 095905.webp" alt="">
+    </div>
+</figure>
+
+<p>
+    However, things get challenging when the page relies heavily on a Tailwind CSS-like framework.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/Screenshot 2025-02-15 102548.webp" alt="">
+    </div>
+</figure>
+
+<p>
+    There's no unique ID or class name, or a unique <code>data-*</code> attribute, as seen below.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#282828;">
+        <img src="/assets/posts/Screenshot 2025-02-15 103119.webp" alt="">
+    </div>
+</figure>
+
+<p>
+    Yes, we know that there should only be one <code>h1</code> element on a page. But how about the others? There are three ways to get a reference to an element.
+</p>
+
+<p>
+    First, we add ourselves a unique attribute to the element. It sounds perversely counterintuitive as we need to make sure no one else has the same identifier.
+</p>
+
+<p>
+    The second way is to copy the element's path, either JS path or XPath.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#282828;">
+        <img src="/assets/posts/Screenshot 2025-02-15 104553.webp" alt="">
+    </div>
+</figure>
+
+<p>
+    Copying the JS path will give us something like this:
+</p>
+
+<pre class="wrapped">
+document.querySelector("body > div > div > div.grid.min-h-dvh.grid-cols-1.grid-rows-\\[1fr_1px_auto_1px_auto\\].justify-center.pt-14\\.25.\\[--gutter-width\\:2\\.5rem\\].lg\\:grid-cols-\\[var\\(--gutter-width\\)_minmax\\(0\\,var\\(--breakpoint-2xl\\)\\)_var\\(--gutter-width\\)\\] > div.text-gray-950.dark\\:text-white > div > div:nth-child(2) > h1")
+</pre>
+
+<p>
+    While copying the XPath will give us: <code>/html/body/div/div/div[2]/div[2]/div/div[2]/h1</code>. Which can be used in the console as follows:
+</p>
+
+<pre class="wrapped">
+document.evaluate("/html/body/div/div/div[2]/div[2]/div/div[2]/h1", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+</pre>
+
+<p>
+    An easier way, the third one, is to reference it by using <code>$0</code> selector while the element is being selected&mdash;the target element is getting highlighted in blue in the <i>Elements</i> panel.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#282828;">
+        <img src="/assets/posts/Screenshot 2025-02-15 112252.webp" alt="">
+    </div>
+</figure>
+
+<p>
+    Cool, right? There's one more option. Did you see <i>Store as global variable</i> in the right-click menu?
+</p>
+
+<figure>
+    <div class="container" style="background-color:#282828;">
+        <img src="/assets/posts/Screenshot 2025-02-15 112835.webp" alt="">
+    </div>
+</figure>
+
+<p>
+    It'll throw away <code>temp1</code> in the console which we can use to reference the element later. Storing another element will create a new variable named <code>temp2</code> in the console and so on.
+</p>
+
+<p>
+    These functionalities are also available in the Firefox's Developer Tools, but under different names. Try to find them right away.
+</p>
+
+<h2>
+    Shortcuts? There's a better one!
+</h2>
+
+<p>
+    We love shortcuts. They are very helpful. But at the same time, memorizing them is not an easy thing. In addition, having a shortcut for everything is not effective, often making difficult.
+</p>
+
+<p>
+    Someone may suggest creating our own shortcuts. The problem is there are so many action names that start with specific letters; is it <kbd>Ctrl</kbd>+<kbd>H</kbd>, <kbd>Alt</kbd>+<kbd>H</kbd> or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd>? What about other actions that start with the same letter? We'll soon run out of combinations. Worse, most of the shortcuts aren't intuitive. Even worse, they aren't consistent across software, even if they're developed by the same company or developed in the same franchise group.
+</p>
+
+<p>
+    I don't think this is anything new to you, we called it <i>Command Menu</i> or <i>Command Palette</i>, which appears when you press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#282828;">
+        <img src="/assets/posts/Screenshot 2025-02-15 132539.webp" alt="">
+    </div>
+</figure>
+
+<p>
+    Here are my favorite commands:
+</p>
+
+<ol>
+    <li>Disable/enable DOM word wrap</li>
+    <li>Enable/disable fast/slow 3G throttling</li>
+    <li>Go offline/online</li>
+    <li>Collect garbage</li>
+    <li>Emulate CSS prefers-color-scheme</li>
+    <li>Emulate achromatiopsia or else</li>
+    <li>Show frames per second (FPS) meter</li>
+</ol>
+
+<p>
+    Some commands can be found in the non-opened panel and others can only be accessed by going to <i>Settings</i> page, which takes time.
+</p>
+
+<p>
+    By the way, did you notice the <code>&gt;</code> symbol after the <i>Run</i> label in the above screenshot? Pressing back&shy;space button will give us access to all loaded resources of the web page, in which can also be found in the <i>Sources</i> panel.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#282828;">
+        <img src="/assets/posts/Screenshot 2025-02-15 135630.webp" alt="">
+    </div>
+</figure>
+
+<p>
+    Pretty useful, isn't it? In the next article of this series, we'll discover more useful tips on the way to become more productive.
+</p>
