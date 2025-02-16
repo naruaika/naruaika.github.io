@@ -26,24 +26,20 @@ permalink: /post/
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             overflow: hidden;
-            gap: 1.25rem;
+            gap: 3.75rem;
 
             a {
                 flex: 1;
                 box-sizing: border-box;
-                padding: .75rem 1rem;
                 font-size: 1.6rem;
                 line-height: 1.75;
                 color: inherit;
                 text-decoration: none;
                 font-family: "Fira Sans", sans-serif;
-                border: 3px solid #FFF;
                 cursor: pointer;
 
                 &:hover {
-                    background-color: var(--accent-color, #FFF);
-                    border-color: var(--accent-color, #FFF);
-                    color: #222;
+                    color: var(--accent-color, #FFF);
                 }
             }
         }
