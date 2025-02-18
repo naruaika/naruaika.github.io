@@ -263,20 +263,23 @@ Bersambung ...
         save.classList.add("poster");
         save.addEventListener("click", () => {
             viewer.classList.add("print");
+            const now = Date.now();
             const posters = viewer.querySelectorAll(".poster");
             posters.forEach((poster, index) => {
                 if (index === posters.length - 1) {
                     return;
                 }
-                html2canvas(poster).then((canvas) => {
-                    const link = document.createElement("a");
-                    link.href = canvas.toDataURL("image/png");
-                    link.download = `${Date.now()}-${index+1}.png`;
-                    link.style.display = "none";
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                });
+                setTimeout(() => {
+                    html2canvas(poster).then((canvas) => {
+                        const link = document.createElement("a");
+                        link.href = canvas.toDataURL("image/png");
+                        link.download = `${now}-${index+1}.png`;
+                        link.style.display = "none";
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    });
+                }, index * 200);
             });
             viewer.classList.remove("print");
         });
