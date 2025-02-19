@@ -1,0 +1,238 @@
+---
+layout: post
+title: Coding While Still Being Human
+description: Code comes from humans, is written by humans, and solves human problems. That's all there is to it. But behind that, there is a hidden fact that tries to speak to the surface.
+accent_color: 4be8fd
+hero_content: >-
+    <div style="
+        --c1: #4be8fd;
+        --c2: #42cee0;
+        --c3: #3ab3c4;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    Code comes from humans, is written by humans, and solves human problems. That's all there is to it. But behind that, there is a hidden fact that tries to speak to the surface that it means nothing less than understanding humans.
+</p>
+
+<h2>
+    When to be human
+</h2>
+
+<p>
+    Code is read more than written. We read when we want to add new functionalities to the system. We read when it needs to be refactored. We read when we want to improve the performance of the execution. We read when we want to debug the code. So, clarity is of the utmost importance.
+</p>
+
+<p>
+    <a href="https://digitalcommons.tamusa.edu/cgi/viewcontent.cgi?article=1015&context=computer_faculty" rel="nofollow">A study</a> concluded that meaningful names, consistency, and comments have a strong beneficial influence on improving code readability. On the other side, arithmetic expressions, nested loops, and recursive functions demonstrated a detrimental influence. <a href="https://arxiv.org/pdf/1909.01760" rel="nofollow">Another study</a> confirmed that spacing is the second most important factor in code readability.
+</p>
+
+<p>
+    Meaningful names are essential so that we don't lose track of what's going on when reading, while comments give us the ability to understand the code in a more holistic way. As for spacing, it serves as a visual cue that helps us read the structure of the code, as well as helping us focus on key information.
+</p>
+
+<pre>
+function p(x) {
+    return x * 0.453592;
+}
+
+let w = p(150);
+console.log(w);
+</pre>
+
+<p>
+    See if there's any differences from the above:
+</p>
+
+<pre>
+function poundsToKilograms(pounds) {
+    const conversionFactor = 0.453592;
+    return pounds * conversionFactor;
+}
+
+let weightInKg = poundsToKilograms(150);
+console.log(`Weight: ${weightInKg} kg`);
+</pre>
+
+<p>
+    Code should be communicative, so that code reviews, pair programming, and systems collaboration can occur. Nowadays, it's hard to find code that can stand alone, it's more easy to find code that's part of something bigger than itself.
+</p>
+
+<p>
+    Code also needs to show empathy in collaboration. Our teams interact more while writing code than after it goes to production, right? So our communication should be as effective as possible.
+</p>
+
+<pre>
+function getCompletedTasks(tasks) {
+    let completedTasks = [];
+    for (let index = 0; index < tasks.length; index++) {
+        if (tasks[index].status === "completed") {
+            completedTasks.push(tasks[index]);
+        }
+    }
+    return completedTasks;
+}
+
+let taskList = [
+    { title: "Buy groceries", status: "completed" },
+    { title: "Wash car", status: "pending" },
+    { title: "Pay bills", status: "completed" },
+];
+
+const completedTasks = getCompletedTasks(taskList);
+console.log("Completed Tasks:", completedTasks);
+</pre>
+
+<p>
+    Compared it to the following:
+</p>
+
+<pre>
+function getCompletedTasks(tasks) {
+    return tasks.filter(task => task.status === "completed");
+}
+
+let taskList = [...];
+
+const completedTasks = getCompletedTasks(taskList);
+console.log("Completed Tasks:", completedTasks);
+</pre>
+
+<p>
+    We agreed that code impacts real people and real businesses, so human-centered thinking is essential. It's by no means that the code should only can be read by us, because we're human too, but it should also be readable by most humans. Code impacts all the humans who collaborated in writing it and it impacts all the humans who make use of it, that's what it means.
+</p>
+
+<p>
+    Meanwhile, code impacts real business meaning it impacts all the humans involved in passing the baton. Because there's hardly any software that doesn't require maintenance at all. Keeping code relevant is part of the business.
+</p>
+
+<p>
+    In the previous example, we saw that one-liner is more readable. But that's not always true. Let's look at the following example.
+</p>
+
+<pre class="wrapped">
+const taskCounts = tasks.reduce((acc, task) => (acc[task.status] = (acc[task.status] || 0) + 1, acc), {});
+</pre>
+
+<p>
+    Now, look at the alternative:
+</p>
+
+<pre>
+const taskCounts = tasks.reduce((acc, task) => {
+    acc[task.status] = (acc[task.status] || 0) + 1;
+    return acc;
+}, {});
+</pre>
+
+<p>
+    Well, perhaps it doesn't have to be this way either:
+</p>
+
+<pre>
+function countTasksByStatus(tasks) {
+    return tasks.reduce((acc, task) => {
+        if (!acc[task.status]) {
+            acc[task.status] = 0;
+        }
+        acc[task.status]++;
+        return acc;
+    }, {});
+}
+</pre>
+
+<p>
+    We may insist, <i>but all our team members can read the first version!</i> Yes, that may be true. However, what if a junior joins the team and everyone is too busy to add non-significant functionality to the code?
+</p>
+
+<p>
+    Open-source softwares usually have complete technical guidelines on writting code, because the amount of people contributing to the code is huge. Even if it doesn't, our code won't be accepted because it might not be formatted the same way as the rest.
+</p>
+
+<p>
+    So, once again, think of the human first, as humans.
+</p>
+
+<h2>
+    When to not be human
+</h2>
+
+<p>
+    The code runs well, it meets business needs. However, after going through the stress tests, it feels slow below the tolerance level.
+</p>
+
+<p>
+    This is when we start to think that the most readable solution isn't the most efficient. See the example below.
+</p>
+
+<pre>
+function isEven(num) {
+    return (num & 1) === 0;
+}
+</pre>
+
+<p>
+    Instead of this:
+</p>
+
+<pre>
+function isEven(num) {
+    return num % 2 === 0;
+}
+</pre>
+
+<p>
+    We know, this is rarely useful. But when it comes to developing a game, it can helps a lot. Because we've to make sure the whole process is executed within 1/60th of a second.
+</p>
+
+<p>
+    Here's another scenario:
+</p>
+
+<pre class="wrapped">
+const arr = new Array(1_000_000).fill(0);
+</pre>
+
+<p>
+    Then, <a href="https://www.measurethat.net/Benchmarks/Show/9348/0/array-fill-method-vs-for-loop" rel="nofollow">look at this</a>:
+</p>
+
+<pre>
+const arr = new Array(1_000_000);
+for (let i = 0; i < 1_000_000; i++) {
+    arr[i] = 0;
+}
+</pre>
+
+<p>
+    Or <a href="https://www.measurethat.net/Benchmarks/Show/7287/0/array-vs-int32array" rel="nofollow">even faster one</a>:
+</p>
+
+<pre class="wrapped">
+const arr = new Int32Array(1_000_000);
+</pre>
+
+<p>
+    The latter is considered more non-human although still readable as it's not as intuitive and explicit as the others.
+</p>
+
+<p>
+    Other times, readable code may not align with our values. For instance when working closely to hardware, readibility takes a backseat to precise control over execution.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#000000;">
+        <img src="/assets/posts/Screenshot 2025-02-19 151302.webp" alt="">
+    </div>
+</figure>
+
+<p>
+    As we can see in the above case, readability is not a factor when working with Assembly, or anything that's low-level.
+</p>
+
+<!-- <h2>
+    When to have humour
+</h2> -->
