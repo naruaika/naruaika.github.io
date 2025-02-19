@@ -133,15 +133,13 @@ const taskCounts = tasks.reduce((acc, task) => {
 </p>
 
 <pre>
-function countTasksByStatus(tasks) {
-    return tasks.reduce((acc, task) => {
-        if (!acc[task.status]) {
-            acc[task.status] = 0;
-        }
-        acc[task.status]++;
-        return acc;
-    }, {});
-}
+const taskCounts = tasks.reduce((acc, task) => {
+    if (!acc[task.status]) {
+        acc[task.status] = 0;
+    }
+    acc[task.status]++;
+    return acc;
+}, {});
 </pre>
 
 <p>
