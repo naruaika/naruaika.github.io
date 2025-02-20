@@ -78,6 +78,17 @@
     - Assisted in finding several bugs in the existing subscription workflow implementation.
     - Assisted in updating technical documentation of the system.
 
+- name: Website for MyRepublic Indonesia
+  time: 2023&ndash;2024
+  description: The project goal was to redesign the existing WordPress website and integrate with more customer related APIs.
+  technology_stack: JavaScript (Next.js), PHP (Laravel), MySQL, Strapi, Nginx, Postal, Odoo, Firebase, Kubernetes
+  responsibilities:
+    - Initiated the middleware API service which handles the website user authentication, as well as integrates with the customer APIs.
+    - Initiated an automated warning notification for monitoring the website down times.
+    - Performed a data migration from WordPress database to Strapi.
+    - Assisted in maintaining the continuous integration/continuous deployment (CI/CD) of the website and the middleware API service.
+    - Assisted in maintaining the self-hosted company’s GitLab instance.
+
 - name: Customer Mobile Application for MyRepublic Indonesia
   time: 2023
   description: The project aims to redesign an existing customer mobile application which was no longer maintainable due to technical issues, as well as help the company rebrand its product.
@@ -93,16 +104,13 @@
     - Implemented reCAPTCHA on the user login page.
     - Resolved several bugs related to Odoo integration and customer subscription payment APIs.
 
-- name: Website for MyRepublic Indonesia
-  time: 2023&ndash;2024
-  description: The project goal was to redesign the existing WordPress website and integrate with more customer related APIs.
-  technology_stack: JavaScript (Next.js), PHP (Laravel), MySQL, Strapi, Nginx, Postal, Odoo, Firebase, Kubernetes
+- name: Smokeping Daemon for MyRepublic Indonesia
+  time: 2023
+  description: The project aims to add a new module to an open-source software so that the Network Operations Center (NOC) team can monitor network latency and stability more accurately.
+  technology_stack: Go, InfluxDB
   responsibilities:
-    - Initiated the middleware API service which handles the website user authentication, as well as integrates with the customer APIs.
-    - Initiated an automated warning notification for monitoring the website down times.
-    - Performed a data migration from WordPress database to Strapi.
-    - Assisted in maintaining the continuous integration/continuous deployment (CI/CD) of the website and the middleware API service.
-    - Assisted in maintaining the self-hosted company’s GitLab instance.
+    - Worked on adding tcpping probe support.
+    - Assisted testing in real environment.
 
 - name: Website for Ne**le Indonesia
   time: 2023
