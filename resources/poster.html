@@ -63,22 +63,21 @@ permalink: /resource/poster
             }
 
             &:last-child {
-                font-weight: 600;
+                font-weight: 500;
                 cursor: pointer;
                 user-select: none;
 
-                &:hover {
-                    transform: scale(0.99);
-                }
-
+                &:hover,
                 &:active {
-                    transform: scale(0.97);
+                    outline: 2px solid var(--text-color);
+                    outline-offset: -10px;
+                    text-decoration: underline;
                 }
             }
 
             svg {
-                width: 30px;
-                height: 30px;
+                width: 26px;
+                height: 26px;
             }
         }
     }
@@ -125,7 +124,22 @@ permalink: /resource/poster
         }
     }
 
-    @media (width < 720px) {
+    @media (orientation: portrait) and (width < 720px) {
+        main {
+            padding: 0;
+            padding-top: 1rem;
+            height: auto;
+            min-height: calc(100vh - 33px);
+        }
+
+        #viewer .poster {
+            --poster-size: 225px;
+            --font-size: 11.25px;
+            --watermark-size: 22.5px;
+        }
+    }
+
+    @media (orientation: landscape) and (height < 720px) {
         main {
             padding: 0;
             padding-top: 1rem;
@@ -200,7 +214,7 @@ permalink: /resource/poster
 `background-color: #FFF
 text-color: #000
 watermark-text: @naruaika
-watermark-color: #DDD
+watermark-color: #EEE
 
 ---
 
