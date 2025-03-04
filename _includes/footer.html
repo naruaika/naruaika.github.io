@@ -1,3 +1,6 @@
 <footer id="footer">
-    <div>&copy;{{ site.time | date: "%Y" }} Naufan Rusyda Faikar (@naruaika)</div>
+    <div>&copy;<span id="current-year">{{ site.time | date: "%Y" }}</span> Naufan Rusyda Faikar (@naruaika)</div>
 </footer>
+<script>
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+</script>
