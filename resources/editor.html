@@ -196,8 +196,8 @@ permalink: /resource/editor
         <div style="position:relative">
             <div class="title">Explorer</div>
             <div id="templates" class="scrollable">
-                {% for item in site.data.web-templates %}
-                    <div class="{{ item.type }}" onclick="loadTemplate(event)">
+                {% for item in site.data.rce-items %}
+                    <div class="{{ item.type }}" data-credit="{{ item.credit }}" onclick="loadTemplate(event)">
                         {{ item.content }}
                     </div>
                 {% endfor %}
@@ -259,10 +259,10 @@ permalink: /resource/editor
 
     const loadTemplate = (event) => {
         const target = event.currentTarget;
-        const css = target.children[0].textContent;
-        const html = target.children[1].outerHTML;
-        cssEditor.setValue(cssEditor.getValue() + css + "\n");
-        htmlEditor.setValue(htmlEditor.getValue() + html + "\n");
+        const css = target.children[0].textContent + "\n";
+        const html = `\n<!-- Credit to ${target.dataset.credit} -->\n` + target.children[1].outerHTML + "\n";
+        cssEditor.setValue(cssEditor.getValue() + css);
+        htmlEditor.setValue(htmlEditor.getValue() + html);
     }
 
     require.config({ paths: { vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs" } });
