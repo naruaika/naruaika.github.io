@@ -15,7 +15,6 @@ permalink: /resource/
             box-sizing: border-box;
             margin: 0;
             margin-bottom: 3.5rem;
-            display: inline-block;
             font-family: "DM Serif Display", serif;
             font-size: 2.5rem;
             line-height: 1.25;
@@ -31,15 +30,13 @@ permalink: /resource/
 
         ul, ol {
             margin: 0;
-            max-width: 1060px;
             padding-inline-start: 3rem;
         }
 
         ul:nth-of-type(1) {
-            max-width: unset;
             padding: 0;
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.25rem;
 
             li {
@@ -47,8 +44,11 @@ permalink: /resource/
                 list-style: none;
 
                 a {
+                    flex: 1;
+                    aspect-ratio: 2 / 1;
+                    height: auto;
                     box-sizing: border-box;
-                    padding: .75rem 1rem;
+                    padding: 1.25rem;
                     font-size: 1.6rem;
                     font-weight: 800;
                     line-height: 1;
@@ -65,6 +65,27 @@ permalink: /resource/
                     }
                 }
             }
+
+            li:last-of-type a {
+                border-style: dashed;
+
+                &:hover {
+                    background-color: inherit;
+                    color: inherit;
+                }
+            }
+        }
+    }
+
+    @media (width < 1400px) {
+        main ul:nth-of-type(1) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (width < 1080px) {
+        main ul:nth-of-type(1) {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 
@@ -72,8 +93,19 @@ permalink: /resource/
         main {
             padding-top: 0;
 
-            a {
-                font-size: 1.2rem;
+            ul:nth-of-type(1) {
+                grid-template-columns: 1fr;
+
+                a {
+                    position: relative;
+                    padding: 2rem;
+                    font-size: 1.4rem;
+                    border: none;
+
+                    &:hover {
+                        border: none;
+                    }
+                }
             }
         }
     }
@@ -83,38 +115,40 @@ permalink: /resource/
     <h1>My Resources</h1>
     <ul>
         <li><a href="/resource/editor">CSS Editor</a></li>
-        <li><a href="/resource/poster">MD Poster</a></li>
+        <li><a href="/resource/poster">Markdown Poster</a></li>
         <li><a href="#">More Later</a></li>
     </ul>
 
     <h2>My Readings</h2>
     <p>
-        Readings reflect one's character and knowledge.
+        I do believe that readings reflect one's character and knowledge.
+        <br>See if we share the same interests and let's have a conversation!
     </p>
     <ol>
-        <li><i>Start with Why:</i> How Great Leaders Inspire Everyone to Take Action (Simon Sinek)</li>
-        <li><i>Leaders Eat Last:</i> Why Some Teams Pull Together and Others Don't (Simon Sinek)</li>
-        <li><i>Same as Ever:</i> Timeless Lessons on Risk, Opportunity and Living a Good Life (Morgan Housel)</li>
-        <li><i>The Psychology of Money:</i> Timeless Lessons on Wealth, Greed, and Happiness (Morgan Housel)</li>
-        <li><i>Outliers:</i> The Story of Success (Malcolm Gladwell)</li>
-        <li><i>The Tipping Point:</i> How Little Things Can Make a Big Difference (Malcolm Gladwell)</li>
-        <li><i>Everybody Lies:</i> Big Data, New Data, and What the Internet Can Tell Us About Who We Really Are (Seth Stephens-Davidowitz)</li>
-        <li><i>The Diary of a CEO:</i> The 33 Laws of Business and Life (Steven Bartlett)</li>
-        <li><i>The $100 Startup:</i> Reinvent the Way You Make a Living, Do What You Love, and Create a New Future (Chris Guillebeau)</li>
-        <li><i>How to Win Friends and Influence People</i> (Dale Carnegie)</li>
-        <li><i>This is Marketing:</i> You Can't Be Seen Until You Learn To See (Seth Godin) [On reading]</li>
-        <li><i>Misbehaving:</i> The Making of Behavioral Economics (Richard H. Thaler) [On reading]</li>
-        <li><i>TED Talks:</i> The Official TED Guide to Public Speaking (Chris Anderson) [On reading]</li>
-        <li><i>Range:</i> Why Generalists Triumph in a Specialized World (David Epstein) [On reading]</li>
-        <li><i>Code:</i> The Hidden Language of Computer Hardware and Software (Charles Petzold) [On reading]</li>
-        <li><i>The Black Swan:</i> The Impact of the Highly Improbable (Nassim Nicholas Taleb) [To be read]</li>
-        <li><i>Loonshots:</i> How to Nurture the Crazy Ideas That Win Wars, Cure Diseases, and Transform Industries (Safi Bahcall) [To be read]</li>
-        <li><i>Zero to One:</i> Notes on Startups, or How to Build the Future (Peter Thiel) [To be read]</li>
-        <li><i>Atomic Habits:</i> An Easy & Proven Way to Build Good Habits & Break Bad Ones (James Clear) [To be read]</li>
-        <li><i>Hidden Potential:</i> The Science of Achieving Greater Things (Adam Grant) [To be read]</li>
-        <li><i>Think and Grow Rich</i> (Napoleon Hill) [To be read]</li>
+        <li><i>Start with Why:</i> How Great Leaders Inspire Everyone to Take Action&mdash;Simon Sinek</li>
+        <li><i>Leaders Eat Last:</i> Why Some Teams Pull Together and Others Don't&mdash;Simon Sinek</li>
+        <li><i>Same as Ever:</i> Timeless Lessons on Risk, Opportunity and Living a Good Life&mdash;Morgan Housel</li>
+        <li><i>The Psychology of Money:</i> Timeless Lessons on Wealth, Greed, and Happiness&mdash;Morgan Housel</li>
+        <li><i>Outliers:</i> The Story of Success&mdash;Malcolm Gladwell</li>
+        <li><i>The Tipping Point:</i> How Little Things Can Make a Big Difference&mdash;Malcolm Gladwell</li>
+        <li><i>Everybody Lies:</i> Big Data, New Data, and What the Internet Can Tell Us About Who We Really Are&mdash;Seth Stephens-Davidowitz</li>
+        <li><i>The Diary of a CEO:</i> The 33 Laws of Business and Life&mdash;Steven Bartlett</li>
+        <li><i>The $100 Startup:</i> Reinvent the Way You Make a Living, Do What You Love, and Create a New Future&mdash;Chris Guillebeau</li>
+        <li><i>How to Win Friends and Influence People</i>&mdash;Dale Carnegie</li>
+        <li>[On reading] <i>This is Marketing:</i> You Can't Be Seen Until You Learn To See&mdash;Seth Godin</li>
+        <li>[On reading] <i>Misbehaving:</i> The Making of Behavioral Economics&mdash;Richard H. Thaler</li>
+        <li>[On reading] <i>Zero to One:</i> Notes on Startups, or How to Build the Future&mdash;Peter Thiel</li>
+        <li>[On reading] <i>Range:</i> Why Generalists Triumph in a Specialized World&mdash;David Epstein</li>
+        <li>[On reading] <i>Code:</i> The Hidden Language of Computer Hardware and Software&mdash;Charles Petzold</li>
+        <li>[On reading] <i>TED Talks:</i> The Official TED Guide to Public Speaking&mdash;Chris Anderson</li>
+        <li>[To be read] <i>The Black Swan:</i> The Impact of the Highly Improbable&mdash;Nassim Nicholas Taleb</li>
+        <li>[To be read] <i>Loonshots:</i> How to Nurture the Crazy Ideas That Win Wars, Cure Diseases, and Transform Industries&mdash;Safi Bahcall</li>
+        <li>[To be read] <i>Atomic Habits:</i> An Easy & Proven Way to Build Good Habits & Break Bad Ones&mdash;James Clear</li>
+        <li>[To be read] <i>Hidden Potential:</i> The Science of Achieving Greater Things&mdash;Adam Grant</li>
+        <li>[To be read] <i>Think and Grow Rich</i>&mdash;Napoleon Hill</li>
     </ol>
     <p>
-        I also read Agatha Christie and Keigo Higashino's books; some local books; and many more.
+        Apart from the above, I also read Agatha Christie's books, Keigo Higashino's, and many more.
+        <br>Meanwhile, as a child, I grew up surrounded by books from Enid Blyton and Alfred Hitchcock.
     </p>
 </main>
