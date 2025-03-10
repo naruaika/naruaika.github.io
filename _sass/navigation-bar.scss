@@ -33,10 +33,11 @@
                 &::after {
                     content: '^';
                     position: absolute;
+                    top: 1rem;
                     left: 0;
                     right: 0;
                     text-align: center;
-                    transform: scaleY(0.5);
+                    transform: scaleY(0.5) translateY(-1rem);
                     opacity: 0;
                     animation: navbar-selection .15s ease-out;
                     animation-fill-mode: forwards;
@@ -48,11 +49,8 @@
 }
 
 @keyframes navbar-selection {
-    0% {
-        top: 2rem;
-    }
     100% {
-        top: 1rem;
+        transform: scaleY(0.5);
         opacity: 1;
     }
 }
