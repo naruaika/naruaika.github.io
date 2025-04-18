@@ -252,6 +252,16 @@ layout: default
                 }
             }
 
+            hr {
+                left: 0;
+                margin-block-start: 2rem;
+                margin-block-end: 2rem;
+                width: 20px;
+                height: 1px;
+                border: none;
+                background-color: var(--accent-color, #FFF);
+            }
+
             .comparison {
                 grid-column: full;
                 display: grid;
@@ -270,6 +280,10 @@ layout: default
                     font-style: italic;
                     text-align: center;
                 }
+            }
+
+            .icode {
+                margin-block-start: -2rem;
             }
         }
     }
@@ -325,7 +339,8 @@ layout: default
                     font-size: 0.9rem;
                 }
 
-                > pre {
+                > pre,
+                > .ielement.full-on-mobile {
                     grid-column: full;
                 }
 
@@ -342,7 +357,7 @@ layout: default
                         overflow-x: auto;
 
                         img {
-                            max-height: 50vh;
+                            max-height: 75vh;
                             max-width: unset;
                             margin: 0 auto;
                         }
@@ -361,6 +376,10 @@ layout: default
                 p, ul, ol, figure, pre, .ielement {
                     margin-block-start: .8rem;
                     margin-block-end: .8rem;
+                }
+
+                .icode {
+                    margin-block-start: -1.6rem;
                 }
 
                 .comparison {
