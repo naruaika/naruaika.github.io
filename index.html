@@ -36,7 +36,7 @@ title: Software Engineer
             &::after {
                 content: '';
                 position: absolute;
-                background-color: #FFF;
+                background-color: #EEE;
                 z-index: 1;
             }
 
@@ -58,7 +58,7 @@ title: Software Engineer
                 grid-column: 1 / span 2;
                 grid-row: 1 / span 2;
                 font-family: "DM Serif Display", serif;
-                background-color: #FFF;
+                background-color: #EEE;
                 color: #222;
                 font-size: 4rem;
                 line-height: 1.25;
@@ -146,7 +146,7 @@ title: Software Engineer
             &::after {
                 content: '';
                 position: absolute;
-                background-color: #FFF;
+                background-color: #EEE;
             }
 
             &::after {
@@ -163,10 +163,11 @@ title: Software Engineer
                 inset-inline-start: -1px;
             }
 
-            &:nth-child(4) {
+            &:nth-child(1) {
                 font-family: "DM Serif Display", serif;
                 font-size: 2.5rem;
-                background-color: #FFF;
+                line-height: 2.5rem;
+                background-color: #EEE;
                 color: #222;
             }
         }
@@ -191,7 +192,7 @@ title: Software Engineer
             &::after {
                 content: '';
                 position: absolute;
-                background-color: #FFF;
+                background-color: #EEE;
             }
 
             &::after {
@@ -211,7 +212,8 @@ title: Software Engineer
             &:nth-child(1) {
                 font-family: "DM Serif Display", serif;
                 font-size: 2.5rem;
-                background-color: #FFF;
+                line-height: 2.5rem;
+                background-color: #EEE;
                 color: #222;
             }
         }
@@ -262,11 +264,6 @@ title: Software Engineer
 
         #my-values {
             grid-template-columns: repeat(2, 1fr);
-
-            .box:nth-child(4) {
-                grid-column: 1;
-                grid-row: 1;
-            }
         }
 
         #my-experiences {
@@ -314,7 +311,8 @@ title: Software Engineer
         #my-hello .box,
         #my-values .box,
         #my-experiences .box {
-            padding: 1.25rem 2rem;
+            padding: 0.75rem 2rem;
+            font-size: 1.2rem;
         }
 
         #steve-quote,
@@ -323,12 +321,24 @@ title: Software Engineer
             padding-left: 2rem;
             padding-right: 2rem;
         }
+
+        #my-values .box:nth-child(1),
+        #my-experiences .box:nth-child(1) {
+            font-size: 2rem;
+        }
     }
 </style>
 
 <main>
     <div id="my-hello" aria-label="Naufan Rusyda Faikar">
-        <div class="box">Naufan Rusyda Faikar, the best engineer you can hire.<a href="mailto:hello@naruaika.me" class="button">Get in touch</a></div>
+        <div class="box">
+            <span>
+                <span style="color:#444;">Meet</span>
+                Naufan Rusyda Faikar,
+                <span style="color:#444;">your chosen companion.</span>
+            </span>
+            <a href="mailto:hello@naruaika.me" class="button">Get in touch</a>
+        </div>
         <div class="box">AI-generated? Templates? Nope, let's build real things.</div>
         <div class="box">No surprise. Let's surpass your expectations.</div>
         <div class="box">You don't want cheap. You're reaching for more.</div>
@@ -348,6 +358,7 @@ title: Software Engineer
     </blockquote>
 
     <div id="my-values" aria-label="My Values">
+        <div class="box">My Values</div>
         <div class="box" aria-label="Integrity">
             <strong>I work with integrity.</strong>
             If the project doesn't align with my values and passions, I'll not take part. But don't worry, you can still have a free consultation with me.
@@ -360,7 +371,6 @@ title: Software Engineer
             <strong>I prioritize quality.</strong>
             If you got asked too many questions, it does only mean that I'm doing my best to make sure my work can have the best impact on your business.
         </div>
-        <div class="box">My Values</div>
     </div>
 
     <blockquote id="alice-quote" aria-label="Quote from Alice in Wonderland">
