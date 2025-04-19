@@ -24,7 +24,6 @@ permalink: /post/
             padding: 0;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            overflow: hidden;
             gap: 3.75rem;
 
             a {
@@ -66,14 +65,12 @@ permalink: /post/
             margin-block: 0.5rem;
         }
 
-        .series {
+        .series, time {
             font-size: 75%;
             font-style: italic;
-        }
-
-        time {
-            font-size: 75%;
-            font-style: italic;
+            text-decoration: underline dotted var(--accent-color, #FFF) 2px;
+            text-underline-offset: 2px;
+            text-decoration-skip-ink: none;
         }
     }
 
@@ -96,7 +93,8 @@ permalink: /post/
             h1 {
                 padding-left: 2rem;
                 padding-right: 2rem;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1rem;
+                font-size: 2rem;
             }
 
             ul {
@@ -131,11 +129,12 @@ permalink: /post/
                     </div>
                 {%- endif -%}
                 <time datetime="{{ post.date | date_to_xmlschema }}" title="{{ post.date | date: '%B %d, %Y' }}">
-                    {%- if post.draft -%}
-                        Drafted on {{ post.date | date: '%B %d, %Y' }}
-                    {%- else -%}
-                        Posted on {{ post.date | date: '%B %d, %Y' }}
-                    {%- endif -%}
+                    {% if post.draft %}
+                        Drafted
+                    {% else %}
+                        Posted
+                    {% endif %}
+                    on {{ post.date | date: '%B %d, %Y' }}
                 </time>
             </a>
         </li>

@@ -281,7 +281,7 @@ layout: default
             }
 
             .icode {
-                margin-block-start: -2rem;
+                margin-block-start: -1rem;
             }
         }
     }
@@ -377,7 +377,7 @@ layout: default
                 }
 
                 .icode {
-                    margin-block-start: -1.6rem;
+                    margin-block-start: -.8rem;
                 }
 
                 .comparison {
@@ -400,11 +400,12 @@ layout: default
         Author: <a href="/">Naufan Rusyda Faikar</a>
     </p>
     <time datetime="{{ page.date | date_to_xmlschema }}" title="{{ page.date | date: '%B %d, %Y' }}">
-        {%- if page.draft -%}
-            Drafted on {{ page.date | date: '%B %d, %Y' }}
-        {%- else -%}
-            Posted on {{ page.date | date: '%B %d, %Y' }}
-        {%- endif -%}
+        {% if page.draft %}
+            Drafted
+        {% else %}
+            Posted
+        {% endif %}
+        on {{ page.date | date: '%B %d, %Y' }}
     </time>
     <div class="content">
         <div class="full hero">
