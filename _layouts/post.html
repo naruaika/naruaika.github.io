@@ -216,8 +216,6 @@ layout: default
 
                     > img {
                         max-width: 100%;
-                        margin-bottom: -5px;
-                        margin-top: -5px;
                     }
                 }
 
@@ -358,7 +356,7 @@ layout: default
 
                         img {
                             max-height: 75vh;
-                            max-width: unset;
+                            max-width: 200vw;
                             margin: 0 auto;
                         }
                     }
@@ -402,7 +400,11 @@ layout: default
         Author: <a href="/">Naufan Rusyda Faikar</a>
     </p>
     <time datetime="{{ page.date | date_to_xmlschema }}" title="{{ page.date | date: '%B %d, %Y' }}">
-        Posted on {{ page.date | date: '%B %d, %Y' }}
+        {%- if page.draft -%}
+            Drafted on {{ page.date | date: '%B %d, %Y' }}
+        {%- else -%}
+            Posted on {{ page.date | date: '%B %d, %Y' }}
+        {%- endif -%}
     </time>
     <div class="content">
         <div class="full hero">

@@ -56,23 +56,24 @@ permalink: /post/
             font-weight: 800;
             line-height: 1.5;
             hyphens: auto;
+            color: var(--accent-color, #FFF);
         }
 
         p {
             margin: 0;
             font-size: 85%;
             hyphens: auto;
+            margin-block: 0.5rem;
         }
 
         .series {
-            font-size: 85%;
+            font-size: 75%;
             font-style: italic;
         }
 
         time {
-            font-size: 85%;
+            font-size: 75%;
             font-style: italic;
-            /* margin-bottom: 1rem; */
         }
     }
 
@@ -106,11 +107,6 @@ permalink: /post/
                     position: relative;
                     padding: 2rem;
                     font-size: 1.4rem;
-                    border: none;
-
-                    &:hover {
-                        border: none;
-                    }
                 }
             }
         }
@@ -126,17 +122,21 @@ permalink: /post/
                 <h2>
                     {{ post.title }}
                 </h2>
+                <p>
+                    {{ post.description }}
+                </p>
                 {%- if post.series -%}
                     <div class="series">
                         Series: {{ post.series }}&mdash;Part {{ post.part }}
                     </div>
                 {%- endif -%}
                 <time datetime="{{ post.date | date_to_xmlschema }}" title="{{ post.date | date: '%B %d, %Y' }}">
-                    Posted on {{ post.date | date: '%B %d, %Y' }}
+                    {%- if post.draft -%}
+                        Drafted on {{ post.date | date: '%B %d, %Y' }}
+                    {%- else -%}
+                        Posted on {{ post.date | date: '%B %d, %Y' }}
+                    {%- endif -%}
                 </time>
-                <p>
-                    {{ post.description }}
-                </p>
             </a>
         </li>
         {% endfor %}
