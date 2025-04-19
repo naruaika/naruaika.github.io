@@ -17,3 +17,5 @@ plugins:
 
 include:
   - .well-known
+
+timezone: "Asia/Jakarta"
