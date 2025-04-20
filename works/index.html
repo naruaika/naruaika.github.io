@@ -9,7 +9,7 @@ permalink: /work/
         box-sizing: border-box;
         padding: 3.5rem 2rem;
         font-size: 1.4rem;
-        line-height: 1.75;
+        line-height: 1.5;
 
         h1, h2 {
             box-sizing: border-box;
@@ -56,8 +56,12 @@ permalink: /work/
         }
 
         .description {
-            margin-block: .4rem;
+            margin-block-start: 1rem;
             font-style: italic;
+        }
+
+        .responsibilities p {
+            margin-block: 1rem;
         }
 
         .responsibilities li {
@@ -188,9 +192,7 @@ permalink: /work/
                     {{ item.description }}
                 </div>
                 <div class="responsibilities">
-                    <span style="font-weight:500;">
-                        Responsibilities:
-                    </span>
+                    <p><b>Responsibilities:</b></p>
                     <ul>
                         {% for item in item.responsibilities %}
                             <li>{{ item }}</li>

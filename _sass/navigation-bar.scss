@@ -8,6 +8,7 @@
     z-index: 9999;
 
     .icon {
+        display: block;
         height: 50px;
     }
 
@@ -27,31 +28,19 @@
             }
 
             &.selected {
-                position: relative;
                 color: #FFF;
 
+                &::before {
+                    content: '[';
+                    margin-inline-end: -0.3rem;
+                }
+
                 &::after {
-                    content: '^';
-                    position: absolute;
-                    top: 1rem;
-                    left: 0;
-                    right: 0;
-                    text-align: center;
-                    transform: scaleY(0.5) translateY(-1rem);
-                    opacity: 0;
-                    animation: navbar-selection .15s ease-out;
-                    animation-fill-mode: forwards;
-                    animation-delay: .05s;
+                    content: ']';
+                    margin-inline-start: -0.3rem;
                 }
             }
         }
-    }
-}
-
-@keyframes navbar-selection {
-    100% {
-        transform: scaleY(0.5);
-        opacity: 1;
     }
 }
 
