@@ -183,7 +183,6 @@ layout: default
                 font-family: monospace;
                 font-size: 1.2rem;
                 background-color: #333;
-                border: 1px solid #999;
                 hyphens: unset;
                 word-break: break-all;
             }
@@ -283,6 +282,15 @@ layout: default
             .icode {
                 margin-block-start: -1rem;
             }
+
+            .icode + .icode {
+                border-top: 2px dashed #222;
+            }
+
+            /* Warning: this feature is deprecated */
+            xmp {
+                margin: 0;
+            }
         }
     }
 
@@ -338,7 +346,7 @@ layout: default
                 }
 
                 > pre,
-                > .ielement.full-on-mobile {
+                > .ielement.sm\:w-full {
                     grid-column: full;
                 }
 
