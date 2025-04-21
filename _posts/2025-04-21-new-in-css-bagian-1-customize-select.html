@@ -54,7 +54,7 @@ hero_content: >-
 
     <form class="formulir-kunjungan-1">
         <select>
-            <option value="" selected disabled>Pilih objek potretmu</option>
+            <option value="" selected disabled>Pilih hewan favoritmu</option>
             <option value="harimau">🐯 Harimau</option>
             <option value="beruang">🐻 Beruang</option>
             <option value="koala">🐨 Koala</option>
@@ -83,7 +83,7 @@ select:focus {
 </pre>
 
 <pre class="icode"><xmp><select>
-    <option value="" selected disabled>Pilih objek potretmu</option>
+    <option value="" selected disabled>Pilih hewan favoritmu</option>
     <option value="harimau">🐯 Harimau</option>
     <option value="beruang">🐻 Beruang</option>
     <option value="koala">🐨 Koala</option>
@@ -98,7 +98,7 @@ select:focus {
 </p>
 
 <p>
-    Sebagai informasi, jika terdapat garis putus-putus melingkari <code>&lt;select&gt;</code>, itu artinya perambanmu belum mendukung. Ah, tapi jangan terlalu khawatir, karena <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select" rel="nofollow">Mozilla sudah mendokumentasikannya</a> pada situs web MDN, tampaknya kali ini hanya masalah waktu saja. Tidak seperti dalam beberapa kasus di mana tim pengembang Mozilla Firefox dan Apple Safari punya pertimbangan sendiri&mdash;terkait kompatibilitas atau sekuriti misalnya&mdash;hingga akhirnya urung.
+    Sebagai informasi, jika latar belakang wadah elemen <code>&lt;select&gt;</code> berwarna merah, tandanya perambanmu belum mendukung. Ah, tapi jangan terlalu khawatir, karena <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select" rel="nofollow">Mozilla sudah mendokumentasikannya</a> pada situs web MDN, tampaknya kali ini hanya masalah waktu saja. Tidak seperti dalam beberapa kasus di mana tim pengembang Mozilla Firefox dan Apple Safari punya pertimbangan sendiri&mdash;terkait kompatibi&shy;litas atau sekuriti misalnya&mdash;hingga akhirnya urung.
 </p>
 
 <div class="ielement sm:w-full">
@@ -119,16 +119,19 @@ select:focus {
             }
 
             @supports not selector(::picker(select)) {
+                background-color: #F00;
+
                 select {
-                    position: relative;
                     font-size: 0.8em;
-                    border-style: dashed;
+                    background-color: #F00;
+                    color: #FFF;
+                    border-color: #FFF;
                 }
 
                 select:hover,
                 select:focus {
-                    background: #222;
-                    color: #FFF;
+                    background: #FFF;
+                    color: #222;
                     outline: none;
                 }
             }
@@ -222,7 +225,7 @@ select:focus {
     <form class="formulir-kunjungan-2">
         <select>
             <button><selectedcontent></selectedcontent></button>
-            <option value="" selected disabled>Pilih objek potretmu</option>
+            <option value="" selected disabled>Pilih hewan favoritmu</option>
             <option value="harimau">🐯 Harimau</option>
             <option value="beruang">🐻 Beruang</option>
             <option value="koala">🐨 Koala</option>
