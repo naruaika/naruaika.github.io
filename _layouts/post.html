@@ -1,6 +1,9 @@
 ---
 layout: default
 ---
+<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/vs2015.min.css">
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+
 {% if page.accent_color %}
 <style>
     :root {
@@ -223,6 +226,10 @@ layout: default
                     font-size: 1rem;
                     font-style: italic;
                     text-align: center;
+
+                    a {
+                        font-size: inherit;
+                    }
                 }
             }
 
@@ -300,7 +307,7 @@ layout: default
 
     @container (width < 1280px) {
         main .content blockquote {
-            font-size: min(10vmin, 4rem);
+            font-size: min(10vmin, 3.5rem);
         }
     }
 
@@ -430,3 +437,11 @@ layout: default
         {{ content }}
     </div>
 </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('.icode, .hcode').forEach((element) => {
+            hljs.highlightElement(element);
+        });
+    });
+</script>

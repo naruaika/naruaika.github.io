@@ -1,0 +1,671 @@
+---
+layout: post
+title: Paralaks, Inspirasi Desain Web dari Kajian Astronomi
+series: CSS Multiverse
+part: 1
+description: Paralaks, sebuah istilah yang meminjam dari astronomi, bukan hal yang baru. Kemunculannya diketahui setidaknya sudah sejak 1625. Meskipun sempat mengalami penurunan tren yang signifikan, desain paralaks masih terus disukai.
+language: id
+accent_color: c0ff2d
+hero_content: >-
+    <div style="
+        --c1: #c0ff2d;
+        --c2: #b2ec28;
+        --c3: #9dd123;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1em, var(--c2) 1em, var(--c2) 50%), repeating-linear-gradient(45deg, var(--c3), var(--c3) 1em, var(--c1) 1em, var(--c1) 50%);
+        background-size: 3em 3em, 2em 2em;
+    "></div>
+---
+<p>
+    Paralaks atau <i>parallax</i> dalam dunia desain web bukan hal asing bagi banyak orang, terutama bagi para desainer web dan pemrogram <i>front-end</i>. Dulu sempat mengetren selama beberapa tahun. Pada Januari 2014, frekuensi penelusuran kata kunci <i>parallax design</i> di Google sempat meraih puncak.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#f1f4f9;">
+        <img src="/assets/posts/Screenshot 2025-04-21 at 17-47-33 parallax design - Explore - Google Trends.webp" alt="">
+    </div>
+    <figcaption>
+        Statistik tren penggunaan kata kunci <i>parallax design</i> di Google berdasarkan Google Trends.
+    </figcaption>
+</figure>
+
+<p>
+    Meskipun sudah mengalami penurunan tren secara signifikan, kita masih bisa menemukan beberapa situs web, templat situs web, dan portofolio yang masih relatif baru bertebaran di berbagai platform. Seperti banyak tren lainnya yang tidak begitu mudah untuk hilang/mati, ketertarikan masyarakat pada desain paralaks ini mulai memasuki fase kestabilan persisnya sejak akhir 2020 atau awal 2021.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#FFFFFF;">
+        <img src="/assets/posts/Screenshot 2025-04-21 at 18-44-19 Google Ngram Viewer parallax design.webp" alt="">
+    </div>
+    <figcaption>
+        Statistik frekuensi kemunculan frasa <i>parallax design</i> dalam kumpulan buku berdasarkan <i>Google Books</i>.
+    </figcaption>
+</figure>
+
+<p>
+    <i>Google Books Ngram Viewer</i> membenarkan tren tersebut sekaligus membantah situasi belakangan, namun juga memberikan tambahan wawasan. Istilah <i>parallax design</i> sendiri ternyata sudah sempat muncul jauh sebelum internet pertama kali bisa diakses oleh publik. Muncul lagi pada pertengahan 1980-an, meningkat secara signifikan mulai 1999&mdash;bersamaan dengan terjadinya fenomena <a href="https://en.wikipedia.org/wiki/Dot-com_bubble" rel="nofollow"><i>dot-com bubble</i></a>&mdash;, dan mencapai puncaknya pada 2002. Kemudian turun kembali secara drastis mulai 2014.
+</p>
+
+<p>
+    Apa yang menyebabkan tren desain paralaks mengalami penurunan? Mengutip dari <i>IEEE Spectrum</i>, pendanaan ventura kepada perusahaan rintisan di Amerika pada 2014 <a href="https://spectrum.ieee.org/venture-funding-highest-in-2014-since-dotcom-high" rel="nofollow">mencetak angka tertinggi</a> dalam sejarah sejak peristiwa <i>dot-com crash</i>. Melalui 4.356 transaksi, kapitalis ventura menggelontorkan dana sebesar 48,3 miliar dolar atau sekitar 814,5 triliun rupiah. Meskipun belum jelas korelasinya, saya pikir titik ini bisa menjadi awalan yang bagus untuk eksplorasi ke depannya.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#FFFFFF;">
+        <img src="/assets/posts/Screenshot 2025-04-21 at 18-59-41 Google Ngram Viewer parallax.webp" alt="">
+    </div>
+    <figcaption>
+        Statistik frekuensi kemunculan frasa <i>parallax</i> dalam kumpulan buku berdasarkan <i>Google Books</i>.
+    </figcaption>
+</figure>
+
+<p>
+    Sementara kata <i>parallax</i> sendiri pertama kali diketahui kemunculannya pada 1625 menurut <i>Google Books Ngram Viewer</i>. Pada akhirnya rasa penasaran kita tergelitik; paralaks itu sebenarnya apa? <i>Cambridge Advanced Learner's Dictionary & Thesaurus</i> berusaha <a href="https://dictionary.cambridge.org/dictionary/english/parallax" rel="nofollow">memberikan definisi kata</a> tersebut:
+</p>
+
+<blockquote>
+    The effect by which the position of an object seems to change when it is looked at from different positions.
+</blockquote>
+
+<p>
+    Sementara <i>Britannica</i> sembari merujuk pada astronomi <a href="https://www.britannica.com/science/parallax" rel="nofollow">memberikan penjelasan arti</a> sebagai <i>the difference in direction of a celestial object as seen by an observer from two widely separated points</i>.
+</p>
+
+<p>
+    Dengan cukup memasukkan kata kunci <i>parallax</i>, kita bisa menemukan berbagai penjelasan tambahan secara visual yang relatif mudah dipahami sekalipun untuk kalangan awam seperti saya.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#101218;">
+        <img src="/assets/posts/Screenshot 2025-04-21 at 20-00-55 parallax - Google Search.webp" alt="">
+    </div>
+    <figcaption>
+        Hasil pencarian gambar untuk kata kunci <i>parallax</i> di <i>Google Search</i>.
+    </figcaption>
+</figure>
+
+<p>
+    Pada kesempatan ini, kita akan menjelajahi beberapa inspirasi desain web yang sedikit banyak dipengaruhi oleh fenomena paralaks yang terjadi di luar angkasa. Dilanjutkan dengan beberapa eksperimen dalam upaya mempelajari teknik-teknik dasar implementasinya ke dalam desain web berdasarkan contoh-contoh yang berhasil kita observasi di internet.
+</p>
+
+<p>
+    <b>Dalam artikel ini:</b>
+</p>
+
+<ul>
+    <li><a href="#mengobservasi-dunia">Mengobservasi Dunia</a></li>
+    <li><a href="#melakukan-pertunjukan">Melakukan Pertunjukan</a></li>
+</ul>
+
+<h2 id="mengobservasi-dunia">
+    Mengobservasi Dunia
+</h2>
+
+<p>
+    Cara paling mudah untuk mendapatkan inspirasi desain yang mengadopsi paralaks adalah dengan mengetikkan kata kunci <i>parallax</i> ke dalam bilah input pencarian di <i>Dribbble</i>. Di bawah ini merupakan contoh implementasi yang sempat menjadi paling populer di fase awal kepopuleran desain paralaks berdasarkan pengamatan saya.
+</p>
+
+<figure>
+    <div class="container">
+        <video src="../assets/posts/Screen Recording 2025-04-21 174028.mp4" controls muted></video>
+    </div>
+    <figcaption>
+        <a href="https://dribbble.com/shots/24322165-Web-design" rel="nofollow">Portofolio desain web</a> dari akun bernama <i>Cami</i> di <i>Dribbble</i> yang dipublikasikan pada 9 Juni 2024.
+    </figcaption>
+</figure>
+
+<p>
+    Variasi pertama ini sebenarnya lebih agresif ketimbang kebanyakan desain yang lebih umum saya temui dalam rentang waktu yang sama. Di bawah ini contoh variasi yang lebih umum yang saya maksud.
+</p>
+
+<figure>
+    <div class="container">
+        <video src="../assets/posts/Screen Recording 2025-04-22 070400.mp4" controls muted></video>
+    </div>
+    <figcaption>
+        <a href="https://elementor.com/library/template-kit/startup-investment-one-page-kit/" rel="nofollow">Templat halaman web</a> dari <i>Elementor Kits Library</i> yang untuk bisnis <i>startup</i> dan investasi.
+    </figcaption>
+</figure>
+
+<p>
+    Saya bisa melihat mengapa pendekatan terakhir di atas kemungkinan lebih banyak diapresiasi daripada yang sebelumnya. Animasi paralaks pada halaman web yang ini tidak terlalu menggangu kemampuan pengunjung untuk membaca dan menemukan kembali informasi, meskipun mungkin dipandang kurang dalam memberikan pengalaman yang <i>immersive</i>.
+</p>
+
+<p>
+    Sayangnya, pertunjukannya tampak kurang bisa diterima oleh banyak pengguna. Mereka tidak terkesan sebagaimana harapan, bahkan pendekatan desain ini dinilai <a href="https://www.nngroup.com/articles/parallax-usability/" rel="nofollow">merugikan pengalaman pengguna</a>. Pada fase tren berikutnya, implementasinya bergeser ke arah yang lebih bisa dikendalikan.
+</p>
+
+<figure>
+    <div class="container">
+        <video src="../assets/posts/Screen Recording 2025-04-22 052351.mp4" controls muted></video>
+    </div>
+    <figcaption>
+        <a href="https://dribbble.com/shots/25024300-Solar-Panel-Ecommerce-Web-Animation" rel="nofollow">Portofolio desain web</a> dari akun bernama <i>Happy Milliarta</i> di <i>Dribbble</i> yang dipublikasikan pada 14 Oktober 2024.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container">
+        <video src="../assets/posts/Screen Recording 2025-04-22 054125.mp4" controls muted></video>
+    </div>
+    <figcaption>
+        <a href="https://dribbble.com/shots/20783522-Effects-in-Framer" rel="nofollow">Portofolio desain web</a> dari akun bernama <i>Monika Michalczyk</i> di <i>Dribbble</i> yang dipublikasikan pada 1 Maret 2023.
+    </figcaption>
+</figure>
+
+<p>
+    Pada dua contoh di atas, animasi pergerakan elemen-elemen dan latar belakangnya terasa lebih halus dan kadang tidak kentara. Fungsi pengaturan waktu animasi tidak lagi linear mengikuti posisi gulir tetikus, melainkan sudah lebih organik dan lebih bisa bercerita. Perubahannya tidak hanya terpaut pada satu variabel&mdash;posisi vertikal latar belakang&mdash;, namun juga pada perspektif dalam ruang tiga dimensi yang memberikan efek kedalaman yang lebih menarik.
+</p>
+
+<p>
+    Terutama pada satu contoh tambahan berikut ini, efek kedalaman lebih mudah untuk dinikmati tanpa mengorbankan pengalaman pengguna dalam mendapatkan informasi.
+</p>
+
+<figure>
+    <div class="container">
+        <video src="../assets/posts/Screen Recording 2025-04-22 063358.mp4" controls muted></video>
+    </div>
+    <figcaption>
+        <a href="https://www.firewatchgame.com/" rel="nofollow"><i>Situs web hidup</i></a> dari studio gim <i>Campo Santo</i> untuk <i>Firewatch</i> yang dirilis pada 2016 di <i>Steam</i>.
+    </figcaption>
+</figure>
+
+<p>
+    Berikut ini adalah dua contoh alternatif implementasi efek paralaks yang melibatkan lebih dari satu percepatan elemen seperti pada contoh terakhir di atas, yang juga mengenalkan variabel perubahan baru yaitu perbesaran dan perputaran relatif.
+</p>
+
+<figure>
+    <div class="container">
+        <video src="../assets/posts/Screen Recording 2025-04-22 053804.mp4" controls muted></video>
+    </div>
+    <figcaption>
+        <a href="https://dribbble.com/shots/14669566-Landing-page-design-for-Qoorio" rel="nofollow">Portofolio desain web</a> dari akun bernama <i>Outer Studio</i> di <i>Dribbble</i> yang dipublikasikan pada 30 November 2020.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container">
+        <video src="../assets/posts/Screen Recording 2025-04-22 053452.mp4" controls muted></video>
+    </div>
+    <figcaption>
+        <a href="https://dribbble.com/shots/18262711-Jupiter-Wine-Website" rel="nofollow">Portofolio desain web</a> dari akun bernama <i>Daniel Tan</i> di <i>Dribbble</i> yang dipublikasikan pada 17 Mei 2022.
+    </figcaption>
+</figure>
+
+<p>
+    Ujung-ujungnya, ketika menghendaki efek paralaks untuk diterapkan pada situs web kita, kita perlu mempertimbangkan banyak hal, khususnya terkait dengan pengalaman pengguna dalam mendapatkan informasi. Jangan malah pengunjung terlena atau bahkan tersakiti sehingga merugikan bisnis kita.
+</p>
+
+<h2 id="melakukan-pertunjukan">
+    Melakukan Pertunjukan
+</h2>
+
+<p>
+    Mari kita mulai dari implementasi yang paling sederhana.
+</p>
+
+<div class="ielement sm:w-full">
+    <style>
+        .viewport-1 {
+            height: 50vh;
+            color: #111;
+            background-color: #FFF;
+            overflow: auto;
+
+            .object {
+                position: relative;
+                box-sizing: border-box;
+                padding: 2rem;
+                height: 80%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 3.5rem;
+                line-height: 3.5rem;
+                font-weight: 700;
+                text-align: center;
+                text-transform: uppercase;
+                z-index: 0;
+
+                &:nth-of-type(2) {
+                    color: #FFF;
+                    background-image: url("/assets/posts/dan-cristian-padure-sIcLuAw8qx0-unsplash.webp");
+                    background-position: center center;
+                    background-size: cover;
+                    background-attachment: fixed;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        backdrop-filter: brightness(35%);
+                        z-index: -1;
+                    }
+                }
+
+                span {
+                    content: "";
+                    position: absolute;
+                    height: 50%;
+                    width: auto;
+                    aspect-ratio: 1;
+                    z-index: -1;
+                    background-image: url("/assets/posts/dan-cristian-padure-sIcLuAw8qx0-unsplash.webp");
+                    background-position: center center;
+                    background-size: cover;
+                    background-attachment: fixed;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        backdrop-filter: invert(100%);
+                        z-index: -1;
+                    }
+                }
+            }
+        }
+    </style>
+
+    <div class="viewport-1">
+        <div class="object">Please, you tell me</div>
+        <div class="object">Why she's so cute</div>
+        <div class="object">Know the answer?</div>
+        <div class="object">Uh, really?<span></span></div>
+        <div class="object">Come on, man.</div>
+    </div>
+</div>
+
+<pre class="icode">
+.viewport {
+    height: 50vh;
+    color: #111;
+    background-color: #FFF;
+    overflow: auto;
+
+    .object {
+        position: relative;
+        box-sizing: border-box;
+        padding: 2rem;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3.5rem;
+        line-height: 3.5rem;
+        font-weight: 700;
+        text-align: center;
+        text-transform: uppercase;
+        z-index: 0;
+
+        &:nth-of-type(2) {
+            color: #FFF;
+
+            /* Bagian ini yang penting */
+            background-image: url("...");
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                backdrop-filter: brightness(35%);
+                z-index: -1;
+            }
+        }
+
+        span {
+            content: "";
+            position: absolute;
+            height: 50%;
+            width: auto;
+            aspect-ratio: 1;
+            z-index: -1;
+
+            /* Bagian ini juga penting */
+            background-image: url("...");
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                backdrop-filter: invert(100%);
+                z-index: -1;
+            }
+        }
+    }
+}
+</pre>
+
+<pre class="icode"><xmp><div class="viewport">
+    <div class="object">Please, you tell me</div>
+    <div class="object">Why she's so cute</div>
+    <div class="object">Know the answer?</div>
+    <div class="object">Uh, really?<span></span></div>
+    <div class="object">Come on, man.</div>
+</div></xmp></pre>
+
+<div class="ielement sm:w-full">
+    <style>
+        .viewport-2 {
+            height: 50vh;
+            width: 100%;
+            color: #111;
+            background-color: #FFF;
+            overflow-y: auto;
+            overflow-x: hidden;
+            perspective: 1px;
+
+            .wrapper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                transform-style: preserve-3d;
+
+                img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    top: 80%;
+                    transform: translateZ(-1px) scale(2);
+                }
+
+                .object {
+                    box-sizing: border-box;
+                    padding: 2rem;
+                    height: 80%;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 3.5rem;
+                    line-height: 3.5rem;
+                    font-weight: 700;
+                    text-align: center;
+                    text-transform: uppercase;
+                    background-color: #FFF;
+
+                    &:nth-of-type(2) {
+                        color: #FFF;
+                        background-color: #000A;
+                    }
+                }
+            }
+        }
+    </style>
+
+    <div class="viewport-2">
+        <div class="wrapper">
+            <img src="/assets/posts/alexander-grey-QGQz-IBBl5w-unsplash.webp" alt="">
+            <div class="object">Please, someone tell me</div>
+            <div class="object">Why you're&mdash;awesome</div>
+            <div class="object">Come on, anyone.</div>
+        </div>
+    </div>
+</div>
+
+<pre class="icode">
+.viewport {
+    height: 50vh;
+    width: 100%;
+    color: #111;
+    background-color: #FFF;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /* Bagian ini yang penting */
+    perspective: 1px;
+
+    .wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        /* Bagian ini juga penting */
+        transform-style: preserve-3d;
+
+        img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+            /* Bagian ini juga penting */
+            top: 80%;
+            transform: translateZ(-1px) scale(2);
+        }
+
+        .object {
+            box-sizing: border-box;
+            padding: 2rem;
+            height: 80%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3.5rem;
+            line-height: 3.5rem;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+
+            /* Bagian ini cukup penting */
+            background-color: #FFF;
+
+            &:nth-of-type(2) {
+                color: #FFF;
+                background-color: #000A;
+            }
+        }
+    }
+}
+</pre>
+
+<pre class="icode"><xmp><div class="viewport">
+    <div class="wrapper">
+        <img src="...">
+        <div class="object">Please, someone tell me</div>
+        <div class="object">Why you're&mdash;awesome</div>
+        <div class="object">Come on, anyone.</div>
+    </div>
+</div></xmp></pre>
+
+<p>
+    Sebagai catatan, variasi implementasi terakhir di atas nampaknya agak berliku-liku. Saya beberapa kali menghadapi situasi di mana efeknya bekerja pada Firefox, namun tidak bekerja pada Chrome. Juga sebaliknya. Penggunaan properti seperti <code>backdrop-filter</code> tidak mesti konsisten antar peramban dalam konteks ini. Sehingga diperlukan upaya lebih untuk memastikan kodenya berjalan pada semua peramban utama.
+</p>
+
+<p>
+    Yang tidak kalah penting bahkan lebih penting adalah bagaimana cara mengoptimasi penerapannya sehingga tidak menggangu keseluruhan performa halaman web. Coba perhatikan seberapa mahal potensi biaya komputasi yang dibutuhkan untuk menghasilkan efek paralaks sekalipun model yang paling sederhana.
+</p>
+
+<figure>
+    <div class="container">
+        <video src="../assets/posts/Screen Recording 2025-04-22 142501.mp4" controls muted></video>
+    </div>
+    <figcaption>
+        Halaman web ini tanpa efek paralaks.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container">
+        <video src="../assets/posts/Screen Recording 2025-04-22 142503.mp4" controls muted></video>
+    </div>
+    <figcaption>
+        Halaman web ini dengan efek paralaks.
+    </figcaption>
+</figure>
+
+<p>
+    Pada dasarnya, paralaks hanya bisa tercipta pada lingkungan yang berlapis, di mana satu objek atau kumpulan objek memiliki kedalaman yang berbeda dari yang lainnya relatif terhadap jendela pandang pengguna. Lapisan-lapisan ini digambar sendiri-sendiri menjadi bitmap, diunggah ke GPU sebagai tekstur, dan kemudian digabung menjadi satu gambar utuh untuk ditampilkan ke layar komputer. Secara umum proses komposisi memerlukan <a href="https://web.dev/articles/speed-layers#:~:text=and%20GraphicsLayers,%20which%20are%20responsible%20for%20subtrees%20of%20RenderLayers" rel="nofollow">biaya komputasi yang relatif murah</a>. Namun jumlah lapisan grafis yang terlampau banyak bisa meningkatkan biayanya, terutama jika ada objek atau lapisan yang perlu digambar berulang kali.
+</p>
+
+<p>
+    Salah satu cara yang paling simpel yaitu dengan mengumpulkan semua elemen <code>.object</code> ke dalam satu wadah seperti dalam contoh kode berikut ini.
+</p>
+
+<pre class="hcode"><xmp><div class="viewport">
+    <div class="wrapper">
+        <img src="...">
+        <div style="width: 100%; height: 100%;">
+            <div class="object">Please, someone tell me</div>
+            <div class="object">Why you're&mdash;awesome</div>
+            <div class="object">Come on, anyone.</div>
+        </div>
+    </div>
+</div></xmp></pre>
+
+<p>
+    Sehingga tiap elemen <code>.object</code> berikut simpul teks di dalamnya tidak lagi dipromosikan menjadi lapisan grafis yang terpisah.
+</p>
+
+<figure>
+    <div class="container">
+        <img src="/assets/posts/Screenshot 2025-04-22 154232.webp" alt="">
+    </div>
+    <figcaption>
+        Halaman web ini dengan efek paralaks setelah dioptimasi.
+    </figcaption>
+</figure>
+
+<p>
+    Sekarang mari kita lihat contoh variasi terakhir dengan menambahkan sedikit kode JavaScript.
+</p>
+
+<div class="ielement sm:w-full">
+    <style>
+        .viewport-3 {
+            --distance: 1.0;
+
+            height: 50vh;
+            width: 100%;
+            color: #111;
+            background-color: #FFF;
+            overflow-y: auto;
+            overflow-x: hidden;
+            perspective: 1px;
+
+            .wrapper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                transform-style: preserve-3d;
+
+                img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    top: 80%;
+                    transform: translateZ(-1px) scale(2);
+                }
+
+                .object {
+                    box-sizing: border-box;
+                    padding: 2rem;
+                    height: 80%;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 3.5rem;
+                    line-height: 3.5rem;
+                    font-weight: 700;
+                    text-align: center;
+                    text-transform: uppercase;
+                    background-color: #FFF;
+
+                    &:nth-of-type(2) {
+                        color: #FFF;
+                        background-color: rgba(0, 0, 0, calc(0.60 + 0.30 * var(--distance, 1.0)));
+                    }
+                }
+            }
+        }
+    </style>
+
+    <div class="viewport-3">
+        <div class="wrapper">
+            <img src="/assets/posts/dan-cristian-padure-sIcLuAw8qx0-unsplash.webp" alt="">
+            <div class="object">Hey, now I have no doubt</div>
+            <div class="object target">You're absolutely a winner!</div>
+            <div class="object">Let's celebrate together.</div>
+        </div>
+    </div>
+
+    <script>
+        let viewport3 = document.querySelector(".viewport-3");
+        let target3 = viewport3.querySelector(".target");
+        viewport3.addEventListener("scroll", () => {
+            const vBBox = viewport3.getBoundingClientRect();
+            const tBBox = target3.getBoundingClientRect();
+            const vCenter = vBBox.top + vBBox.height / 2;
+            const tRCenter = tBBox.top + tBBox.height / 2;
+            const distance = Math.abs(vCenter - tRCenter);
+            viewport3.style.setProperty("--distance", Math.min(distance / (vBBox.height / 2), 1.0));
+        });
+    </script>
+</div>
+
+<pre class="icode">
+.viewport {
+    --distance: 1.0;
+
+    ...
+
+    .wrapper {
+        ...
+
+        .object {
+            ...
+
+            &:nth-of-type(2) {
+                color: #FFF;
+                background-color: rgba(0, 0, 0, calc(0.60 + 0.30 * var(--distance, 1.0)));
+            }
+        }
+    }
+}
+</pre>
+
+<pre class="icode"><xmp><div class="viewport">
+    <div class="wrapper">
+        ...
+        <div class="object target">You're absolutely a winner!</div>
+        ...
+    </div>
+</div></xmp></pre>
+
+<pre class="icode">
+let viewport = document.querySelector(".viewport");
+let target = viewport.querySelector(".target");
+viewport.addEventListener("scroll", () => {
+    const vBBox = viewport.getBoundingClientRect();
+    const tBBox = target.getBoundingClientRect();
+    const vCenter = vBBox.top + vBBox.height / 2;
+    const tRCenter = tBBox.top + tBBox.height / 2;
+    const distance = Math.abs(vCenter - tRCenter);
+    viewport.style.setProperty("--distance", Math.min(distance / (vBBox.height / 2), 1.0));
+});
+</pre>
+
+<p>
+    Kita bisa melanjutkan eksperimen menggunakan berbagai <i>web API</i> lainnya seperti <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent" rel="nofollow"><code>MouseEvent</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/AnimationTimeline" rel="nofollow"><code>AnimationTimeline</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API" rel="nofollow">Intersection Observer API</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver" rel="nofollow">Resize Observer API</a>, dan bahkan <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API" rel="nofollow">WebGL</a>/<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API" rel="nofollow">WebGPU</a>. Seperti kata pepatah,
+</p>
+
+<blockquote>
+    The only limit is your imagination.
+</blockquote>
+
+<p>
+    Jangan berhenti untuk terus berkarya! Jika kamu memiliki ide untuk artikel berikutnya dalam serial ini, jangan ragu untuk menghubungi saya melalui WhatsApp atau surel. Siapa tahu kita bisa berkolaborasi ke depannya :)
+</p>
