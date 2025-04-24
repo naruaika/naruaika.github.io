@@ -123,7 +123,7 @@ hero_content: >-
     As I already said, I was lazy and still I am ... Therefore, I was thinking of looking for Python libraries to achieve it. Then I was made to understand that it has something to do with optical character recognition. So, I had been playing around with <a href="https://pypi.org/project/pytesseract/" rel="nofollow">PyTesseract</a>:
 </p>
 
-<pre>
+<pre class="hcode language-python">
 import cv2
 from pytesseract import image_to_data, Output
 
@@ -145,7 +145,7 @@ cv2.waitKey(0)
     and also <a href="https://github.com/JaidedAI/EasyOCR" rel="nofollow">EasyOCR</a>:
 </p>
 
-<pre>
+<pre class="hcode language-python">
 import easyocr
 
 reader = easyocr.Reader(['ar'])
@@ -168,7 +168,7 @@ result = reader.readtext('dataset/quran-images/3.png')
     First of all, since they all need a page containing only the texts we want to extract from, we have to get rid of everything else outside the page border and the border itself for sure. You already know, as for by doing a simple code should be enough. Uh, wait, we need to install all required libraries and their dependencies:
 </p>
 
-<pre class="wrapped">
+<pre>
 $ sudo dnf install --yes poppler-utils
 ...
 
@@ -180,7 +180,7 @@ $ pip install pdf2image opencv-python matplotlib
     Then, inside my Jupyter notebook, I wrote these:
 </p>
 
-<pre>
+<pre class="hcode language-python">
 from pdf2image import convert_from_path
 
 pages = convert_from_path('dataset/quran-images/hafs-standard39.pdf', dpi=190)
@@ -200,7 +200,7 @@ pages = convert_from_path('dataset/quran-images/hafs-standard39.pdf', dpi=190)
     Thus, I did this instead:
 </p>
 
-<pre>
+<pre class="hcode language-python">
 from pdf2image import convert_from_path
 import tempfile
 
@@ -223,7 +223,7 @@ with tempfile.TemporaryDirectory() as outdir:
     Next, these lines:
 </p>
 
-<pre>
+<pre class="hcode language-python">
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
@@ -267,7 +267,7 @@ plt.show()
     Got it, ya? Let us continue writing ...
 </p>
 
-<pre>
+<pre class="hcode language-python">
 img_mod = cv2.Canny(img_mod, 100, 200)
 kernel = np.ones((2, 2), np.uint8)
 img_mod = cv2.dilate(img_mod, kernel)
@@ -292,7 +292,7 @@ plt.show()
     Then we could do something like:
 </p>
 
-<pre>
+<pre class="hcode language-python">
 bboxes = cv2.findContours(img_mod, cv2.RETR_EXTERNAL,
                           cv2.CHAIN_APPROX_SIMPLE)
 bboxes = bboxes[0] if len(bboxes) == 2 else bboxes[1]
@@ -303,7 +303,7 @@ x, y, w, h = cv2.boundingRect(max(bboxes, key=cv2.contourArea))
     and finally:
 </p>
 
-<pre>
+<pre class="hcode language-python">
 img_mod[y:y+h, x:x+w] = img_thres[y:y+h, x:x+w]
 </pre>
 

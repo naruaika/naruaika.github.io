@@ -89,7 +89,7 @@ INFO: Could not find files for the given pattern(s).
     From there, I had found that it have to be <code>python3.9</code> with the specific version as a suffix. Alright, I had no problem with that.
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 > where.exe python3.9
 C:\Users\Naufan Rusyda Faikar\AppData\Local\Microsoft\WindowsApps\python3.9.exe
 
@@ -116,7 +116,7 @@ Successfully installed pip-20.2.4
     Do you realize where the inconsistency lies? Let me make it clearer.
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 > where.exe pip
 C:\Users\Naufan Rusyda Faikar\AppData\Local\Microsoft\WindowsApps\pip.exe
 
@@ -128,7 +128,7 @@ pip 20.2.4 from C:\Users\Naufan Rusyda Faikar\AppData\Local\Packages\PythonSoftw
     The <code>where.exe</code> command had no knowledge of where the "usable" <code>pip</code> command is. Even if I did get more specific.
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 > where.exe python3.9
 C:\Users\Naufan Rusyda Faikar\AppData\Local\Microsoft\WindowsApps\python3.9.exe
 
@@ -201,7 +201,7 @@ FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\Naufan Rusyd
     Actually, it will run a similar command in PowerShell as below.
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 > & 'C:\Users\Naufan Rusyda Faikar\AppData\Local\Programs\Python\Python39\pythonw.exe' -c "import winreg; winreg.SetValueEx(winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r'SYSTEM\CurrentControlSet\Control\FileSystem'), 'LongPathsEnabled', None, winreg.REG_DWORD, 1)"
 </pre>
 

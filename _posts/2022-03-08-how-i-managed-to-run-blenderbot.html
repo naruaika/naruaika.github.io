@@ -66,7 +66,7 @@ Swap:             0           0           0
     <b>First,</b> let us install all the required dependencies in a new cell:
 </p>
 
-<pre>
+<pre class="hcode">
 %%capture
 
 # Install the latest version of ParlAI from source.
@@ -82,7 +82,7 @@ Swap:             0           0           0
     <b>Second,</b> run the web search server in a new cell:
 </p>
 
-<pre>
+<pre class="hcode">
 import os
 import shlex
 import subprocess
@@ -106,7 +106,7 @@ time.sleep(3)
     <b>Third,</b> in here where the hack is applied:
 </p>
 
-<pre>
+<pre class="hcode language-python">
 %%capture
 
 %mkdir /usr/local/lib/python3.7/dist-packages/data
@@ -122,7 +122,7 @@ download_bart_model('.')
     <b>Last,</b> run the BlenderBot 2.0's interactive shell in a new cell:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 !python -m parlai interactive --model-file zoo:blenderbot2/blenderbot2_400M/model --search_server $HOST
 </pre>
 

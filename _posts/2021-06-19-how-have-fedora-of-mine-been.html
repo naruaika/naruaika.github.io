@@ -63,7 +63,7 @@ $ sudo dnf swap --allowerasing pipewire-pulseaudio pulseaudio
     To play a wide variety of multimedia, especially those with restricted codecs, we need to:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 # Enable the RPMFusion repositories
 $ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 ...
@@ -85,7 +85,7 @@ $ sudo group upgrade --with-optional Multimedia
     Since my machine has a dedicated graphics processing unit (GPU), the GeForce GTX 10 Series for mobile, I have also grabbed the proprietary driver by:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ sudo dnf install -y akmod-nvidia
 ...
 </pre>
@@ -143,7 +143,7 @@ db82745c519b  k8s.gcr.io/pause:3.5                                             2
     You might noticed that all the above containers can be easily obtained by, for instance:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 # Download the PostgreSQL image
 $ podman pull docker.io/library/postgres
 ...
@@ -201,7 +201,7 @@ b68dcf5c322f  texlive         6 weeks ago  configured  registry.fedoraproject.or
     For writing, as I prefer LaTeX to LibreOffice Writer and Google Docs, I have created <code>texlive</code> container. Why not the host? Is not it a generic-purpose software? Because of:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ sudo dnf install texlive-scheme-full
 ...
 </pre>
@@ -242,7 +242,7 @@ $ sudo dnf install texlive-scheme-full
     First of all, let us run and enter the container:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ toolbox enter texlive
 </pre>
 
@@ -250,7 +250,7 @@ $ toolbox enter texlive
     Second, give write permission to the <code>/root</code> directory for our user. This is important for the VSCode to write server configuration files to the <code>/root</code>. In spite of not the best workaround, I tend to change the ownership instead;
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ sudo chown -R naru /root
 </pre>
 
@@ -270,7 +270,7 @@ $ sudo chown -R naru /root
     We actually need not to enter the texlive container, just run it. So, we can safely exit from the container now. Next time, make sure to run the container:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ toolbox run -c texlive true
 </pre>
 

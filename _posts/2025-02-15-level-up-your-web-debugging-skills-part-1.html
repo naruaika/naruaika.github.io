@@ -38,7 +38,7 @@ hero_content: >-
     In this case, it's more than easy to do:
 </p>
 
-<pre>
+<pre class="hcode">
 document.querySelector('.SDkEP');
 
 // or alternatively
@@ -97,7 +97,7 @@ document.getElementsByClassName('SDkEP')[0];
     Copying the JS path will give us something like this:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 document.querySelector("body > div > div > div.grid.min-h-dvh.grid-cols-1.grid-rows-\\[1fr_1px_auto_1px_auto\\].justify-center.pt-14\\.25.\\[--gutter-width\\:2\\.5rem\\].lg\\:grid-cols-\\[var\\(--gutter-width\\)_minmax\\(0\\,var\\(--breakpoint-2xl\\)\\)_var\\(--gutter-width\\)\\] > div.text-gray-950.dark\\:text-white > div > div:nth-child(2) > h1")
 </pre>
 
@@ -105,7 +105,7 @@ document.querySelector("body > div > div > div.grid.min-h-dvh.grid-cols-1.grid-r
     While copying the XPath will give us: <code>/html/body/div/div/div[2]/div[2]/div/div[2]/h1</code>. Which can be used in the console as follows:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 document.evaluate("/html/body/div/div/div[2]/div[2]/div/div[2]/h1", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
 </pre>
 

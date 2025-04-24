@@ -134,7 +134,7 @@ C:\Users\Naufan Rusyda Faikar\AppData\Roaming\Python\Python37\Scripts\pip.exe
     The <code>where.exe python</code> command simply searches for all <code>python</code> executables within the specified environment variables and then prints the list in descending order&mdash;the highest priority of <code>python.exe</code> to be called occupies the first place&mdash;. In Powershell, we might just want to see which executable was called-by typing its name;
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 > Get-Command python | Select-Object -ExpandProperty Definition
 C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\python.exe
 
@@ -182,7 +182,7 @@ C:\Users\Naufan Rusyda Faikar\AppData\Local\Programs\Python\Python39\Scripts\pip
     <b>On Linux,</b> we can run <code>whereis python</code> and <code>which python</code> instead;
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ whereis python3
 python3: /usr/bin/python3.8 /usr/bin/python3.9 /usr/bin/python3.8-config /usr/bin/python3.9-config /usr/bin/python /usr/bin/python3.8-x86_64-config /usr/bin/python3.9-x86_64-config /usr/lib/python3.8 /usr/lib/python3.9 /usr/lib64/python3.8 /usr/lib64/python3.9 /usr/local/lib/python3.8 /usr/include/python3.8 /usr/include/python3.9
 

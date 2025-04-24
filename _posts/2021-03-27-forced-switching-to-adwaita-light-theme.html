@@ -36,7 +36,7 @@ hero_content: >-
     Exploring the directory structure, I have realised that somehow WPS Office has included its own theme directory at <code>/var/lib/flatpak/app/com.wps.Office/x86_64/stable/active/files/share/themes/</code>.
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ cd /var/lib/flatpak/app/com.wps.Office/x86_64/stable/active/files/share/themes/
 
 $ ls
@@ -47,7 +47,7 @@ Adwaita  Adwaita-dark  Default  Emacs  HighContrast  Raleigh
     I think, this is not common, at least not for most applications. Then, I idly experimented to remove the <code>Adwaita-dark</code> folder, so that WPS Office cannot find it anymore. Or at least just to rename it;
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ sudo mv Adwaita-dark/ Adwaita-dark-bk/
 $ sudo mv Adwaita/ Adwaita-dark/
 </pre>
@@ -60,7 +60,7 @@ $ sudo mv Adwaita/ Adwaita-dark/
     <b>For GTK applications,</b> we can make sure to set the <code>GTK_THEME</code> environment variable. For example, for the <a href="https://gitlab.gnome.org/World/gcolor3" rel="nofollow">Color Picker</a> application:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ sudo flatpak override --env=GTK_THEME=Adwaita nl.hjdskes.gcolor3
 </pre>
 
@@ -68,7 +68,7 @@ $ sudo flatpak override --env=GTK_THEME=Adwaita nl.hjdskes.gcolor3
     To unset, just need to set the value to empty:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ sudo flatpak override --env=GTK_THEME= nl.hjdskes.gcolor3
 </pre>
 

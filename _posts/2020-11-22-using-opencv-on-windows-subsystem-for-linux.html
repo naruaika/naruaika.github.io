@@ -65,7 +65,7 @@ Fri Nov 20 23:08:43 2020
     Third, we had to install <a href="https://developer.nvidia.com/cuda-downloads" rel="nofollow">the CUDA toolkit</a> along with <a href="https://developer.nvidia.com/rdp/cudnn-download" rel="nofollow">the cuDNN</a> and then add it into the Fedora system path;
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ curl https://developer.download.nvidia.com/compute/cuda/11.1.1/local_installers/cuda_11.1.1_455.32.00_linux.run -o cuda_11.1.1_455.32.00_linux.run
 ...
 
@@ -87,7 +87,7 @@ $ source ~/.zshrc
     <b>Fourth</b>, we had to make sure that we have installed all the following necessary build tools;
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ sudo dnf install -y cmake python-devel ffmpeg-devel gstreamermm-devel
 ...
 </pre>
@@ -96,7 +96,7 @@ $ sudo dnf install -y cmake python-devel ffmpeg-devel gstreamermm-devel
     <b>Fifth</b>, it is highly recommended to install OpenCV into a virtual environment rather than directly to the system. So, we need to create one and do not forget to install the <code>numpy</code> module in it;
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ python3.8 -m pip install virtualenv # Fedora 33 has made Python 3.9 the default
 ...
 
@@ -115,7 +115,7 @@ $ pip install numpy
     <b>Sixth</b>, we had to download OpenCV with the extra modules source codes and extracted them;
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ cd ..
 $ mkdir Downloads
 $ cd Downloads
@@ -189,7 +189,7 @@ $ make
     Get a cup of coffee or two. But I would have preferred tea to coffee. Hahaha... Once it has done, <b>eighth</b>, install it using a simple command;
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ sudo make install
 ...
 </pre>
@@ -198,7 +198,7 @@ $ sudo make install
     Tada! We are done! You could run it and see if everything works! Well, I do not have enough experience to give you examples of using any CUDA OpenCV modules.
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 >>> import cv2
 >>> cv2.cuda.getDevice()
 0
@@ -270,7 +270,7 @@ $ rpm -qlp libcudnn8-8.0.5.39-1.cuda11.1.x86_64.rpm
     If we did not like this behaviour, we could download <a href="https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.0.5/11.1_20201106/cudnn-11.1-linux-x64-v8.0.5.39.tgz" rel="nofollow">the archived file</a> instead and then extract it manually;
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 $ curl https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.0.5/11.1_20201106/cudnn-11.1-linux-x64-v8.0.5.39.tgz -o cudnn-11.1-linux-x64-v8.0.5.39.tgz
 ...
 

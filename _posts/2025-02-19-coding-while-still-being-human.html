@@ -34,7 +34,7 @@ hero_content: >-
     Meaningful names are essential so that we don't lose track of what's going on when reading, while comments give us the ability to understand the code in a more holistic way. As for spacing, it serves as a visual cue that helps us read the structure of the code, as well as helping us focus on key information.
 </p>
 
-<pre>
+<pre class="hcode">
 function p(x) {
     return x * 0.453592;
 }
@@ -47,7 +47,7 @@ console.log(w);
     See if there's any differences from the above:
 </p>
 
-<pre>
+<pre class="hcode">
 function poundsToKilograms(pounds) {
     const conversionFactor = 0.453592;
     return pounds * conversionFactor;
@@ -65,7 +65,7 @@ console.log(`Weight: ${weightInKg} kg`);
     Code also needs to show empathy in collaboration. Our teams interact more while writing code than after it goes to production, right? So our communication should be as effective as possible.
 </p>
 
-<pre>
+<pre class="hcode">
 function getCompletedTasks(tasks) {
     let completedTasks = [];
     for (let index = 0; index < tasks.length; index++) {
@@ -90,7 +90,7 @@ console.log("Completed Tasks:", completedTasks);
     Compared it to the following:
 </p>
 
-<pre>
+<pre class="hcode">
 function getCompletedTasks(tasks) {
     return tasks.filter(task => task.status === "completed");
 }
@@ -113,7 +113,7 @@ console.log("Completed Tasks:", completedTasks);
     In the previous example, we saw that one-liner is more readable. But that's not always true. Let's look at the following example.
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 const taskCounts = tasks.reduce((acc, task) => (acc[task.status] = (acc[task.status] || 0) + 1, acc), {});
 </pre>
 
@@ -121,7 +121,7 @@ const taskCounts = tasks.reduce((acc, task) => (acc[task.status] = (acc[task.sta
     Now, look at the alternative:
 </p>
 
-<pre>
+<pre class="hcode">
 const taskCounts = tasks.reduce((acc, task) => {
     acc[task.status] = (acc[task.status] || 0) + 1;
     return acc;
@@ -132,7 +132,7 @@ const taskCounts = tasks.reduce((acc, task) => {
     Well, perhaps it doesn't have to be this way either:
 </p>
 
-<pre>
+<pre class="hcode">
 const taskCounts = tasks.reduce((acc, task) => {
     if (!acc[task.status]) {
         acc[task.status] = 0;
@@ -166,7 +166,7 @@ const taskCounts = tasks.reduce((acc, task) => {
     This is when we start to think that the most readable solution isn't the most efficient. See the example below.
 </p>
 
-<pre>
+<pre class="hcode">
 function isEven(num) {
     return (num & 1) === 0;
 }
@@ -176,7 +176,7 @@ function isEven(num) {
     Instead of this:
 </p>
 
-<pre>
+<pre class="hcode">
 function isEven(num) {
     return num % 2 === 0;
 }
@@ -190,7 +190,7 @@ function isEven(num) {
     Here's another scenario:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 const arr = new Array(1_000_000).fill(0);
 </pre>
 
@@ -198,7 +198,7 @@ const arr = new Array(1_000_000).fill(0);
     Then, <a href="https://www.measurethat.net/Benchmarks/Show/9348/0/array-fill-method-vs-for-loop" rel="nofollow">look at this</a>:
 </p>
 
-<pre>
+<pre class="hcode">
 const arr = new Array(1_000_000);
 for (let i = 0; i < 1_000_000; i++) {
     arr[i] = 0;
@@ -209,7 +209,7 @@ for (let i = 0; i < 1_000_000; i++) {
     Or <a href="https://www.measurethat.net/Benchmarks/Show/7287/0/array-vs-int32array" rel="nofollow">even faster one</a>:
 </p>
 
-<pre class="wrapped">
+<pre class="hcode">
 const arr = new Int32Array(1_000_000);
 </pre>
 
