@@ -216,7 +216,11 @@ layout: default
                     background-color: #333;
                     overflow-y: hidden;
 
-                    > img {
+                    picture {
+                        display: flex;
+                    }
+
+                    img {
                         max-width: 100%;
                     }
                 }
@@ -372,6 +376,11 @@ layout: default
                     > .container {
                         justify-content: start;
                         overflow-x: auto;
+
+                        picture img {
+                            max-height: unset;
+                            width: 100%;
+                        }
 
                         img {
                             max-height: 75vh;
