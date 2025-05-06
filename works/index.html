@@ -232,7 +232,7 @@ permalink: /work/
     <h2>
         My Photos
     </h2>
-    <a href="https://unsplash.com/@naruaika" class="button">&raquo; View all my shots &#11173;</a>
+    <a href="https://unsplash.com/@naruaika" class="button">&raquo; View all my shots</a>
     <div class="grid non-square">
         <img src="/assets/works/naufan-rusyda-faikar-lvTcQ5P_t50-unsplash.webp" alt="" loading="lazy">
         <img src="/assets/works/naufan-rusyda-faikar-jb3KUwGrzFY-unsplash.webp" alt="" loading="lazy">
@@ -367,6 +367,9 @@ permalink: /work/
             container.dataset.position = position;
         });
         slider.append(aL);
+
+        // TODO: add scrollsnapchange event listener
+        slider.querySelector('.content').addEventListener('scrollsnapchange', () => {});
 
         // Reset scroll position
         slider.querySelector('.content').scrollLeft = 0;
