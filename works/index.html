@@ -21,7 +21,12 @@ permalink: /work/
         }
 
         h2 {
-            margin-top: 7rem;
+            margin-top: 3.5rem;
+            text-box-trim: trim-both;
+
+            &::first-letter {
+                font-size: 200%;
+            }
         }
 
         :is(h1, h2) + .button {

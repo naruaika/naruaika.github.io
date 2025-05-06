@@ -6,3 +6,4 @@ _site
 vendor
 
 *.Identifier
+.well-known/appspecific

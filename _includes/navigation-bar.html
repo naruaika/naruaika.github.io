@@ -1,5 +1,5 @@
 <nav id="navigation-bar">
-    <a href="/"><img class="icon" src="/assets/images/favicon-invert-50x50.webp" alt=""></a>
+    <a href="/"><img class="icon" src="/assets/images/favicon-invert-50x50.webp" alt="Website logo"></a>
     <div class="menu">
         {%- assign page_url = page.url | relative_url | replace: '/', ' ' | split: ' ' | first | prepend: '/' | append: '/' | replace: '//', '/' -%}
         {% for item in site.data.navigation %}
