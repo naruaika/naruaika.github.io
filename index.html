@@ -84,8 +84,7 @@ title: Creative Software Engineer
             }
 
             &.post {
-                grid-column: 3 / span 2;
-                grid-row: 1;
+                grid-column: auto / span 2;
 
                 .description {
                     display: -webkit-box;
@@ -107,7 +106,8 @@ title: Creative Software Engineer
             }
 
             &.researching {
-                grid-column: auto / span 2;
+                grid-column: 3 / span 2;
+                grid-row: 1;
             }
 
             &.contact {
@@ -157,7 +157,7 @@ title: Creative Software Engineer
                     inset: 0;
                     padding: 1.25rem;
                     display: flex;
-                    justify-content: end;
+                    align-items: end;
                     color: inherit;
                     text-decoration: dotted underline;
 
@@ -165,10 +165,6 @@ title: Creative Software Engineer
                         text-decoration: underline;
                     }
                 }
-            }
-
-            &.placeholder {
-                display: none;
             }
         }
     }
@@ -364,7 +360,7 @@ title: Creative Software Engineer
                 grid-row: 1;
             }
 
-            .box:nth-child(2) {
+            .box.researching {
                 grid-column: 1 / span 2;
                 grid-row: unset;
             }
@@ -373,6 +369,11 @@ title: Creative Software Engineer
                 grid-column: 3;
                 grid-row: 4;
                 background-position: center;
+            }
+
+            .box.placeholder {
+                grid-column: 1;
+                grid-row: 3;
             }
 
             .box:last-child {
@@ -457,7 +458,8 @@ title: Creative Software Engineer
             }
 
             .box:nth-child(2),
-            .box:nth-child(5) {
+            .box:nth-child(5),
+            .box:nth-child(8) {
                 grid-column: unset;
                 grid-row: unset;
             }
@@ -527,21 +529,21 @@ title: Creative Software Engineer
             </span>
             <a href="mailto:hello@naruaika.me" class="button">&raquo; Get in touch</a>
         </div>
-        <div class="box post">
-            <b>{{ site.posts.first.title }}</b>
-            <span class="description">{{ site.posts.first.description }}</span>
-            <a href="{{ site.posts.first.url }}"><b>Read the post</b></a>
+        <div class="box researching">
+            <b>Current working:</b>
+            <span>Studying 550+ websites from big brands worldwide across 25 different industries, plus 150 inspiring yet curated websites, to create a collection of creative web designs&mdash;beyond the capabilities of today's AI&mdash;while still considering UX best practices.</span>
         </div>
         <div class="box reading">
-            <b>Currently reading:</b>
+            <b>Current reading:</b>
             <span><i>The Design of Everyday Things</i>&mdash;Don Norman</span>
         </div>
         <div class="box profile-picture">
             <a href="https://www.linkedin.com/in/naruaika/" rel="nofollow"><b>View my LinkedIn</b></a>
         </div>
-        <div class="box researching">
-            <b>Working on:</b>
-            <span>Studying 550+ websites from big brands worldwide across 25 different industries, plus 150 inspiring yet curated websites, to create a collection of creative web designs&mdash;beyond the capabilities of today's AI&mdash;while still considering UX best practices.</span>
+        <div class="box post">
+            <b>{{ site.posts.first.title }}</b>
+            <span class="description">{{ site.posts.first.description }}</span>
+            <a href="{{ site.posts.first.url }}"><b>Read the post</b></a>
         </div>
         <div class="box contact">
             <b>Don't be a stranger.</b>
@@ -551,7 +553,7 @@ title: Creative Software Engineer
             <b>Up for a brew?</b>
             {{ site.phone }}
         </div>
-        <div class="box">
+        <div class="box placeholder">
             <span><i>Jack of all trades, master of none?</i> Not really, but I do love learn new things especially related to languages, people, and cultures.</span>
         </div>
         <div class="box favorite-shot">
