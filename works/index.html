@@ -124,27 +124,33 @@ permalink: /work/
                 }
 
                 > .icon {
+                    box-sizing: border-box;
                     position: absolute;
                     display: inline-flex;
                     right: 10px;
                     bottom: -10px;
                     padding: 5px;
                     padding-left: 25px;
-                    background-color: #FFF;
+                    border: 2px solid #FFF;
+                    background-color: #222;
                     cursor: pointer;
-
-                    &.previous-button {
-                        right: 63px;
-                    }
-
-                    &:hover {
-                        background-color: #DDD;
-                    }
 
                     svg {
                         height: 18px;
                         width: 18px;
-                        fill: #222;
+                        fill: #FFF;
+                    }
+
+                    &.previous-button {
+                        right: 68px;
+                    }
+
+                    &:hover {
+                        background-color: #FFF;
+
+                        svg {
+                            fill: #222;
+                        }
                     }
                 }
             }
