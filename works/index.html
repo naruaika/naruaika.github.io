@@ -24,6 +24,24 @@ permalink: /work/
             margin-top: 7rem;
         }
 
+        :is(h1, h2) + .button {
+            display: inline-block;
+            margin-bottom: 3.5rem;
+            padding: .75rem 1rem;
+            font-weight: 800;
+            line-height: 1.5rem;
+            color: inherit;
+            text-decoration: none;
+            border: 3px solid #FFF;
+            background-color: transparent;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #FFF;
+                color: #222;
+            }
+        }
+
         > ul {
             margin: 0;
             padding: 0;
@@ -74,7 +92,6 @@ permalink: /work/
             padding: 0;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            overflow: hidden;
             gap: 1.25rem;
 
             img {
@@ -91,7 +108,6 @@ permalink: /work/
                     background-color: #FFF;
                     overflow-x: scroll;
                     scrollbar-width: none;
-                    -ms-overflow-style: none;
                     scroll-snap-stop: always;
                     scroll-snap-type: x mandatory;
                     overscroll-behavior-x: contain;
@@ -110,16 +126,25 @@ permalink: /work/
                 > .icon {
                     position: absolute;
                     display: inline-flex;
-                    right: 5px;
-                    bottom: 5px;
+                    right: 10px;
+                    bottom: -10px;
                     padding: 5px;
-                    background-color: #222;
-                    border-radius: 50%;
+                    padding-left: 25px;
+                    background-color: #FFF;
+                    cursor: pointer;
+
+                    &.previous-button {
+                        right: 63px;
+                    }
+
+                    &:hover {
+                        background-color: #DDD;
+                    }
 
                     svg {
                         height: 18px;
                         width: 18px;
-                        fill: #FFF;
+                        fill: #222;
                     }
                 }
             }
@@ -179,6 +204,7 @@ permalink: /work/
 
 <main>
     <h1>My Works</h1>
+    <a href="/assets/works/Curriculum Vitae - Naufan Rusyda Faikar - 20250506.pdf" class="button">&raquo; Read my resume (PDF)</a>
     <ul>
         {% for item in site.data.my-projects %}
             <li>
@@ -206,98 +232,144 @@ permalink: /work/
     <h2>
         My Photos
     </h2>
+    <a href="https://unsplash.com/@naruaika" class="button">&raquo; View all my shots &#11173;</a>
     <div class="grid non-square">
-        <img src="/assets/posts/naufan-rusyda-faikar-lvTcQ5P_t50-unsplash.webp" alt="" loading="lazy">
-        <img src="/assets/posts/naufan-rusyda-faikar-jb3KUwGrzFY-unsplash.webp" alt="" loading="lazy">
-        <img src="/assets/posts/naufan-rusyda-faikar-33szSvt_PNg-unsplash.webp" alt="" loading="lazy">
-        <img src="/assets/posts/naufan-rusyda-faikar-3vCEd_4U8Ow-unsplash.webp" alt="" loading="lazy">
-        <img src="/assets/posts/naufan-rusyda-faikar--xcshK9Qwe4-unsplash.webp" alt="" loading="lazy">
-        <img src="/assets/posts/naufan-rusyda-faikar-N2v_SVlVLpE-unsplash.webp" alt="" loading="lazy">
-        <img src="/assets/posts/naufan-rusyda-faikar-jNTglBHJKuI-unsplash.webp" alt="" loading="lazy">
-        <img src="/assets/posts/naufan-rusyda-faikar-CuIcxGk8ujI-unsplash.webp" alt="" loading="lazy">
-        <img src="/assets/posts/naufan-rusyda-faikar-7VM2deooAdM-unsplash.webp" alt="" loading="lazy">
-        <img src="/assets/posts/naufan-rusyda-faikar-f4RV8Qlvg8Q-unsplash.webp" alt="" loading="lazy">
-        <img src="/assets/posts/naufan-rusyda-faikar-ZLWdEUzg25M-unsplash.webp" alt="" loading="lazy">
-        <img src="/assets/posts/naufan-rusyda-faikar-KwwTr6p1HVo-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-lvTcQ5P_t50-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-jb3KUwGrzFY-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-33szSvt_PNg-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-3vCEd_4U8Ow-unsplash.webp" alt="" loading="lazy">
+
+        <img src="/assets/works/naufan-rusyda-faikar--xcshK9Qwe4-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-N2v_SVlVLpE-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-jNTglBHJKuI-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-IjmhOHghpeU-unsplash.webp" alt="" loading="lazy">
+
+        <img src="/assets/works/naufan-rusyda-faikar-fnjScdIRZos-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-K0ndNGffjv8-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-oqRZpktI3oA-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-CuIcxGk8ujI-unsplash.webp" alt="" loading="lazy">
+
+        <img src="/assets/works/naufan-rusyda-faikar-7VM2deooAdM-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-f4RV8Qlvg8Q-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-ZLWdEUzg25M-unsplash.webp" alt="" loading="lazy">
+        <img src="/assets/works/naufan-rusyda-faikar-KwwTr6p1HVo-unsplash.webp" alt="" loading="lazy">
     </div>
 
     <h2>
         My Posters
     </h2>
     <div class="grid square">
-        <img src="/assets/posts/ef5f0a2a76638e9abaea0bb0dfa1c774.webp" alt="" loading="lazy">
-        <img src="/assets/posts/b064dc73682b095405fae0f3eeb3ad2d.webp" alt="" loading="lazy">
-        <img src="/assets/posts/f4d2314ec0a67cdaae713b1234ac4325.webp" alt="" loading="lazy">
-        <img src="/assets/posts/feb998ea36ed324249fc6654f08231bc.webp" alt="" loading="lazy">
-        <img src="/assets/posts/4072a91c9a1faca37470376c5333e0bd.webp" alt="" loading="lazy">
-        <img src="/assets/posts/441af89e666d3a63b1926fc805320cbf.webp" alt="" loading="lazy">
+        <img src="/assets/works/ef5f0a2a76638e9abaea0bb0dfa1c774.webp" alt="" loading="lazy">
+        <img src="/assets/works/6e64a8cccf39d28fc4f3134a1d861457.webp" alt="" loading="lazy">
+        <img src="/assets/works/b064dc73682b095405fae0f3eeb3ad2d.webp" alt="" loading="lazy">
+        <img src="/assets/works/f4d2314ec0a67cdaae713b1234ac4325.webp" alt="" loading="lazy">
+
+        <img src="/assets/works/feb998ea36ed324249fc6654f08231bc.webp" alt="" loading="lazy">
+        <img src="/assets/works/4072a91c9a1faca37470376c5333e0bd.webp" alt="" loading="lazy">
         <div class="slider">
             <div class="content">
-                <img src="/assets/posts/20241010C - S1.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010C - S2.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010C - S3.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010C - S4.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010C - S5.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010C - S6.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010C - S1.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010C - S2.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010C - S3.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010C - S4.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010C - S5.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010C - S6.webp" alt="" loading="lazy">
             </div>
         </div>
         <div class="slider">
             <div class="content">
-                <img src="/assets/posts/20241010B - S1.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010B - S2.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010B - S3.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010B - S4.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010B - S5.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010B - S6.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010B - S1.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010B - S2.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010B - S3.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010B - S4.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010B - S5.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010B - S6.webp" alt="" loading="lazy">
+            </div>
+        </div>
+
+        <div class="slider">
+            <div class="content">
+                <img src="/assets/works/20241010A - S1.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010A - S2.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010A - S3.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010A - S4.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010A - S5.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241010A - S6.webp" alt="" loading="lazy">
             </div>
         </div>
         <div class="slider">
             <div class="content">
-                <img src="/assets/posts/20241010A - S1.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010A - S2.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010A - S3.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010A - S4.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010A - S5.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241010A - S6.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007C - S1.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007C - S2.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007C - S3.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007C - S4.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007C - S5.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007C - S6.webp" alt="" loading="lazy">
             </div>
         </div>
         <div class="slider">
             <div class="content">
-                <img src="/assets/posts/20241007C - S1.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007C - S2.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007C - S3.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007C - S4.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007C - S5.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007C - S6.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007B - S1.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007B - S2.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007B - S3.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007B - S4.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007B - S5.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007B - S6.webp" alt="" loading="lazy">
             </div>
         </div>
         <div class="slider">
             <div class="content">
-                <img src="/assets/posts/20241007B - S1.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007B - S2.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007B - S3.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007B - S4.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007B - S5.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007B - S6.webp" alt="" loading="lazy">
-            </div>
-        </div>
-        <div class="slider">
-            <div class="content">
-                <img src="/assets/posts/20241007A - S1.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007A - S2.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007A - S3.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007A - S4.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007A - S5.webp" alt="" loading="lazy">
-                <img src="/assets/posts/20241007A - S6.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007A - S1.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007A - S2.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007A - S3.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007A - S4.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007A - S5.webp" alt="" loading="lazy">
+                <img src="/assets/works/20241007A - S6.webp" alt="" loading="lazy">
             </div>
         </div>
     </div>
 </main>
 
 <script>
-    // Add slider icon
-    const sliderIcon = document.createElement('div');
-    sliderIcon.classList.add('icon');
-    sliderIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M264.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 149.8C37.4 145.8 32 137.3 32 128s5.4-17.9 13.9-21.8L264.5 5.2zM476.9 209.6l53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 277.8C37.4 273.8 32 265.3 32 256s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0l152-70.2zm-152 198.2l152-70.2 53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 405.8C37.4 401.8 32 393.3 32 384s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0z"/></svg>`;
-    document.querySelectorAll('.slider').forEach(slider => slider.append(sliderIcon.cloneNode(true)));
+    /**
+     * Initialize image carousels
+     */
+
+    // Create next button
+    let nextButton = document.createElement('div');
+    nextButton.classList.add('icon', 'next-button');
+    nextButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>`;
+
+    // Create previous button
+    let arrowLeft = document.createElement('div');
+    arrowLeft.classList.add('icon', 'previous-button');
+    arrowLeft.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>`;
+
+    document.querySelectorAll('.slider').forEach(slider => {
+        // Append next button
+        const aR = nextButton.cloneNode(true);
+        aR.addEventListener('click', event => {
+            const container = slider.querySelector('.content');
+            let position = parseInt(container.dataset.position) || 0;
+            position = (position + 1) % container.children.length;
+            container.scrollLeft = (container.scrollWidth / container.children.length) * position;
+            container.dataset.position = position;
+        });
+        slider.append(aR);
+
+        // Append previous button
+        const aL = arrowLeft.cloneNode(true);
+        aL.addEventListener('click', event => {
+            const container = slider.querySelector('.content');
+            let position = parseInt(container.dataset.position) || 0;
+            position = (((position - 1) % container.children.length) + container.children.length) % container.children.length;
+            container.scrollLeft = (container.scrollWidth / container.children.length) * position;
+            container.dataset.position = position;
+        });
+        slider.append(aL);
+
+        // Reset scroll position
+        slider.querySelector('.content').scrollLeft = 0;
+        slider.querySelector('.content').dataset.position = 0;
+    });
 </script>

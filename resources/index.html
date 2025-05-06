@@ -48,7 +48,7 @@ permalink: /resource/
                     aspect-ratio: 2 / 1;
                     height: auto;
                     box-sizing: border-box;
-                    padding: 1.25rem;
+                    padding: .75rem 1rem;
                     font-size: 1.6rem;
                     font-weight: 800;
                     line-height: 1;
@@ -66,7 +66,7 @@ permalink: /resource/
                 }
             }
 
-            li:last-of-type a {
+            li.coming-soon a {
                 border-style: dashed;
 
                 &:hover {
@@ -123,10 +123,10 @@ permalink: /resource/
 <main>
     <h1>My Resources</h1>
     <ul>
-        <li><a href="/resource/gallery">CSS Gallery</a></li>
-        <li><a href="/resource/editor">CSS Editor</a></li>
-        <li><a href="/resource/poster">Markdown Poster</a></li>
-        <li><a href="#">More Later</a></li>
+        <li><a href="/resource/editor">&raquo; CSS Editor</a></li>
+        <li><a href="/resource/poster">&raquo; Markdown Poster</a></li>
+        <li class="coming-soon"><a href="/resource/gallery">CSS Gallery</a></li>
+        <li class="coming-soon"><a href="#">More Later</a></li>
     </ul>
 
     <h2>My Readings</h2>
