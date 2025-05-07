@@ -90,7 +90,7 @@ title: Creative Software Engineer
                 }
             }
 
-            &.post {
+            &.latest-post {
                 grid-column: auto / span 2;
 
                 .description {
@@ -563,7 +563,7 @@ title: Creative Software Engineer
         <div class="box profile-picture">
             <a href="https://www.linkedin.com/in/naruaika/" rel="nofollow"><b>View my LinkedIn</b></a>
         </div>
-        <div class="box post">
+        <div class="box latest-post">
             <a
                 href="{{ post_url }}"
                 {% if post.external_site %} rel="external nofollow" {% endif %}
@@ -573,14 +573,14 @@ title: Creative Software Engineer
                 {%- if post.external_site -%}
                     {%- assign post_url = post.external_url -%}
                 {%- endif -%}
-                <b>
-                    {% if post.external_site %}
-                        [{{ post.external_site }}]
-                    {% endif %}
-                    {{ post.title }}
-                </b>
+                <b>{{ post.title }}</b>
                 <span class="description">{{ post.description }}</span>
-                <b>View my post</b>
+                <b>
+                    View my post
+                    {% if post.external_site %}
+                        at {{ post.external_site }}
+                    {% endif %}
+                </b>
             </a>
         </div>
         <div class="box contact">
