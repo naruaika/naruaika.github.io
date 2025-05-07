@@ -26,13 +26,15 @@ permalink: /post/
             padding: 0;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
+            grid-auto-flow: dense;
             gap: 3.75rem;
 
             li {
                 display: flex;
                 list-style: none;
 
-                &:first-of-type {
+                &:first-of-type,
+                &.featured {
                     grid-column: span 2;
                 }
 
@@ -105,7 +107,8 @@ permalink: /post/
                 grid-template-columns: 1fr;
                 gap: 0;
 
-                li:first-of-type {
+                li:first-of-type,
+                li.featured {
                     grid-column: auto;
                 }
 
@@ -123,8 +126,17 @@ permalink: /post/
     <h1>My Posts</h1>
     <ul>
         {% for post in site.posts %}
-        <li>
-            <a href="{{ post.url }}" {% if post.accent_color %} style="--accent-color: #{{ post.accent_color }};" {% endif %}>
+        {%- assign slug = post.url | relative_url | replace: '/', ' ' | split: ' ' | last | replace: '.html', '' -%}
+        <li class="{%- if site.data.featured-posts contains slug -%} featured {%- endif -%}">
+            {%- assign url = post.url -%}
+            {%- if post.external_site -%}
+                {%- assign url = post.external_url -%}
+            {%- endif -%}
+            <a
+                href="{{ url }}"
+                {% if post.accent_color %} style="--accent-color: #{{ post.accent_color }};" {% endif %}
+                {% if post.external_site %} rel="external nofollow" {% endif %}
+            >
                 {% if post.draft %}
                     <div style="
                         width: 100%;
@@ -135,6 +147,9 @@ permalink: /post/
                     "></div>
                 {% endif %}
                 <h2>
+                    {% if post.external_site %}
+                        [{{ post.external_site }}]
+                    {% endif %}
                     {{ post.title }}
                 </h2>
                 <p>
