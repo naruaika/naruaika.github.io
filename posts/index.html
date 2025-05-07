@@ -28,25 +28,29 @@ permalink: /post/
             grid-template-columns: repeat(4, 1fr);
             gap: 3.75rem;
 
-            a {
-                flex: 1;
+            li {
                 display: flex;
-                flex-direction: column;
-                box-sizing: border-box;
-                color: inherit;
-                text-decoration: none;
-                font-family: "Fira Sans", sans-serif;
-                cursor: pointer;
+                list-style: none;
 
-                &:hover {
-                    color: var(--accent-color, #FFF);
+                &:first-of-type {
+                    grid-column: span 2;
+                }
+
+                a {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    box-sizing: border-box;
+                    color: inherit;
+                    text-decoration: none;
+                    font-family: "Fira Sans", sans-serif;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: var(--accent-color, #FFF);
+                    }
                 }
             }
-        }
-
-        li {
-            display: flex;
-            list-style: none;
         }
 
         h2 {
@@ -100,6 +104,10 @@ permalink: /post/
             ul {
                 grid-template-columns: 1fr;
                 gap: 0;
+
+                li:first-of-type {
+                    grid-column: auto;
+                }
 
                 a {
                     position: relative;
