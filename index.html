@@ -105,6 +105,7 @@ title: Creative Software Engineer
                     align-self: flex-start;
                     color: inherit;
                     text-decoration: dotted underline;
+                    text-underline-offset: .2em;
 
                     &:hover {
                         text-decoration: underline;
@@ -141,6 +142,7 @@ title: Creative Software Engineer
                     align-items: end;
                     color: inherit;
                     text-decoration: dotted underline;
+                    text-underline-offset: .2em;
 
                     &:hover {
                         text-decoration: underline;
@@ -167,6 +169,7 @@ title: Creative Software Engineer
                     align-items: end;
                     color: inherit;
                     text-decoration: dotted underline;
+                    text-underline-offset: .2em;
 
                     &:hover {
                         text-decoration: underline;
@@ -553,9 +556,24 @@ title: Creative Software Engineer
             <a href="https://www.linkedin.com/in/naruaika/" rel="nofollow"><b>View my LinkedIn</b></a>
         </div>
         <div class="box post">
-            <b>{{ site.posts.first.title }}</b>
-            <span class="description">{{ site.posts.first.description }}</span>
-            <a href="{{ site.posts.first.url }}"><b>Read the post</b></a>
+            {%- assign post = site.posts.first -%}
+            {%- assign post_url = post.url -%}
+            {%- if post.external_site -%}
+                {%- assign post_url = post.external_url -%}
+            {%- endif -%}
+            <b>
+                {% if post.external_site %}
+                    [{{ post.external_site }}]
+                {% endif %}
+                {{ post.title }}
+            </b>
+            <span class="description">{{ post.description }}</span>
+            <a
+                href="{{ post_url }}"
+                {% if post.external_site %} rel="external nofollow" {% endif %}
+            >
+                <b>Read the post</b>
+            </a>
         </div>
         <div class="box contact">
             <b>Don't be a stranger.</b>
