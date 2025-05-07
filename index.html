@@ -104,11 +104,19 @@ title: Creative Software Engineer
                 a {
                     align-self: flex-start;
                     color: inherit;
-                    text-decoration: dotted underline;
-                    text-underline-offset: .2em;
+                    text-decoration: none;
+
+                    :last-child {
+                        text-decoration: dotted underline;
+                        text-underline-offset: .2em;
+                    }
 
                     &:hover {
                         text-decoration: underline;
+
+                        b {
+                            text-decoration: none;
+                        }
                     }
                 }
             }
@@ -130,7 +138,7 @@ title: Creative Software Engineer
                 transition: all .2s ease-in-out;
 
                 &:hover {
-                    background-size: auto 125%;
+                    background-size: auto 115%;
                     filter: grayscale(0%);
                 }
 
@@ -157,7 +165,7 @@ title: Creative Software Engineer
                 transition: all .2s ease-in-out;
 
                 &:hover {
-                    background-size: auto 125%;
+                    background-size: auto 115%;
                     filter: grayscale(0%);
                 }
 
@@ -556,23 +564,23 @@ title: Creative Software Engineer
             <a href="https://www.linkedin.com/in/naruaika/" rel="nofollow"><b>View my LinkedIn</b></a>
         </div>
         <div class="box post">
-            {%- assign post = site.posts.first -%}
-            {%- assign post_url = post.url -%}
-            {%- if post.external_site -%}
-                {%- assign post_url = post.external_url -%}
-            {%- endif -%}
-            <b>
-                {% if post.external_site %}
-                    [{{ post.external_site }}]
-                {% endif %}
-                {{ post.title }}
-            </b>
-            <span class="description">{{ post.description }}</span>
             <a
                 href="{{ post_url }}"
                 {% if post.external_site %} rel="external nofollow" {% endif %}
             >
-                <b>Read the post</b>
+                {%- assign post = site.posts.first -%}
+                {%- assign post_url = post.url -%}
+                {%- if post.external_site -%}
+                    {%- assign post_url = post.external_url -%}
+                {%- endif -%}
+                <b>
+                    {% if post.external_site %}
+                        [{{ post.external_site }}]
+                    {% endif %}
+                    {{ post.title }}
+                </b>
+                <span class="description">{{ post.description }}</span>
+                <b>View my post</b>
             </a>
         </div>
         <div class="box contact">
