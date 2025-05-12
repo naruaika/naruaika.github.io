@@ -8,7 +8,7 @@ description: >-
 baseurl: ""
 url: "https://naruaika.me"
 
-permalink: /post/:title.html
+permalink: /post/:title
 
 plugins:
   - jekyll-sitemap
