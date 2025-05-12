@@ -28,6 +28,81 @@ layout: default
         font-size: 1.4rem;
         line-height: 1.5;
 
+        --minimum-content-padding: 2rem;
+
+        --full-max-width: 1fr;
+        --popout-max-width: 1400px;
+        --content-max-width: 1060px;
+        --inset-max-width: 840px;
+
+        --full: minmax(var(--minimum-content-padding), var(--full-max-width));
+        --popout: minmax(0, calc((var(--popout-max-width) - var(--content-max-width)) * 0.5));
+        --content: minmax(0, calc((var(--content-max-width) - var(--inset-max-width)) * 0.5));
+        --inset: min(var(--inset-max-width), 100% - var(--minimum-content-padding) * 2);
+
+        display: grid;
+        grid-template-columns:
+            [full-start]
+            var(--full)
+                [popout-start]
+                var(--popout)
+                    [content-start]
+                    var(--content)
+                        [inset-start]
+                        var(--inset)
+                        [inset-end]
+                    var(--content)
+                    [content-end]
+                var(--popout)
+                [popout-end]
+            var(--full)
+            [full-end];
+
+        > * {
+            grid-column: content;
+        }
+
+        .inset {
+            grid-column: inset;
+        }
+
+        .popout {
+            grid-column: popout;
+        }
+
+        .full {
+            grid-column: full;
+        }
+
+        header {
+            padding-block-end: 1rem;
+            border-bottom: 1px solid #AAA;
+            margin-block-end: 3.5rem;
+
+            .series {
+                margin-block-end: 0;
+                font-style: italic;
+            }
+
+            .author {
+                margin-block: 0;
+
+                a {
+                    text-decoration: dotted underline;
+                    text-underline-offset: .2em;
+                    color: inherit;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            time {
+                display: block;
+            }
+        }
+
         h1 {
             box-sizing: border-box;
             margin: 0;
@@ -41,303 +116,194 @@ layout: default
             color: var(--accent-color, #FFF);
         }
 
-        > .series {
-            margin-block-end: 0;
-            font-size: 80%;
+        h2 {
+            margin-block-start: 3.5rem;
+            margin-block-end: 1rem;
+            font-size: 2rem;
+            line-height: 1.25;
+        }
+
+        p {
+            hyphens: auto;
+        }
+
+        p, li, a {
+            font-size: 1.4rem;
+        }
+
+        p, ul, ol, figure, pre, button, .ielement {
+            margin-block-start: 1rem;
+            margin-block-end: 1rem;
+        }
+
+        ul, ol {
+            padding-inline-start: 3rem;
+        }
+
+        q {
             font-style: italic;
         }
 
-        > .author {
-            margin-block: 0;
-            font-size: 80%;
+        blockquote {
+            margin: 3rem 0;
+            font-family: 'DM Serif Display', serif;
+            font-size: 3.5rem;
+            line-height: 1.25;
+            font-style: italic;
+            text-align: center;
+        }
 
-            a {
-                text-decoration: dotted underline;
-                text-underline-offset: .2em;
-                color: inherit;
+        a {
+            color: inherit;
+            text-decoration: dotted underline;
+            text-underline-offset: .2em;
 
-                &:hover {
-                    text-decoration: underline;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        ins {
+            text-decoration: none;
+        }
+
+        kbd {
+            margin-right: 0.2rem;
+            padding: 0 0.2rem;
+            font-size: 1.2rem;
+            border: 1px solid #999;
+            box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px;
+        }
+
+        code {
+            padding: 0 3px;
+            font-family: monospace;
+            font-size: 1.2rem;
+            background-color: #333;
+            hyphens: unset;
+            word-break: break-all;
+        }
+
+        pre {
+            box-sizing: border-box;
+            margin-inline: 0;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 1rem;
+            background-color: #333;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+
+            &.wrapped {
+                white-space: pre-wrap;
+                word-break: break-all;
+            }
+        }
+
+        figure {
+            margin-inline: 0;
+
+            > .container {
+                box-sizing: border-box;
+                display: flex;
+                justify-content: center;
+                background-color: #333;
+                overflow-y: hidden;
+
+                picture {
+                    display: flex;
+                }
+
+                img {
+                    max-width: 100%;
+                }
+            }
+
+            > figcaption {
+                margin-block-start: .25rem;
+                font-size: 1rem;
+                font-style: italic;
+                text-align: center;
+
+                a {
+                    font-size: inherit;
                 }
             }
         }
 
-        > time {
-            margin-block-end: 3.5rem;
-            display: block;
-            font-size: 80%;
+        figure + figure {
+            margin-block-start: 1rem;
         }
 
-        .content {
-            --minimum-content-padding: 2rem;
+        video {
+            width: 100%;
+        }
 
-            --full-max-width: 1fr;
-            --popout-max-width: 1400px;
-            --content-max-width: 1060px;
-            --inset-max-width: 840px;
+        button {
+            justify-self: start;
+            box-sizing: border-box;
+            padding: .75rem 1rem;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: inherit;
+            text-decoration: none;
+            font-family: "Fira Sans", sans-serif;
+            border: 3px solid #FFF;
+            background-color: transparent;
+            cursor: pointer;
 
-            --full: minmax(var(--minimum-content-padding), var(--full-max-width));
-            --popout: minmax(0, calc((var(--popout-max-width) - var(--content-max-width)) * 0.5));
-            --content: minmax(0, calc((var(--content-max-width) - var(--inset-max-width)) * 0.5));
-            --inset: min(var(--inset-max-width), 100% - var(--minimum-content-padding) * 2);
-
-            display: grid;
-            grid-template-columns:
-                [full-start]
-                var(--full)
-                    [popout-start]
-                    var(--popout)
-                        [content-start]
-                        var(--content)
-                            [inset-start]
-                            var(--inset)
-                            [inset-end]
-                        var(--content)
-                        [content-end]
-                    var(--popout)
-                    [popout-end]
-                var(--full)
-                [full-end];
-
-            > * {
-                grid-column: content;
-            }
-
-            .inset {
-                grid-column: inset;
-            }
-
-            .popout {
-                grid-column: popout;
-            }
-
-            .full {
-                grid-column: full;
-            }
-
-            .hero {
-                position: relative;
-                margin-block-end: 2.5rem;
-                height: 75vh;
-                /* width: 25vh; */
+            &:hover {
                 background-color: #FFF;
+                color: #222;
+            }
+        }
+
+        hr {
+            left: 0;
+            margin-block-start: 2rem;
+            margin-block-end: 2rem;
+            width: 20px;
+            height: 1px;
+            border: none;
+            background-color: var(--accent-color, #FFF);
+        }
+
+        .comparison {
+            grid-column: full;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .ielement {
+            > .container {
+                box-sizing: border-box;
             }
 
-            h2 {
-                margin-block-start: 3.5rem;
-                margin-block-end: 1rem;
-                font-size: 2rem;
-                line-height: 1.25;
-            }
-
-            p {
-                hyphens: auto;
-            }
-
-            p, li, a {
-                font-size: 1.4rem;
-            }
-
-            p, ul, ol, figure, pre, button, .ielement {
-                margin-block-start: 1rem;
-                margin-block-end: 1rem;
-            }
-
-            ul, ol {
-                padding-inline-start: 3rem;
-            }
-
-            q {
-                font-style: italic;
-            }
-
-            blockquote {
-                margin: 3rem 0;
-                font-family: 'DM Serif Display', serif;
-                font-size: 3.5rem;
-                line-height: 1.25;
+            > .caption {
+                margin-block-start: .25rem;
+                font-size: 1rem;
                 font-style: italic;
                 text-align: center;
             }
-
-            a {
-                color: inherit;
-                text-decoration: dotted underline;
-                text-underline-offset: .2em;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-
-            ins {
-                text-decoration: none;
-            }
-
-            kbd {
-                margin-right: 0.2rem;
-                padding: 0 0.2rem;
-                font-size: 1.2rem;
-                border: 1px solid #999;
-                box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px;
-            }
-
-            code {
-                padding: 0 3px;
-                font-family: monospace;
-                font-size: 1.2rem;
-                background-color: #333;
-                hyphens: unset;
-                word-break: break-all;
-            }
-
-            pre {
-                box-sizing: border-box;
-                margin-inline: 0;
-                padding: 1rem;
-                font-family: monospace;
-                font-size: 1rem;
-                background-color: #333;
-                overflow-x: auto;
-                scroll-behavior: smooth;
-
-                &.wrapped {
-                    white-space: pre-wrap;
-                    word-break: break-all;
-                }
-            }
-
-            figure {
-                margin-inline: 0;
-
-                > .container {
-                    box-sizing: border-box;
-                    display: flex;
-                    justify-content: center;
-                    background-color: #333;
-                    overflow-y: hidden;
-
-                    picture {
-                        display: flex;
-                    }
-
-                    img {
-                        max-width: 100%;
-                    }
-                }
-
-                > figcaption {
-                    margin-block-start: .25rem;
-                    font-size: 1rem;
-                    font-style: italic;
-                    text-align: center;
-
-                    a {
-                        font-size: inherit;
-                    }
-                }
-            }
-
-            figure + figure {
-                margin-block-start: 1rem;
-            }
-
-            video {
-                width: 100%;
-            }
-
-            button {
-                justify-self: start;
-                box-sizing: border-box;
-                padding: .75rem 1rem;
-                font-size: 1.4rem;
-                font-weight: 800;
-                color: inherit;
-                text-decoration: none;
-                font-family: "Fira Sans", sans-serif;
-                border: 3px solid #FFF;
-                background-color: transparent;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: #FFF;
-                    color: #222;
-                }
-            }
-
-            hr {
-                left: 0;
-                margin-block-start: 2rem;
-                margin-block-end: 2rem;
-                width: 20px;
-                height: 1px;
-                border: none;
-                background-color: var(--accent-color, #FFF);
-            }
-
-            .comparison {
-                grid-column: full;
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-
-            .ielement {
-                > .container {
-                    box-sizing: border-box;
-                }
-
-                > .caption {
-                    margin-block-start: .25rem;
-                    font-size: 1rem;
-                    font-style: italic;
-                    text-align: center;
-                }
-            }
-
-            .icode {
-                margin-block-start: -1rem;
-            }
-
-            .icode + .icode {
-                border-top: 2px dashed #222;
-            }
-
-            /* Warning: this feature is deprecated */
-            xmp {
-                margin: 0;
-            }
         }
-    }
 
-    .scroll-signifier {
-        box-sizing: border-box;
-        position: fixed;
-        padding: 1rem;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: center;
-        animation: scroll-signifier linear forwards;
-        animation-timeline: scroll();
-        animation-range: 0vh 100px;
-
-        span {
-            padding: .5rem 1rem;
-            box-sizing: border-box;
-            background-color: #222;
+        .icode {
+            margin-block-start: -1rem;
         }
-    }
 
-    @keyframes scroll-signifier {
-        to {
-            translate: 0 100px;
+        .icode + .icode {
+            border-top: 2px dashed #000;
+        }
+
+        /* Warning: this feature is deprecated */
+        xmp {
+            margin: 0;
         }
     }
 
     @container (width < 1280px) {
-        main .content blockquote {
+        main blockquote {
             font-size: min(10vmin, 3.5rem);
         }
     }
@@ -346,135 +312,134 @@ layout: default
         main {
             padding: 0;
 
-            h1,
-            > .series,
-            > .author,
-            > time {
-                padding: 0 2rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-                margin-block-end: .8rem;
-            }
-
-            > .series, > time {
-                font-size: 1.2rem;
-            }
-
-            > time {
-                margin-block-end: 2.5rem;
-            }
-
-            .content {
-                h2 {
-                    font-size: 1.7rem;
+            header {
+                h1, .series, .author, time {
+                    padding: 0 2rem;
                 }
 
-                p, li, a {
+                h1 {
+                    font-size: 2rem;
+                    margin-block-end: .8rem;
+                }
+
+                .series, time {
                     font-size: 1.2rem;
                 }
 
-                blockquote {
-                    font-size: 2.5rem;
+                time {
+                    margin-block-end: 2.5rem;
                 }
+            }
 
-                kbd, code {
-                    font-size: 1rem;
-                }
+            h2 {
+                font-size: 1.7rem;
+            }
 
-                pre {
-                    font-size: 0.9rem;
-                }
+            p, li, a {
+                font-size: 1.2rem;
+            }
 
-                > pre,
-                > .ielement.sm\:w-full {
-                    grid-column: full;
-                }
+            blockquote {
+                font-size: 2.5rem;
+            }
 
-                figure > figcaption,
-                .ielement > .caption {
-                    font-size: .8rem;
-                }
+            kbd, code {
+                font-size: 1rem;
+            }
 
-                figure {
-                    grid-column: full;
+            pre {
+                font-size: 0.9rem;
+            }
 
-                    > .container {
-                        justify-content: start;
-                        overflow-x: auto;
+            > pre, > .ielement.sm\:w-full {
+                grid-column: full;
+            }
 
-                        picture img {
-                            max-height: unset;
-                            width: 100%;
-                        }
+            figure > figcaption, .ielement > .caption {
+                font-size: .8rem;
+            }
 
-                        img {
-                            max-height: 75vh;
-                            max-width: 200vw;
-                            margin: 0 auto;
-                        }
+            figure {
+                grid-column: full;
+
+                > .container {
+                    justify-content: start;
+                    overflow-x: auto;
+
+                    picture img {
+                        max-height: unset;
+                        width: 100%;
                     }
 
-                    > figcaption {
-                        padding: 0 2rem;
+                    img {
+                        max-height: 75vh;
+                        max-width: 200vw;
+                        margin: 0 auto;
                     }
                 }
 
-                video {
-                    grid-column: full;
+                > figcaption {
+                    padding: 0 2rem;
                 }
+            }
 
-                h2 {
-                    margin-block-start: 2.5rem;
-                    margin-block-end: .8rem;
-                }
+            video {
+                grid-column: full;
+            }
 
-                p, ul, ol, figure, pre, .ielement {
-                    margin-block-start: .8rem;
-                    margin-block-end: .8rem;
-                }
+            h2 {
+                margin-block-start: 2.5rem;
+                margin-block-end: .8rem;
+            }
 
-                .icode {
-                    margin-block-start: -.8rem;
-                }
+            p, ul, ol, figure, pre, .ielement {
+                margin-block-start: .8rem;
+                margin-block-end: .8rem;
+            }
 
-                .comparison {
-                    grid-column: full;
-                    grid-template-columns: 1fr;
-                }
+            .icode {
+                margin-block-start: -.8rem;
+            }
+
+            .comparison {
+                grid-column: full;
+                grid-template-columns: 1fr;
             }
         }
     }
 </style>
 
 <main>
-    <h1>{{ page.title }}</h1>
-    <p class="series">
-        {%- if page.series -%}
-            Series: {{ page.series }}&mdash;Part {{ page.part }}
-        {%- endif -%}
-    </p>
-    <p class="author">
-        Author: <a href="/">Naufan Rusyda Faikar</a>
-    </p>
-    <time datetime="{{ page.date | date_to_xmlschema }}" title="{{ page.date | date: '%B %d, %Y' }}">
+    <header>
         {% if page.draft %}
-            Drafted
-        {% else %}
-            Posted
+            <div style="
+                width: 100%;
+                height: 2rem;
+                margin-block-end: -1.25rem;
+                background: repeating-linear-gradient(45deg, #444 0 10px, #333 10px 20px);
+                border-radius: 1rem;
+            "></div>
         {% endif %}
-        on {{ page.date | date: '%B %d, %Y' }}
-    </time>
-    <div class="content">
-        <div class="full hero">
-            {{ page.hero_content }}
-        </div>
-        {{ content }}
-    </div>
+        <h1>{{ page.title }}</h1>
+        <p class="series">
+            {%- if page.series -%}
+                Series: {{ page.series }}&mdash;Part {{ page.part }}
+            {%- endif -%}
+        </p>
+        <p class="author">
+            Author: <a href="/">Naufan Rusyda Faikar</a>
+        </p>
+        <time datetime="{{ page.date | date_to_xmlschema }}" title="{{ page.date | date: '%B %d, %Y' }}">
+            {% if page.draft %}
+                Drafted
+            {% else %}
+                Posted
+            {% endif %}
+            on {{ page.date | date: '%B %d, %Y' }}
+        </time>
+    </header>
+    {{ content | default: '<p>Content goes here ...</p>' }}
 </main>
-
-<div class="scroll-signifier"><span>Scroll to see more</span></div>
 
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
