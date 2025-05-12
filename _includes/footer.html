@@ -1,6 +1,6 @@
 <footer id="footer">
     <div translate="no">
-        &copy;<span id="copyright-year">{{ site.time | date: "%Y" }}</span> Naufan Rusyda Faikar (@naruaika)
+        All rights reserved. Copyright &copy;<span id="copyright-year">{{ site.time | date: "%Y" }}</span> Naufan Rusyda Faikar.
     </div>
     <script>
         document.getElementById("copyright-year").textContent = new Date().getFullYear();
@@ -13,5 +13,16 @@
                 {{ item.name }}
             </a>
         {% endfor %}
+
+        <span>|</span>
+
+        <a href="mailto:hello@naruaika.me">hello@naruaika.me</a>
+        <a href="tel:+6282130003006">+62-821-3000-3006</a>
+
+        <a href="https://www.linkedin.com/in/naruaika" translate="no">LinkedIn</a>
+        <a href="https://github.com/naruaika/" translate="no">GitHub</a>
+        <a href="https://www.youtube.com/@naruaika" translate="no">YouTube</a>
+        <a href="https://stackoverflow.com/users/8791891/naufan-rusyda-faikar" translate="no">Stack Overflow</a>
+        <a href="https://dev.to/naruaika" translate="no">DEV Community</a>
     </div>
 </footer>
