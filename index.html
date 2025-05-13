@@ -133,12 +133,10 @@ title: Creative Software Engineer
 
             &.profile-picture {
                 grid-row: 2 / span 2;
-                background: url("/assets/images/my-photo.webp") 46.5% center / auto 100%;
+                background: url("/assets/images/my-photo.webp") 46.5% center / cover;
                 filter: grayscale(100%);
-                transition: all .2s ease-in-out;
 
                 &:hover {
-                    background-size: auto 115%;
                     filter: grayscale(0%);
                 }
 
@@ -160,12 +158,10 @@ title: Creative Software Engineer
 
             &.favorite-shot {
                 position: relative;
-                background: url("/assets/works/naufan-rusyda-faikar-jOUW9pAxovw-unsplash.webp") center / auto 100%;
+                background: url("/assets/works/naufan-rusyda-faikar-oqRZpktI3oA-unsplash.webp") center / cover;
                 filter: grayscale(100%);
-                transition: all .2s ease-in-out;
 
                 &:hover {
-                    background-size: auto 115%;
                     filter: grayscale(0%);
                 }
 
@@ -564,15 +560,15 @@ title: Creative Software Engineer
             <a href="https://www.linkedin.com/in/naruaika/" rel="nofollow"><b>View my LinkedIn</b></a>
         </div>
         <div class="box latest-post">
+            {%- assign post = site.posts.first -%}
+            {%- assign post_url = post.url -%}
+            {%- if post.external_site -%}
+                {%- assign post_url = post.external_url -%}
+            {%- endif -%}
             <a
                 href="{{ post_url }}"
                 {% if post.external_site %} rel="external nofollow" {% endif %}
             >
-                {%- assign post = site.posts.first -%}
-                {%- assign post_url = post.url -%}
-                {%- if post.external_site -%}
-                    {%- assign post_url = post.external_url -%}
-                {%- endif -%}
                 <b>{{ post.title }}</b>
                 <span class="description">{{ post.description }}</span>
                 <b>
