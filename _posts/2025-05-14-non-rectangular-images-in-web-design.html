@@ -1,0 +1,728 @@
+---
+layout: post
+title: "Non-Rectangular Images in Web Design: Think Beyond Commonalties"
+series: Exclusive Web Design
+part: 1
+description: Rectangular shapes are everywhere. It may be intentional, but considering the buttons are deliberately designed with radius borders, what are the chances they just wouldn't bother with a more creative approach?
+accent_color: c0ff2d
+---
+<p>
+    Rounded edge screens have been gaining popularity lately, especially on mobile devices. Curved corners have been ubiquitous in user interface design for a long time. Physical goods, although may introduce to <a href="https://www.cutplasticsheeting.co.uk/how-to-measure-rounded-corners/#:~:text=Achieving a consistent, smooth curve can be more challenging, potentially increasing manufacturing costs." rel="nofollow">additional manufacturing costs</a>, are designed to have smooth corners so that they don't hurt the parts of our body that come into contact with them. Natural objects don't have sharp edges&mdash;if they do at any given time, they will become blunt over time&mdash;; basically they're never rectangular in the sense that they don't have 90-degree angles.
+</p>
+
+<p>
+    However, it's hard not to get attached to rectangular images. Our camera sensors are rectangular, so are the resulting images. Not to mention everything in web design is <a href="https://learntheweb.courses/topics/box-model/" rel="nofollow">expressed as boxes</a>. In some circumstances, even we're tied to rectangles. For example, <i>Google Play Store</i> requires app <a href="https://developer.android.com/distribute/google-play/resources/icon-design-specifications/#:~:text=Google Play dynamically renders rounded corners and drop shadows for your app icons, you should omit them from your original assets." rel="nofollow">icons to be square</a> and discourages rounded corners in the original asset.
+</p>
+
+<p>
+    While there are some scientific discussions and intuitive studies in the fields of history, psychology, and neurology, supporting non-rectangular shapes in the web domain can open up new opportunities to express our brand more accurately. Sometimes the shape cannot be simple, but must be made of two or more visual objects by applying certain boolean operations.
+</p>
+
+<p>
+    <b>In this article:</b>
+</p>
+
+<ul>
+    <li><a href="#rounded-corners">Rounded Corners</a></li>
+    <li><a href="#overlay-decorations">Overlay Decorations</a></li>
+    <li><a href="#object-masking">Object Masking</a></li>
+</ul>
+
+<h2 id="rounded-corners">
+    Rounded Corners
+</h2>
+
+<p>
+    The simplest way to have a non-rectangular shape is to adopt the <code>border-radius</code> property. At the very least, we can technically eliminate the right angle from any of the four corners referring <a href="https://dictionary.cambridge.org/dictionary/english/rectangle" rel="nofollow">to the definition</a> of the <i>rectangle</i> itself.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-13 at 13-12-14 New Homes for Sale from America's Most Trusted Home Builder - TAYLOR MORRISON.webp">
+            <img src="/assets/posts/Screenshot 2025-05-13 at 13-11-17 New Homes for Sale from America's Most Trusted Home Builder - TAYLOR MORRISON.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css">
+img { border-radius: 24px; }
+</pre>
+    <figcaption>
+        <a href="https://www.taylormorrison.com/" rel="nofollow">Taylor Morrison</a> uses a radius border for all four corners for many of their images. Meawhile, <a href="https://www.blender.org/" rel="nofollow">Blender</a> use half the value.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-13 at 13-39-16 Telesat l Global Satellite Operators.webp">
+            <img src="/assets/posts/Screenshot 2025-05-13 at 13-38-39 Telesat l Global Satellite Operators.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css">
+img { border-radius: 0px 0px 75px 0px; }
+</pre>
+    <figcaption>
+        Although not very common, <a href="https://www.telesat.com/" rel="nofollow">Telesat</a> for example is one who applies a radius border to only one corner out of four. <a href="https://www.prudential.com/" rel="nofollow">Prudential</a> does similar with about a third of the roundness value, while <a href="https://aquaspersions.com/" rel="nofollow">Aquaspersions</a> uses two-thirds.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-13 at 14-14-00 Homepage groupe RATP.webp">
+            <img src="/assets/posts/Screenshot 2025-05-13 at 14-13-22 Homepage groupe RATP.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css">
+img { border-radius: 30% 0; }
+</pre>
+    <figcaption>
+        In some rare occasions, <a href="https://ratpgroup.com/en/" rel="nofollow">RATP Group</a>, <a href="https://www.lgchem.com/main/index" rel="nofollow">LG Chem</a>, and several others take the asymmetrical approach further. Sometimes diagonally curved, sometimes one-side only, and sometimes each corner getting a completely different curvature.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-13 at 14-24-10 Morrison Child & Family Services.webp">
+            <img src="/assets/posts/Screenshot 2025-05-13 at 14-23-27 Morrison Child & Family Services.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css">
+img { border-radius: 50%; }
+</pre>
+    <figcaption>
+        When the image has a square aspect ratio as seen on the <a href="https://morrisonkids.org/" rel="nofollow">Morrison Foundation's</a> homepage of one of their service, and also on the <a href="https://www.eni.com/en-IT/home.html" rel="nofollow">Eni's</a> landing page, a curvature value of 50% can form a full circle.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-13 at 14-39-45 Leading Managed Detection and Response Trustwave.webp">
+            <img src="/assets/posts/Screenshot 2025-05-13 at 14-39-10 Leading Managed Detection and Response Trustwave.webp" alt="">
+        </picture>
+    </div>
+    <figcaption>
+        Even if it's not square, it can brings interesting shapes like those introduced by <a href="https://www.trustwave.com/en-us/" rel="nofollow">Trustwave</a>. Making it only fully curved at one corner is also very interesting as demonstrated by <a href="https://sagementorat.com/" rel="nofollow">Sage</a>&mdash;even though they originally did post-editing for the image on their homepage.
+    </figcaption>
+</figure>
+
+<p>
+    Below is the complete reproducible code for each variant as discussed above.
+</p>
+
+<div class="ielement sm:w-full">
+    <style>
+        .viewport-1 {
+            box-sizing: border-box;
+            padding: 5vmin;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 5vmin;
+            background-color: #FFF;
+            counter-reset: count-1;
+
+            .image {
+                position: relative;
+                height: 25vmin;
+                width: auto;
+                aspect-ratio: 1;
+                background: url("/assets/posts/alexander-grey-QGQz-IBBl5w-unsplash.webp") center / cover;
+                counter-increment: count-1;
+                overflow: hidden;
+
+                &.image-1 { border-radius: 20%; }
+                &.image-2 { border-bottom-right-radius: 20%; }
+                &.image-3 { border-radius: 40% 0; }
+                &.image-4 { border-radius: 50% 50% 0 0; }
+                &.image-5 { border-radius: 20% 40% 60% 30%; }
+                &.image-6 { border-radius: 50%; }
+                &.image-7 { border-radius: 12.5vmin; aspect-ratio: 55 / 25; }
+                &.image-8 { border-bottom-right-radius: 100%; }
+
+                &::after {
+                    content: counter(count-1);
+                    position: absolute;
+                    inset: 0;
+                    display: grid;
+                    place-content: center;
+                    font-size: 8vmin;
+                    font-weight: bold;
+                    background-color: #0009;
+                }
+            }
+        }
+    </style>
+
+    <div class="viewport-1">
+        <div class="image image-1"></div>
+        <div class="image image-2"></div>
+        <div class="image image-3"></div>
+        <div class="image image-4"></div>
+        <div class="image image-5"></div>
+        <div class="image image-6"></div>
+        <div class="image image-7"></div>
+        <div class="image image-8"></div>
+    </div>
+</div>
+
+<pre class="icode">
+.viewport {
+    box-sizing: border-box;
+    padding: 5vmin;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5vmin;
+    background-color: #FFF;
+    counter-reset: count;
+
+    .image {
+        position: relative;
+        height: 25vmin;
+        width: auto;
+        aspect-ratio: 1;
+        background: url("...") center / cover;
+        counter-increment: count;
+        overflow: hidden;
+
+        /* This part is the most important */
+        &.image-1 { border-radius: 20%; }
+        &.image-2 { border-bottom-right-radius: 20%; }
+        &.image-3 { border-radius: 40% 0; }
+        &.image-4 { border-radius: 50% 50% 0 0; }
+        &.image-5 { border-radius: 20% 40% 60% 30%; }
+        &.image-6 { border-radius: 50%; }
+        &.image-7 { border-radius: 12.5vmin; aspect-ratio: 55 / 25; }
+        &.image-8 { border-bottom-right-radius: 100%; }
+
+        &::after {
+            content: counter(count);
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-content: center;
+            font-size: 8vmin;
+            font-weight: bold;
+            background-color: #0009;
+        }
+    }
+}
+</pre>
+
+<pre class="icode"><xmp><div class="viewport">
+    <div class="image image-1"></div>
+    <div class="image image-2"></div>
+    <div class="image image-3"></div>
+    <div class="image image-4"></div>
+    <div class="image image-5"></div>
+    <div class="image image-6"></div>
+    <div class="image image-7"></div>
+    <div class="image image-8"></div>
+</div></xmp></pre>
+
+<h2 id="overlay-decorations">
+    Overlay Decorations
+</h2>
+
+<p>
+    Another way to make our images not look rectangular is to place decoration shapes on top of them.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-13 at 16-56-02 Creating a more food secure world Cargill.webp">
+            <img src="/assets/posts/Screenshot 2025-05-13 at 16-55-14 Creating a more food secure world Cargill.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css"><xmp>.hero-content::before {
+    background-image: url('data:image/svg+xml,<svg><path d="..."/></svg>');
+    background-position: center -10px;
+    background-repeat: no-repeat;
+}</xmp></pre>
+    <figcaption>
+        <a href="https://www.cargill.com/" rel="nofollow">Cargill</a> uses overlay decorations inspired by nature, mimicking the shape and color of leaves similar to the one in their logo, which somehow reflects their business values.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-13 at 17-14-26 Re-imagining mining to improve people's lives Anglo American.webp">
+            <img src="/assets/posts/Screenshot 2025-05-13 at 17-13-48 Re-imagining mining to improve people's lives Anglo American.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-html"><xmp><img style="width:100%;object-fit:contain;" src="..."></xmp></pre>
+    <figcaption>
+        <a href="https://www.angloamerican.com/" rel="nofollow">AngloAmerican</a> and <a href="https://vale.com/" rel="nofollow">Vale</a> take a different approach as they use a raster image to "reshape" the bottom part of the target image.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-13 at 17-29-27 Teck Resources Limited.webp">
+            <img src="/assets/posts/Screenshot 2025-05-13 at 17-28-44 Teck Resources Limited.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css">
+.section-image::after {
+    /**
+     * Teck actually use a bitmap, but it can
+     * be reproduced using CSS gradient functions.
+     */
+    background: linear-gradient(...);
+    transform: skew(-20deg);
+}
+</pre>
+    <figcaption>
+        <a href="https://www.teck.com/" rel="nofollow">Teck</a> on the other hand uses a <code>div</code> element with a gradient background and applies a skew transformation to give the shape a character. <a href="https://www.bdo.com/" rel="nofollow">BDO</a> does similar thing on their hero section.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-13 at 18-18-57 Meyers Associates Architecture and Interior Design.webp">
+            <img src="/assets/posts/Screenshot 2025-05-13 at 18-18-32 Meyers Associates Architecture and Interior Design.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-html"><xmp><div class="absolute inset-0 object-cover w-full h-full">
+    <svg viewBox="0 0 1457 944" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="..." fill="#FFFFFF"></path>
+        <path d="..." fill="#F5F5F5"></path>
+        <path d="..." fill="#F5F5F5"></path>
+    </svg>
+</div></xmp></pre>
+    <figcaption>
+        Another example coming from <a href="https://meyersarchitects.com/" rel="nofollow">Meyers+Associates</a> which makes use of multiple SVG elements.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-13 at 18-31-33 Graphcore Accelerating machine learning in the cloud.webp">
+            <img src="/assets/posts/Screenshot 2025-05-13 at 18-30-38 Graphcore Accelerating machine learning in the cloud.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css">
+.shape.octagon {
+    height: 192px;
+    width: 192px;
+    background-image: url("...");
+    background-size: 100%;
+}
+</pre>
+    <figcaption>
+        <a href="https://www.graphcore.ai/" rel="nofollow">Graphcore</a> combines several <code>span</code> elements with a solid white color and a <code>span</code> element with an SVG as the background image. Even only a simple block element with a solid background color can create the illusion of an attractive cutout image as illustrated on the <a href="https://www.bnsf.com/" rel="nofollow">BNSF</a> homepage.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-13 at 19-21-49 Leading the Future of Global Agriculture Nutrien.webp">
+            <img src="/assets/posts/Screenshot 2025-05-13 at 19-21-15 Leading the Future of Global Agriculture Nutrien.webp" alt="">
+        </picture>
+    </div>
+    <figcaption>
+        With a <code>border-radius</code> and some overlay decorative elements, we can produce a beautiful piece as shown on the <a href="https://www.nutrien.com/" rel="nofollow">Nutrien's</a> page without having to write any SVG code. Want to take a guess on how to make the leftmost cut? Well, yes, it's rather hacky since we need to play with a transparent background and&mdash;guess what&mdash;a <code>box-shadow</code>.
+    </figcaption>
+</figure>
+
+<p>
+    Let's try making some of our own, shall we?
+</p>
+
+<div class="ielement sm:w-full">
+    <style>
+        .viewport-2 {
+            box-sizing: border-box;
+            padding: 5vmin;
+            background-color: #FFF;
+            overflow: hidden;
+
+            .image {
+                position: relative;
+                margin-bottom: -5vmin;
+                height: max(250px, 50vmin);
+                width: 100%;
+                background: url("/assets/posts/denis-sebastian-tamas-VhQH97vAx-k-unsplash.webp") center / cover;
+                overflow: hidden;
+                border-radius: 5vmin 5vmin 0 0;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    bottom: 10vmin;
+                    left: 0;
+                    height: 10vmin;
+                    width: 10vmin;
+                    background-color: transparent;
+                    box-shadow: -5vmin 5vmin 0 0 #FFF;
+                    border-bottom-left-radius: 5vmin;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 10vmin;
+                    background-color: #FFF;
+                    border-top-right-radius: 5vmin;
+                }
+            }
+        }
+    </style>
+
+    <div class="viewport-2">
+        <div class="image"></div>
+    </div>
+</div>
+
+<pre class="icode">
+.viewport {
+    box-sizing: border-box;
+    padding: 5vmin;
+    background-color: #FFF;
+    overflow: hidden;
+
+    .image {
+        position: relative;
+        margin-bottom: -5vmin;
+        height: max(250px, 50vmin);
+        width: 100%;
+        background: url("...") center / cover;
+        overflow: hidden;
+        border-radius: 5vmin 5vmin 0 0;
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 10vmin;
+            left: 0;
+            height: 10vmin;
+            width: 10vmin;
+            background-color: transparent;
+            box-shadow: -5vmin 5vmin 0 0 #FFF;
+            border-bottom-left-radius: 5vmin;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10vmin;
+            background-color: #FFF;
+            border-top-right-radius: 5vmin;
+        }
+    }
+}
+</pre>
+
+<pre class="icode"><xmp><div class="viewport">
+    <div class="image"></div>
+</div></xmp></pre>
+
+<div class="ielement sm:w-full">
+    <style>
+        .viewport-3 {
+            box-sizing: border-box;
+            padding: 5vmin;
+            background-color: #FFF;
+
+            .image {
+                position: relative;
+                height: max(250px, 50vmin);
+                width: 100%;
+                background: url("/assets/posts/denis-sebastian-tamas-VhQH97vAx-k-unsplash.webp") center / cover;
+                overflow: hidden;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    background: url('data:image/svg+xml,<svg width="160" height="160" xmlns="http://www.w3.org/2000/svg" fill="white"><path d="M 0 80 Q 40 0, 80 80 T 160 80 L 160 0 L 0 0 Z"/></svg>') left top / 100% 40% no-repeat;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    background: url('data:image/svg+xml,<svg width="160" height="160" xmlns="http://www.w3.org/2000/svg" fill="white"><path d="M 0 80 Q 40 0, 80 80 T 160 80 L 160 160 L 0 160 Z"/></svg>') left bottom / 100% 40% no-repeat;
+                }
+            }
+        }
+    </style>
+
+    <div class="viewport-3">
+        <div class="image"></div>
+    </div>
+</div>
+
+<pre class="icode"><xmp>.viewport {
+    box-sizing: border-box;
+    padding: 5vmin;
+    background-color: #FFF;
+
+    .image {
+        position: relative;
+        height: max(250px, 50vmin);
+        width: 100%;
+        background: url("...") center / cover;
+        overflow: hidden;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                url('data:image/svg+xml,<svg width="160" height="160" xmlns="http://www.w3.org/2000/svg" fill="white"><path d="M 0 80 Q 40 0, 80 80 T 160 80 L 160 0 L 0 0 Z"/></svg>')
+                left top / 100% 40% no-repeat;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                url('data:image/svg+xml,<svg width="160" height="160" xmlns="http://www.w3.org/2000/svg" fill="white"><path d="M 0 80 Q 40 0, 80 80 T 160 80 L 160 160 L 0 160 Z"/></svg>')
+                left bottom / 100% 40% no-repeat;
+        }
+    }
+}</xmp></pre>
+
+<pre class="icode"><xmp><div class="viewport">
+    <div class="image"></div>
+</div></xmp></pre>
+
+<h2 id="object-masking">
+    Object Masking
+</h2>
+
+<p>
+    The final approach is to apply a mask or clipping path to the image. This creates more advantages but requires a willingness to deal with higher complexity.
+</p>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-13 at 17-55-51 Home GSK.webp">
+            <img src="/assets/posts/Screenshot 2025-05-13 at 17-55-06 Home GSK.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css">
+.hero-media {
+    mask-image: url("...");
+    mask-position: 0 50%;
+    mask-size: 2560px 2560px;
+    mask-repeat: no-repeat;
+    transform: translate(-50%, -50%);
+    transition: mask-size 0.5s cubic-bezier(0.54, 0.09, 0.2, 0.92);
+
+    &:hover {
+        mask-size: 7680px 7680px;
+    }
+
+    img { ... }
+}
+</pre>
+    <figcaption>
+        SVG as a mask image has been used by <a href="https://www.gsk.com/en-gb/" rel="nofollow">GSK</a> straight on their hero section.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-14 at 06-25-33 Braze Customer Engagement Platform.webp">
+            <img src="/assets/posts/Screenshot 2025-05-14 at 06-22-08 Braze Customer Engagement Platform.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css">
+img {
+    mask: url("...");
+    mask-repeat: repeat;
+    mask-position-x: 0%;
+    mask-position-y: 0%;
+    mask-size: auto;
+    mask-position: 0 center;
+    mask-repeat: no-repeat;
+    mask-size: cover;
+
+    &:hover {
+        transform: scale(105%);
+        transition-duration: .3s;
+    }
+}
+</pre>
+    <figcaption>
+        While not all images are masked, <a href="https://www.braze.com/" rel="nofollow">Braze</a> uses the same technique on their homepage, but they only animate the scale transformation on hover. What's really different is that they use more complex shape than the previous example.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-14 at 06-31-52 ALTITUDE Website Design.webp">
+            <img src="/assets/posts/Screenshot 2025-05-14 at 06-30-22 ALTITUDE Website Design.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css">
+img {
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    animation: animate-polygon 10s ease-in-out infinite;
+}
+
+@keyframes animate-polygon {
+    0%, 100% { clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%); }
+    25%, 75% { clip-path: polygon(0 39%, 100% 0, 100% 56%, 0 100%); }
+    50%      { clip-path: polygon(0 0, 66% 0, 100% 100%, 24% 100%); }
+}
+</pre>
+    <figcaption>
+        On the contrary, <a href="https://www.designbyaltitude.com/" rel="nofollow">ALTITUDE</a> decides to run animations by default. However, instead of using a mask image, they use a <code>clip-path</code> so that the entire shape can be animated&mdash;not just it's transformation. Not only to an image, but we can also apply a clipping path to a video or even <code>iframe</code> as demonstrated by <a href="https://www.ohpd.net/" rel="nofollow">Oh planning+design, architecture</a>.
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container" style="background-color:#FFF;">
+        <picture>
+            <source media="(orientation: portrait)" srcset="/assets/posts/Screenshot 2025-05-14 at 10-26-06 Open House Worldwide.webp">
+            <img src="/assets/posts/Screenshot 2025-05-14 at 10-25-25 Open House Worldwide.webp" alt="">
+        </picture>
+    </div>
+    <figcaption>
+        <a href="https://www.openhouseworldwide.org/" rel="nofollow">Open House Worldwide</a> uses pre-edited images, but the shapes can be replicated by using the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/basic-shape/path" rel="nofollow"><code>path()</code></a> or <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/basic-shape/path" rel="nofollow"><code>shape()</code></a> function.
+    </figcaption>
+</figure>
+
+<p>
+    While barely used by anyone for real clients&mdash;according to the 650+ websites I've been studying&mdash;, we can also make use of CSS gradient functions as the mask image. What's more is that we can clip an image to a text by using the <code>background-clip</code> property. See the code examples below.
+</p>
+
+<div class="ielement sm:w-full">
+    <style>
+        .viewport-4 {
+            background-color: #FFF;
+            overflow: clip;
+
+            .image {
+                position: relative;
+                height: max(250px, 50vmin);
+                width: 100%;
+                background: url("/assets/posts/dan-cristian-padure-sIcLuAw8qx0-unsplash.webp") center / cover;
+                background-clip: text;
+                color: transparent;
+                display: grid;
+                place-content: center;
+                text-align: center;
+                font-weight: 800;
+                font-size: 5rem;
+                line-height: 1;
+            }
+        }
+    </style>
+
+    <div class="viewport-4">
+        <div class="image">
+            YOU'RE AWESOME
+        </div>
+    </div>
+</div>
+
+<pre class="icode">
+.viewport {
+    background-color: #FFF;
+    overflow: clip;
+
+    .image {
+        position: relative;
+        height: max(250px, 50vmin);
+        width: 100%;
+        background: url("...") center / cover;
+        background-clip: text;
+        color: transparent;
+        display: grid;
+        place-content: center;
+        text-align: center;
+        font-weight: 900;
+        font-size: 5rem;
+        line-height: 1;
+    }
+}
+</pre>
+
+<pre class="icode"><xmp><div class="viewport">
+    <div class="image">
+        YOU'RE AWESOME
+    </div>
+</div></xmp></pre>
+
+<div class="ielement sm:w-full">
+    <style>
+        .viewport-5 {
+            box-sizing: border-box;
+            padding: 5vmin;
+            background-color: #FFF;
+            overflow: clip;
+
+            .image {
+                position: relative;
+                height: max(250px, 50vmin);
+                width: 100%;
+                background: url("/assets/posts/dan-cristian-padure-sIcLuAw8qx0-unsplash.webp") center / cover;
+                mask: repeating-radial-gradient(
+                    circle at 0%,
+                    black 0 1.5vmin,
+                    transparent 1.5vmin 3vmin
+                );
+            }
+        }
+    </style>
+
+    <div class="viewport-5">
+        <div class="image"></div>
+    </div>
+</div>
+
+<pre class="icode">
+.viewport {
+    box-sizing: border-box;
+    padding: 5vmin;
+    background-color: #FFF;
+    overflow: clip;
+
+    .image {
+        position: relative;
+        height: max(250px, 50vmin);
+        width: 100%;
+        background: url("...") center / cover;
+        mask: repeating-radial-gradient(
+            circle at 0%,
+            black 0 1.5vmin,
+            transparent 1.5vmin 3vmin
+        );
+    }
+}
+</pre>
+
+<pre class="icode"><xmp><div class="viewport">
+    <div class="image"></div>
+</div></xmp></pre>
+
+<p>
+    Keep getting creative! Promise?
+</p>
