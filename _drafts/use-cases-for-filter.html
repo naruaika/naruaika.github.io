@@ -1,0 +1,74 @@
+---
+layout: post
+title: "filter: A Collection of Real Use Cases"
+series: Real Use Cases for Every CSS Property
+part: 3
+description: This short post is part of a series where we collect and study various real-life use cases for every CSS property. This time we're going to look at the filter property.
+accent_color: c0ff2d
+---
+<p>
+    This short post is part of a series where we collect and study various real-life use cases for every CSS property. This time we're going to look at the <code>filter</code> property.
+</p>
+
+<figure>
+    <div class="container">
+        <picture>
+            <img src="/assets/posts/85fbb93a3f269a45f460.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css">
+.home-teaser.ornament {
+    filter: grayscale(1);
+}
+</pre>
+    <figcaption>
+        <a href="https://www.scottsalisburyhomes.com.au/" rel="nofollow">Scott Salisbury Homes</a>
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container">
+        <picture>
+            <img src="/assets/posts/01bfcacaa61c0a28d351.webp" alt="">
+        </picture>
+        <picture>
+            <img src="/assets/posts/69941635c246d743eac2.webp" alt="">
+        </picture>
+        <picture>
+            <img src="/assets/posts/02156bcc96388b2a52f3.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css">
+.card_work img {
+    filter: grayscale(1);
+}
+
+.card_work a:hover img {
+    filter: grayscale(0);
+}
+</pre>
+    <figcaption>
+        <a href="https://alignbuilders.com/" rel="nofollow">Align Builders</a>, <a href="https://shedbarber.com/" rel="nofollow">SHED Barbershop</a>, and <a href="https://xv.labienal.es/" rel="nofollow">Bienal Española de Arquitectura y Urbanismo</a>
+    </figcaption>
+</figure>
+
+<figure>
+    <div class="container">
+        <picture>
+            <img src="/assets/posts/ae27eaa98a5ae16aef54.webp" alt="">
+        </picture>
+    </div>
+<pre class="ecode language-css">
+element {
+    /* The value changes as we scroll up and down */
+    filter: hue-rotate(299.19deg) grayscale(0.367178);
+}
+</pre>
+    <figcaption>
+        <a href="https://www.remijousselme.com/" rel="nofollow">Rémi Jousselme</a>
+    </figcaption>
+</figure>
+
+<p>
+    See you later!
+</p>

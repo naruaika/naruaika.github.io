@@ -212,7 +212,31 @@ layout: default
                 overflow-y: hidden;
 
                 picture {
+                    position: relative;
                     display: flex;
+                    width: 100%;
+                }
+
+                picture + picture::before {
+                    position: absolute;
+                    content: "";
+                    top: -10px;
+                    left: 0;
+                    right: 0;
+                    height: 10px;
+                    background: url('data:image/svg+xml,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="%23222"><path d="M 0 20 L 10 0 L 20 20 Z"/></svg>') repeat-x left top / 10px 10px;
+                    z-index: 1;
+                }
+
+                picture + picture::after {
+                    position: absolute;
+                    content: "";
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 10px;
+                    background: url('data:image/svg+xml,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="%23222"><path d="M 0 0 L 10 20 L 20 0 Z"/></svg>') repeat-x 5px bottom / 10px 10px;
+                    z-index: 1;
                 }
 
                 img {
@@ -273,7 +297,7 @@ layout: default
             grid-column: full;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            gap: 2px;
         }
 
         .ielement {
@@ -298,7 +322,7 @@ layout: default
         }
 
         .icode + .icode {
-            border-top: 2px dashed #222;
+            border-top: 2px solid #222;
         }
 
         /* Warning: this feature is deprecated */
