@@ -1,0 +1,408 @@
+---
+layout: post
+title: Console Yourself with Dozens of Console's Functions
+series: Level Up Your Web Debugging Skills
+part: 2
+description: This time we'll be involved in a story starring John Konsole where he's facing a critical problem on the front-end involving the console's functions. It goes far beyond the console.log() function.
+accent_color: c0ff2d
+---
+<style>
+    .kukukaki-navbar {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #FFF;
+        color: #000;
+        padding: 1rem;
+
+        > div {
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        > ul {
+            margin: 0 !important;
+            padding: 0 !important;
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+
+            > li {
+                position: relative;
+                box-sizing: border-box;
+                display: flex;
+                align-items: stretch;
+                font-size: 1.05rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: #222;
+                background-color: #c0ff2d;
+                border: 3px solid #222;
+                cursor: pointer;
+                user-select: none;
+                -webkit-user-select: none;
+
+                &.open {
+                    color: #c0ff2d;
+                    background-color: #000;
+                    border-color: #000;
+
+                    > ul {
+                        visibility: visible;
+                        opacity: 1;
+                        translate: 0 0;
+                    }
+                }
+
+                > .menu-label {
+                    flex: 1;
+                    padding-left: 0.75rem;
+                    display: flex;
+                    align-items: center;
+
+                    &:hover {
+                        text-decoration: underline;
+                        text-decoration-thickness: 2px;
+                        text-underline-offset: .3em;
+                    }
+                }
+
+                > .dropdown-button {
+                    padding: 0.25rem 0.75rem;
+                }
+
+                > ul {
+                    position: absolute;
+                    box-sizing: border-box;
+                    top: calc(100% - 1px);
+                    right: -3px;
+                    margin: 0 !important;
+                    padding: 1rem !important;
+                    width: 200px;
+                    display: flex;
+                    flex-direction: column;
+                    background-color: #222;
+                    border: 3px solid #000;
+                    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+                    list-style: none;
+                    cursor: default;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    z-index: 1;
+
+                    visibility: hidden;
+                    opacity: 0;
+                    translate: 0 5px;
+
+                    > li {
+                        box-sizing: border-box;
+                        font-size: 1.05rem;
+                        font-weight: 500;
+                        line-height: 2;
+                        color: #EEE;
+                        cursor: pointer;
+                        user-select: none;
+                        -webkit-user-select: none;
+
+                        &:hover {
+                            color: #FFF;
+                            text-decoration: underline;
+                            text-decoration-thickness: 2px;
+                            text-underline-offset: .3em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .kukukaki-hero {
+        position: relative;
+        box-sizing: border-box;
+        padding: 1rem;
+        padding-bottom: 0;
+        display: flex;
+        gap: 1rem;
+        height: 5rem;
+        background-color: #FFF;
+        border-top: 3px solid #222;
+        overflow: hidden;
+
+        &::after {
+            position: absolute;
+            content: '';
+            left: -20px;
+            right: -20px;
+            bottom: 0;
+            height: 50px;
+            box-shadow: inset 0 -30px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        > div {
+            min-height: 10rem;
+        }
+
+        > div:nth-child(1) {
+            flex: 8;
+            box-sizing: border-box;
+            --s: 60px;
+            --c1: #EEE;
+            --c2: #DDD;
+            background:
+                conic-gradient(
+                var(--c2) atan(2), var(--c1) 0 calc(180deg - atan(2)),
+                var(--c2) 0 180deg, var(--c1) 0 calc(180deg + atan(2)),
+                var(--c2) 0 calc(360deg - atan(2)), var(--c1) 0);
+            background-size: calc(2 * var(--s)) var(--s);
+            border: 3px solid #222;
+            border-bottom: none;
+        }
+
+        > div:nth-child(2) {
+            flex: 4;
+            --s: 60px;
+            box-sizing: border-box;
+            background: repeating-linear-gradient(45deg, #EEE, #EEE 50%, #DDD 50%, #DDD);
+            background-size: var(--s) var(--s);
+            border: 3px solid #222;
+            border-bottom: none;
+        }
+    }
+
+    @media (width < 720px) {
+        .kukukaki-navbar {
+            flex-direction: column;
+            gap: .5rem;
+        }
+
+        .kukukaki-hero {
+            flex-direction: column;
+
+            > div:nth-child(1) {
+                --s: 30px;
+                border-bottom: 3px solid #222;
+            }
+
+            > div:nth-child(2) {
+                --s: 30px;
+            }
+        }
+
+        .kukukaki-loading {
+            height: 15rem;
+        }
+    }
+</style>
+
+<p>
+    <i>Console</i> is not just a fancy logbook to check if your code is executing in the right order. It is not just a magnifying glass for peeking at the values of variables at a certain moment in time.
+</p>
+
+<p>
+    This time we'll be involved in a story starring John Konsole where he's facing a critical problem on the front-end involving the console's functions. It goes far beyond the <code>console.log()</code> function.
+</p>
+
+<h2>
+    Even if there is only log()
+</h2>
+
+<p>
+    John's sipping his <i>capuccino</i> when his grumpy boss, Mr. Grumpledore, stormed into the office yelling at everyone, "What's wrong with the website?!" John pretended not to notice, he stood up from the chair wanting to add more milk to his cup. "John!" his boss shouted, "Where are you going?!"
+</p>
+
+<p>
+    He took a deep breath and said, "There are still five minutes before 9 o'clock." His boss' face turned red, "No, you're supposed to fix it by 9 o'clock!" <i>What a jerk!</i> he tought. He put down the cup, "Okay, why not?" then opened Chrome DevTools.
+</p>
+
+<p>
+    Sweating, he did what every developer instinctively does&mdash;spamming <code>console.log()</code>s everywhere like a desperate detective throwing clues on a board. Completely chaotic. Logs flooded the console like an apocalyptic stock ticker. Nothing made sense. However, two minutes later, he solved the problem.
+</p>
+
+<p>
+    John doesn't remember or even realize when he was first introduced to <code>console.log()</code>. But since it's the only one that he needs to debug something, he doesn't bother looking for anything else. He is totally right! No need to know about <code>console.debug()</code>, <code>console.info()</code>, <code>console.warn()</code>, <code>console.error()</code>, etc. It's not about the tools, really, it's about solving the problem. But, wait, there's a catch.
+</p>
+
+<p>
+    We know right, those functions weren't invented without a reason, even though they seem trivial and can be easily replaced. Look at the following case:
+</p>
+
+<script>
+    function logit1() {
+        console.warn("Your system time is not synchronized with the server.");
+        console.log("Your system time is not synchronized with the server.");
+        console.log("WARNING: Your system time is not synchronized with the server.");
+        console.log(
+            "%cWARNING: Your system time is not synchronized with the server.",
+            "background-color: #413c26; color: #fdf3aa;",
+        );
+    }
+</script>
+
+<pre class="hcode">
+console.warn("Your system time is not synchronized with the server.");
+</pre>
+
+<p>
+    Such logging can be replaced with:
+</p>
+
+<pre class="hcode">
+console.log("Your system time is not synchronized with the server.");
+</pre>
+
+<p>
+    We may argue that in that way we cannot filter it out. Well, let's try:
+</p>
+
+<pre class="hcode">
+console.log("WARNING: Your system time is not synchronized with the server.");
+</pre>
+
+<p>
+    It's not quite efficient without a color to distinguish. Okay then, how about this:
+</p>
+
+<pre class="hcode">
+console.log(
+    "%cWARNING: Your system time is not synchronized with the server.",
+    "background-color: #413c26; color: #fdf3aa;",
+);
+</pre>
+
+<p>
+    So now we can spot it easily. Cool, right?
+</p>
+
+<figure>
+    <div class="container" style="background-color:#282828;">
+        <img src="/assets/posts/Screenshot 2025-02-16 183915.webp" alt="">
+    </div>
+</figure>
+
+<p>
+    Try to open the console yourself, clear it if necessary, and then click the button below.
+</p>
+
+<button onclick="logit1()">
+    &raquo; Log the warning
+</button>
+
+<p>
+    Wait a moment ... Yes, I know you, you have sharp eyes! Let's make it more obvious to everyone:
+</p>
+
+<pre style="background-color:#413c26;color:#fdf3aa;">
+Your system time is not synchronized with the server.
+logit1	@ level-up-your-web-de…lls-part-2.html:492
+onclick	@ level-up-your-web-de…lls-part-2.html:541
+</pre>
+
+<p>
+    Here we have the traceback of the warning, which is very useful for debugging, just like the <code>console.error()</code> and <code>console.trace()</code> functions. Now let's get back to our story as it gets more interesting than we thought.
+</p>
+
+<h2>
+    Start caring about others
+</h2>
+
+<p>
+    Mr. Grumpledore came out of his room, getting even more angry. "John! What are you doing?!" Poor John! He's still in trouble.
+</p>
+
+<p>
+    ...
+</p>
+
+<div class="ielement">
+    <div class="container">
+        <div class="kukukaki-navbar">
+            <div>kukukaki</div>
+            <ul>
+                <li class="kukukaki-menu" data-page="/page-a">
+                    <span class="menu-label">Page A</span>
+                    <span class="dropdown-button">&#x25BC;</span>
+                    <ul>
+                        <li class="kukukaki-menu" data-page="/page-a/subpage-a">Subpage A</li>
+                        <li class="kukukaki-menu" data-page="/page-a/subpage-b">Subpage B</li>
+                        <li class="kukukaki-menu" data-page="/page-a/subpage-c">Subpage C</li>
+                    </ul>
+                </li>
+                <li class="kukukaki-menu" data-page="/page-b">
+                    <span class="menu-label">Page B</span>
+                    <span class="dropdown-button">&#x25BC;</span>
+                    <ul>
+                        <li class="kukukaki-menu" data-page="/page-b/subpage-a">Subpage A</li>
+                        <li class="kukukaki-menu" data-page="/page-b/subpage-b">Subpage B</li>
+                        <li class="kukukaki-menu" data-page="/page-b/subpage-c">Subpage C</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="kukukaki-hero">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function closeDropdownMenu() {
+        document.querySelectorAll(".kukukaki-menu.open").forEach((element) => {
+            element.classList.remove("open");
+        });
+    }
+
+    document.querySelectorAll(".kukukaki-menu").forEach((element) => {
+        element.addEventListener("click", () => {
+            event.stopPropagation();
+            console.log(`Go to page: ${element.dataset.page}`);
+            closeDropdownMenu();
+        });
+    });
+
+    document.querySelectorAll(".dropdown-button").forEach((element) => {
+        element.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const isOpen = element.parentElement.classList.contains("open");
+            closeDropdownMenu();
+            if (! isOpen) { element.parentElement.classList.toggle("open"); }
+        });
+    });
+
+    document.addEventListener("click", () => {
+        closeDropdownMenu();
+    });
+</script>
+
+<pre class="icode">
+...
+</pre>
+
+<p>
+    "Oh, God! Not Bob's again!"
+</p>
+
+<!-- <p>Let's write some tests</p> -->
+
+<h2>
+    Let us wrap them up
+</h2>
+
+<p>
+    It's more than easy to find a list of awesome console functions on the internet, but it also easy to end up being in a situation where we don't really know why, where, and when to use them. Fortunately, John just showed us a way to make the most of them. Here's the summary:
+</p>
+
+<ul>
+    <li>Use <code>%c</code> to style your logs so that they can be easily and quickly recognized.</li>
+    <li>Use <code>console.debug()</code>, <code>info()</code>, <code>warn()</code>, and <code>error()</code> besides <code>log()</code> to add more context to your logs, so they can be easily filtered out.</li>
+    <!-- <li>Use assert() to blablabla.</li> -->
+    <!-- <li>Use time() to blablabla.</li> -->
+    <!-- <li>Use %d, %s, etc to blablabla.</li> -->
+    <!-- <li>Use {a, b, c} to blablabla.</li> -->
+    <!-- <li>Use table(), dir(), dirxml() to blablabla.</li> -->
+    <!-- <li>Use count() to blablabla.</li> -->
+    <!-- <li>Use group() to blablabla.</li> -->
+    <!-- <li>Use clear(), time() to blablabla.</li> -->
+</ul>
