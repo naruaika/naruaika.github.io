@@ -7,6 +7,16 @@ title: Creative Software Engineer
         container-type: inline-size;
         box-sizing: border-box;
         padding: 3.5rem 2rem 0;
+
+        a {
+            color: inherit;
+            text-decoration: dotted underline;
+            text-underline-offset: .2em;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 
     #my-hello {
@@ -103,9 +113,7 @@ title: Creative Software Engineer
 
                 a {
                     align-self: flex-start;
-                    color: inherit;
                     text-decoration: none;
-                    text-underline-offset: .2em;
 
                     :last-child {
                         text-decoration: dotted underline;
@@ -550,7 +558,7 @@ title: Creative Software Engineer
         </div>
         <div class="box researching">
             <b>Current working:</b>
-            <span>Witt Data Studio, a powerful, user-friendly, and integrated platform for data storyteller.</span>
+            <span><a href="https://github.com/naruaika/witt-data-studio">Witt Data Studio</a>, a powerful, user-friendly, and integrated platform. It's an open-source alternative to the existing business intelligence tools.</span>
         </div>
         <div class="box reading">
             <b>Current reading:</b>
